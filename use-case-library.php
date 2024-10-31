@@ -10,13 +10,14 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-// Inclure les classes principales
+// Include the main plugin class
 require_once plugin_dir_path(__FILE__) . 'includes/admin-page.php';
 require_once plugin_dir_path(__FILE__) . 'includes/form-page.php';
 require_once plugin_dir_path(__FILE__) . 'includes/admin-details-page.php';
 require_once plugin_dir_path(__FILE__) . 'includes/display-library.php';
 
-// Instancier les classes
+// Instantiate the main plugin class
 new UseCaseLibraryAdmin();
 new UseCaseLibraryForm();
+new UseCaseLibraryDetailsPage();
 new UseCaseLibraryDisplay();
