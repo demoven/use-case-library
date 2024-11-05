@@ -12,11 +12,12 @@ if (!defined('ABSPATH')) {
 
 // Include the main plugin class
 require_once plugin_dir_path(__FILE__) . 'includes/admin-page.php';
-require_once plugin_dir_path(__FILE__) . 'includes/form-page.php';
+require_once plugin_dir_path(__FILE__) . 'includes/form-page/form-page.php';
 require_once plugin_dir_path(__FILE__) . 'includes/admin-details-page.php';
 require_once plugin_dir_path(__FILE__) . 'includes/display-library.php';
 
 // Instantiate the main plugin class
+
 new UseCaseLibraryAdmin();
 new UseCaseLibraryForm();
 new UseCaseLibraryDetailsPage();

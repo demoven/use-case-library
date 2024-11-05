@@ -46,20 +46,8 @@ if(!class_exists('UseCaseLibraryForm'))
          * Use case Form 
          */
         public function load_shortcode() {
-            ?>
-            <form id="simple-contact-form__form">
-                <input name="project_name" type="text" placeholder="Project Name"> 
-                <br>
-                <input name="name" type="text" placeholder="Name">
-                <br>
-                <input name="email" type="email" placeholder="Email">
-                <br>
-                <br>
-                <textarea name="message" placeholder="Type your message"></textarea>
-                <br>
-                <button type="submit">Send</button>
-            </form>
-            <?php
+            include_once plugin_dir_path(__FILE__) . 'form-page-html.php';
+            render_use_case_form();
         }
 
         /**
@@ -129,9 +117,26 @@ if(!class_exists('UseCaseLibraryForm'))
                 // Update the post meta
                 update_post_meta($post_id, 'project_name', sanitize_text_field($params['project_name']));
                 update_post_meta($post_id, 'creator_name', sanitize_text_field($params['name']));
+                update_post_meta($post_id, 'creator_email', sanitize_email($params['creator_email'])); // Save the email
+                update_post_meta($post_id, 'w_minor', sanitize_text_field($params['w_minor'])); // Save the w_minor
                 update_post_meta($post_id, 'status', 'on hold'); // Set status to "on hold"
+                update_post_meta($post_id, 'project_phase', sanitize_text_field($params['project_phase'])); // Save the project_phase
+                update_post_meta($post_id, 'value_chain', $params['value_chain']); // Save the value_chain
+                update_post_meta($post_id, 'techn_innovations', sanitize_textarea_field($params['techn_innovations'])); // Save the techn_innovations
+                update_post_meta($post_id, 'tech_providers', sanitize_textarea_field($params['tech_providers'])); // Save the tech_providers
+                update_post_meta($post_id, 'themes', $params['themes']); // Save the themes
+                update_post_meta($post_id, 'sdgs', $params['sdgs']); // Save the sdgs
+                update_post_meta($post_id, 'positive_impact_sdgs', sanitize_textarea_field($params['positive_impact_sdgs'])); // Save the positive_impact_sdgs
+                update_post_meta($post_id, 'negative_impact_sdgs', sanitize_textarea_field($params['negative_impact_sdgs'])); // Save the negative_impact_sdgs
+                update_post_meta($post_id, 'project_background', sanitize_textarea_field($params['project_background'])); // Save the project_background
+                update_post_meta($post_id, 'problem', sanitize_textarea_field($params['problem'])); // Save the problem
+                update_post_meta($post_id, 'smart_goal', sanitize_textarea_field($params['smart_goal'])); // Save the smart_goal
+                update_post_meta($post_id, 'project_link', sanitize_text_field($params['project_link'])); // Save the project_link
+                update_post_meta($post_id, 'video_link', sanitize_text_field($params['video_link'])); // Save the video_link
                 return new WP_REST_Response('Message sent', 200);
             }
+
+            return new WP_REST_Response('Message not sent', 500);
         }
     }
 }
