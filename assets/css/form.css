@@ -4,18 +4,68 @@
     width: 100%;
     margin: 0 auto;
     padding: 2em;
-    background-color: var(--Grey4);
+    border: var(--Grey3) 2px solid;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+#simple-contact-form__form * {
+    font-family: 'Arial', sans-serif;
+}
+
+#simple-contact-form__form h2 {
+    text-align: center;
+    color: var(--Black);
+    margin-bottom: 1em;
+}
+
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-group > * {
+    padding: 1rem;
+}
+
+.form-label {
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    color: var(--Black);
+    width: 100%;
+}
+
+#project-name, #technological-innovations, #tech-providers, #project-background, #project-link, #video-link{
+    width: 100%;
+}
+
+#themes, #sdgs {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#themes > label {
+    padding: 0rem 0.5rem;
+    width: 33%;
+}
+
+#sdgs > label {
+    padding: 0rem 0.5rem;
+    width: 50%;
+}
+
+#project-owner, #email, #w-minor, #value-chain, #positive-impact-sdgs, #negative-impact-sdgs, #problem, #smart-goal {
+    width: 50%;
+}
+
 
 #simple-contact-form__form input[type="text"],
 #simple-contact-form__form input[type="email"],
 #simple-contact-form__form textarea {
     width: 100%;
     padding: 0.75em;
-    margin-bottom: 1em;
-    border: 1px solid var(--Grey3);
+    border: 2px solid var(--Grey3);
     border-radius: 4px;
     font-size: 1em;
     color: var(--Black);
@@ -26,6 +76,17 @@
 #simple-contact-form__form textarea:focus {
     border-color: var(--Blue);
     outline: none;
+}
+
+#simple-contact-form__form label {
+    display: block;
+    margin-bottom: 0.5em;
+    color: var(--Black);
+}
+
+#simple-contact-form__form input[type="radio"],
+#simple-contact-form__form input[type="checkbox"] {
+    margin-right: 0.5em;
 }
 
 #simple-contact-form__form button[type="submit"] {
@@ -42,4 +103,15 @@
 
 #simple-contact-form__form button[type="submit"]:hover {
     background-color: var(--Gold);
+}
+
+/* Media query for small screens */
+@media (max-width: 767px) {
+    .form-group > div {
+        width: 100% !important;
+    }
+
+    #themes > label, #sdgs > label {
+        width: 100%;
+    }
 }
