@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
 function render_use_case_form() {
  ob_start();
  ?>

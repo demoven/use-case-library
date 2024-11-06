@@ -21,19 +21,20 @@ if(!class_exists('UseCaseLibraryDisplay'))
             // Load CSS and JS files
             wp_enqueue_style(
                 'use-case-library-style',
-                plugin_dir_url(__FILE__) . '../../assets/css/library.css',
+                plugin_dir_url(__FILE__) . '../assets/css/library.css',
                 array(),
                 '1.0',
                 'all'
             );
             wp_enqueue_script(
                 'use-case-library-script',
-                plugin_dir_url(__FILE__) . '../../assets/js/library.js',
+                plugin_dir_url(__FILE__) . '../assets/js/library.js',
                 array('jquery'),
                 '1.0',
                 true
             );
         }
+  
 
         /**
          * Shortcode to display published use cases.
@@ -71,10 +72,11 @@ if(!class_exists('UseCaseLibraryDisplay'))
                     // Get the custom fields
                     $project_name = get_post_meta(get_the_ID(), 'project_name', true);
                     $creator_name = get_post_meta(get_the_ID(), 'creator_name', true);
+                    $post_id = get_the_ID();
                     ob_start(); // Start the output buffer
                     ?>
                     <div class="use-case">
-                        <h2><?php echo esc_html($project_name); ?></h2>
+                        <h2><a href="<?php echo esc_url(home_url('/use-case-details/?post_id=' . $post_id)); ?>" target="_blank"><?php echo esc_html($project_name); ?></a></h2>
                         <p><strong>Propriétaire du projet :</strong> <?php echo esc_html($creator_name); ?></p>
                     </div>
                     <?php
@@ -90,5 +92,7 @@ if(!class_exists('UseCaseLibraryDisplay'))
             return $output;
         }
     }
+  
 }
+
 

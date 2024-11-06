@@ -3,23 +3,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if ( ! class_exists( 'UseCaseLibraryForm' ) ) {
-	class UseCaseLibraryForm {
-		private $form_loaded = false;
-
-		public function __construct() {
-			// Load assets
-			add_action( 'wp_enqueue_scripts', array( $this, 'load_assets' ) );
-
-			// Add shortcode
-			add_shortcode( 'use-case-library', array( $this, 'load_shortcode' ) );
-
-			// Load scripts
-			add_action( 'wp_footer', array( $this, 'load_scripts' ) );
-
-			// Register REST API
-			add_action( 'rest_api_init', array( $this, 'register_rest_api' ) );
-		}
+if(!class_exists('UseCaseLibraryForm')) 
+{
+    class UseCaseLibraryForm {
+	    private $form_loaded = false;
+        public function __construct() {
+            // Load assets
+            add_action('wp_enqueue_scripts', array($this, 'load_assets'));
+            
+            // Add shortcode
+            add_shortcode('form-use-case', array($this, 'load_shortcode'));
+            
+            // Load scripts
+            add_action('wp_footer', array($this, 'load_scripts'));
+            
+            // Register REST API
+            add_action('rest_api_init', array($this, 'register_rest_api'));
+        }
 
 		/**
 		 * Load assets for the form

@@ -4,8 +4,10 @@ if (!defined('ABSPATH')) {
 }
 
 if (!class_exists('UseCaseLibraryDetailsPage')) {
-    class UseCaseLibraryDetailsPage {
-        public function __construct() {
+    class UseCaseLibraryDetailsPage
+    {
+        public function __construct()
+        {
             // Add details page
             add_action('admin_menu', array($this, 'add_details_page'));
 
@@ -19,7 +21,8 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         /**
          * Add details page to the admin use case panel
          */
-        public function add_details_page() {
+        public function add_details_page()
+        {
             add_submenu_page(
                 null, // Pas de menu parent
                 'Use Case Details',
@@ -33,7 +36,8 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         /**
          * Load assets for the library
          */
-        public function load_assets() {
+        public function load_assets()
+        {
             // Load CSS and JS files
             wp_enqueue_style(
                 'use-case-library-style',
@@ -47,7 +51,8 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         /**
          * Render the details page
          */
-        public function render_details_page() {
+        public function render_details_page()
+        {
             // Check if post_id is set
             if (!isset($_GET['post_id'])) {
                 return;
@@ -105,14 +110,22 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                 <p><strong>Email :</strong> <?php echo esc_html($email); ?></p> <!-- Display the email -->
                 <p><strong>Windesheim Minor :</strong> <?php echo esc_html($w_minor); ?></p> <!-- Display the w_minor -->
                 <p><strong>Project Phase :</strong> <?php echo esc_html($project_phase); ?></p> <!-- Display the project_phase -->
-                <p><strong>Value Chain :</strong> <?php echo esc_html($value_chain_str); ?></p> <!-- Display the value_chain as a comma-separated string -->
-                <p><strong>Technological Innovations :</strong> <?php echo esc_html($tech_innovations); ?></p> <!-- Display the tech_innovations -->
-                <p><strong>Technology Providers :</strong> <?php echo esc_html($tech_providers); ?></p> <!-- Display the tech_providers -->
-                <p><strong>Themes :</strong> <?php echo esc_html($themes_str); ?></p> <!-- Display the themes as a comma-separated string -->
-                <p><strong>Sustainable Development Goals :</strong> <?php echo esc_html($sdgs_str); ?></p> <!-- Display the sdgs as a comma-separated string -->
-                <p><strong>Positive Impact on SDGs :</strong> <?php echo esc_html($positive_impact_sdgs); ?></p> <!-- Display the positive_impact_sdgs -->
-                <p><strong>Negative Impact on SDGs :</strong> <?php echo esc_html($negative_impact_sdgs); ?></p> <!-- Display the negative_impact_sdgs -->
-                <p><strong>Project Background :</strong> <?php echo esc_html($project_background); ?></p> <!-- Display the project_background -->
+                <p><strong>Value Chain :</strong> <?php echo esc_html($value_chain_str); ?></p>
+                <!-- Display the value_chain as a comma-separated string -->
+                <p><strong>Technological Innovations :</strong> <?php echo esc_html($tech_innovations); ?></p>
+                <!-- Display the tech_innovations -->
+                <p><strong>Technology Providers :</strong> <?php echo esc_html($tech_providers); ?></p>
+                <!-- Display the tech_providers -->
+                <p><strong>Themes :</strong> <?php echo esc_html($themes_str); ?></p>
+                <!-- Display the themes as a comma-separated string -->
+                <p><strong>Sustainable Development Goals :</strong> <?php echo esc_html($sdgs_str); ?></p>
+                <!-- Display the sdgs as a comma-separated string -->
+                <p><strong>Positive Impact on SDGs :</strong> <?php echo esc_html($positive_impact_sdgs); ?></p>
+                <!-- Display the positive_impact_sdgs -->
+                <p><strong>Negative Impact on SDGs :</strong> <?php echo esc_html($negative_impact_sdgs); ?></p>
+                <!-- Display the negative_impact_sdgs -->
+                <p><strong>Project Background :</strong> <?php echo esc_html($project_background); ?></p>
+                <!-- Display the project_background -->
                 <p><strong>Problem :</strong> <?php echo esc_html($problem); ?></p> <!-- Display the problem -->
                 <p><strong>SMART Goal :</strong> <?php echo esc_html($smart_goal); ?></p> <!-- Display the smart_goal -->
                 <p><strong>Project Link :</strong> <?php echo esc_html($project_link); ?></p> <!-- Display the project_link -->
@@ -120,21 +133,21 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                 <?php
                 // Display the unpublish button
                 if ($status === 'published') {
-                ?>
+                    ?>
                     <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
                         <input type="hidden" name="action" value="unpublish_use_case">
                         <input type="hidden" name="post_id" value="<?php echo esc_attr($post_id); ?>">
                         <button type="submit" class="button button-secondary">Unpublish</button>
                     </form>
-                <?php
+                    <?php
                 } else {
-                ?>
+                    ?>
                     <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
                         <input type="hidden" name="action" value="publish_use_case">
                         <input type="hidden" name="post_id" value="<?php echo esc_attr($post_id); ?>">
                         <button type="submit" class="button button-primary">Publish</button>
                     </form>
-                <?php
+                    <?php
                 }
                 ?>
                 <form method="post" action="<?php echo admin_url('admin-post.php'); ?>" onsubmit="return confirmDeletion();">
@@ -154,7 +167,8 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         /**
          * Publish a use case
          */
-        public function publish_use_case() {
+        public function publish_use_case()
+        {
             // Check if post_id is set
             if (!isset($_POST['post_id'])) {
                 wp_redirect(admin_url('admin.php?page=use-case-details')); // Redirect to the details page
@@ -173,7 +187,8 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         /**
          * Unpublish a use case
          */
-        public function unpublish_use_case() {
+        public function unpublish_use_case()
+        {
             // Check if post_id is set
             if (!isset($_POST['post_id'])) {
                 // Redirect to the details page
@@ -192,7 +207,8 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         /**
          * Delete a use case
          */
-        public function delete_use_case() {
+        public function delete_use_case()
+        {
             // Check if post_id is set
             if (!isset($_POST['post_id'])) {
                 // Redirect to the details page
