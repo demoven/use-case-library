@@ -1,0 +1,32 @@
+/* Windesheim Color Palette */
+
+:root {
+    /* Color Palette */
+    /* ----------------- */
+    /* Yellow palette */
+    --Orange : #F5A61A;
+    --Gold : #FBCB05;
+    --Yellow : #FFF578;
+
+    /* Red palette */
+    --Red : #EE3311;
+    --DarkPink : #F16682;
+    --LightPink : #F287B7;
+
+    /* Green palette */
+    --DarkGreen : #45B97C;
+    --GreenApple : #B1D249;
+    --LightGreen : #D5E05B;
+
+    /* Blue palette */
+    --SkyBlue : #4594D3;
+    --Blue : #1EBCC5;
+    --LightBlue : #84D0D9;
+
+    /* Black and white palette */
+    --Black : #231F20;
+    --Grey1 : #58595B;
+    --Grey2 : #808184;
+    --Grey3 : #A6A8AB;
+    --Grey4 : #D0D2D3;
+}

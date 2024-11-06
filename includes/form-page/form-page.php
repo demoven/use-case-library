@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 if(!class_exists('UseCaseLibraryForm')) 
 {
     class UseCaseLibraryForm {
-
+	    private $form_loaded = false;
         public function __construct() {
             // Load assets
             add_action('wp_enqueue_scripts', array($this, 'load_assets'));
@@ -28,14 +28,14 @@ if(!class_exists('UseCaseLibraryForm'))
             // Load CSS and JS files
             wp_enqueue_style(
                 'form-style',
-                plugin_dir_url(__FILE__) . '../assets/css/form.css',
+                plugin_dir_url(__FILE__) . '../../assets/css/form.css',
                 array(),
                 '1.0',
                 'all'
             );
             wp_enqueue_script(
                 'form-script',
-                plugin_dir_url(__FILE__) . '../assets/js/form.js',
+                plugin_dir_url(__FILE__) . '../../assets/js/form.js',
                 array('jquery'),
                 '1.0',
                 true
@@ -45,10 +45,14 @@ if(!class_exists('UseCaseLibraryForm'))
         /**
          * Use case Form 
          */
-        public function load_shortcode() {
-            include_once plugin_dir_path(__FILE__) . 'form-page-html.php';
-            render_use_case_form();
-        }
+	    public function load_shortcode() {
+		    if ($this->form_loaded) {
+			    return '';
+		    }
+		    $this->form_loaded = true;
+		    include_once plugin_dir_path(__FILE__) . 'form-page-html.php';
+		    return render_use_case_form();
+	    }
 
         /**
          * Load scripts for the form  

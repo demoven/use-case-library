@@ -3,8 +3,7 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-if (!class_exists('UseCaseLibraryDetailsPage'))
-{
+if (!class_exists('UseCaseLibraryDetailsPage')) {
     class UseCaseLibraryDetailsPage {
         public function __construct() {
             // Add details page
@@ -14,6 +13,7 @@ if (!class_exists('UseCaseLibraryDetailsPage'))
             add_action('admin_post_publish_use_case', array($this, 'publish_use_case'));
             add_action('admin_post_unpublish_use_case', array($this, 'unpublish_use_case'));
             add_action('admin_post_delete_use_case', array($this, 'delete_use_case'));
+            add_action('admin_enqueue_scripts', array($this, 'load_assets'));
         }
 
         /**
@@ -25,16 +25,28 @@ if (!class_exists('UseCaseLibraryDetailsPage'))
                 'Use Case Details',
                 'Use Case Details',
                 'manage_options',
-                'use-case-details', 
+                'use-case-details',
                 array($this, 'render_details_page') // Method to render the page
+            );
+        }
+
+        /**
+         * Load assets for the library
+         */
+        public function load_assets() {
+            // Load CSS and JS files
+            wp_enqueue_style(
+                'use-case-library-style',
+                plugin_dir_url(__FILE__) . '../assets/css/details.css',
+                array(),
+                '1.0',
+                'all'
             );
         }
 
         /**
          * Render the details page
          */
-        
-         
         public function render_details_page() {
             // Check if post_id is set
             if (!isset($_GET['post_id'])) {
@@ -44,7 +56,7 @@ if (!class_exists('UseCaseLibraryDetailsPage'))
             $post = get_post($post_id); // Get the post object
             // Check if post exists
             if (!$post) {
-                echo '<div class="wrap"><h1>No use case found</h1></div>'; 
+                echo '<div class="wrap"><h1>No use case found</h1></div>';
                 return;
             }
             // Get post meta data
@@ -105,37 +117,37 @@ if (!class_exists('UseCaseLibraryDetailsPage'))
                 <p><strong>SMART Goal :</strong> <?php echo esc_html($smart_goal); ?></p> <!-- Display the smart_goal -->
                 <p><strong>Project Link :</strong> <?php echo esc_html($project_link); ?></p> <!-- Display the project_link -->
                 <p><strong>Video Link :</strong> <?php echo esc_html($video_link); ?></p> <!-- Display the video_link -->
-            <?php
-            // Display the unpublish button
-            if ($status === 'published') {
-            ?>
-                <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
-                    <input type="hidden" name="action" value="unpublish_use_case">
-                    <input type="hidden" name="post_id" value="<?php echo esc_attr($post_id); ?>">
-                    <button type="submit" class="button button-secondary">Unpublish</button>
-                </form>
-            <?php
-            } else {
-            ?>
-                <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
-                    <input type="hidden" name="action" value="publish_use_case">
-                    <input type="hidden" name="post_id" value="<?php echo esc_attr($post_id); ?>">
-                    <button type="submit" class="button button-primary">Publish</button>
-                </form>
-            <?php
-            }
-            ?>
+                <?php
+                // Display the unpublish button
+                if ($status === 'published') {
+                ?>
+                    <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
+                        <input type="hidden" name="action" value="unpublish_use_case">
+                        <input type="hidden" name="post_id" value="<?php echo esc_attr($post_id); ?>">
+                        <button type="submit" class="button button-secondary">Unpublish</button>
+                    </form>
+                <?php
+                } else {
+                ?>
+                    <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
+                        <input type="hidden" name="action" value="publish_use_case">
+                        <input type="hidden" name="post_id" value="<?php echo esc_attr($post_id); ?>">
+                        <button type="submit" class="button button-primary">Publish</button>
+                    </form>
+                <?php
+                }
+                ?>
                 <form method="post" action="<?php echo admin_url('admin-post.php'); ?>" onsubmit="return confirmDeletion();">
                     <input type="hidden" name="action" value="delete_use_case">
                     <input type="hidden" name="post_id" value="<?php echo esc_attr($post_id); ?>">
                     <button type="submit" class="button button-danger">Delete</button>
                 </form>
-                <script type="text/javascript">
-                    function confirmDeletion() {
-                        return confirm('Are you sure you want to delete this use case?');
-                    }
-                </script>
             </div>
+            <script type="text/javascript">
+                function confirmDeletion() {
+                    return confirm('Are you sure you want to delete this use case?');
+                }
+            </script>
             <?php
         }
 

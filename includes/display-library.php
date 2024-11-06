@@ -21,14 +21,14 @@ if(!class_exists('UseCaseLibraryDisplay'))
             // Load CSS and JS files
             wp_enqueue_style(
                 'use-case-library-style',
-                plugin_dir_url(__FILE__) . '../assets/css/library.css',
+                plugin_dir_url(__FILE__) . '../../assets/css/library.css',
                 array(),
                 '1.0',
                 'all'
             );
             wp_enqueue_script(
                 'use-case-library-script',
-                plugin_dir_url(__FILE__) . '../assets/js/library.js',
+                plugin_dir_url(__FILE__) . '../../assets/js/library.js',
                 array('jquery'),
                 '1.0',
                 true

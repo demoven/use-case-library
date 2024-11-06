@@ -1,7 +1,11 @@
 <?php
 // includes/shortcode-functions.php
+if (!defined('ABSPATH')) {
+	exit; // Exit if accessed directly
+}
 
 function render_use_case_form() {
+	ob_start();
     ?>
     <form id="simple-contact-form__form">
         <h2>Submit your use case</h2>
@@ -208,4 +212,5 @@ function render_use_case_form() {
         <button type="submit">Send</button>
     </form>
     <?php
+	return ob_get_clean();
 }

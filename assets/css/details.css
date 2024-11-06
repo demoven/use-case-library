@@ -1,0 +1,76 @@
+@import url('color-palette.css');
+
+.wrap {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.use-case-details-container {
+    width: 100%;
+    background-color: var(--Grey4);
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2.5em;
+    color: var(--Black);
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+
+p {
+    font-size: 1.2em;
+    color: var(--Grey1);
+    margin-bottom: 1em;
+}
+
+.use-case-actions {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 2em;
+    gap: 1em;
+}
+
+.button-primary, .button-secondary, .button-danger {
+    padding: 0.5em 1em !important;
+    font-size: 1.2em !important;
+    cursor: pointer !important;
+    transition: 150ms !important;
+    border-radius: 4px !important;
+}
+
+.button-primary {
+    background-color: var(--Orange) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.button-primary:hover {
+    background-color: var(--Gold) !important;
+}
+
+.button-secondary {
+    background-color: var(--Grey1) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.button-secondary:hover {
+    background-color: var(--Grey2) !important;
+}
+
+.button-danger {
+    background-color: var(--Red) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.button-danger:hover {
+    background-color: var(--DarkPink) !important;
+}
