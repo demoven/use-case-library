@@ -66,23 +66,25 @@ if(!class_exists('UseCaseLibraryForm'))
 
                 // Dollar sign is a shortcut for jQuerys
                 (function ($) {
-                    // Prevent the form from submitting
-                    $('#simple-contact-form__form').submit(function (event) {
-                        // Prevent the form to reload the page or redirect
-                        event.preventDefault();
+					$('#simple-contact-form__form').submit(function (event) {
+						event.preventDefault();
 
-                        // Serialize the form data
-                        var form = $(this).serialize();
+						// Créer un objet FormData pour gérer les données du formulaire, y compris les fichiers
+						var formData = new FormData(this);
 
-                        // Send the form data to the REST API
-                        $.ajax({
-                            method: 'post',
-                            url: '<?php echo get_rest_url( null, 'use-case-library/v1/send-use-case' );?>', // URL of the REST API
-                            headers: {'X-WP-Nonce': nonce}, // Add the nonce to the headers
-                            data: form // Send the form data
-                        });
-                    });
-                })(jQuery);
+						$.ajax({
+							method: 'post',
+							url: '<?php echo get_rest_url(null, 'use-case-library/v1/send-use-case'); ?>',
+							headers: {'X-WP-Nonce': nonce},
+							processData: false, // Important pour envoyer des fichiers
+							contentType: false,
+							data: formData, // Utiliser formData avec les fichiers
+						}).done(function(response) {
+							console.log(response);
+						});
+					});
+				})(jQuery);
+
             </script>
 			<?php
 		}
@@ -139,6 +141,19 @@ if(!class_exists('UseCaseLibraryForm'))
 				update_post_meta( $post_id, 'smart_goal', sanitize_textarea_field( $params['smart_goal'] ) ); // Save the smart_goal
 				update_post_meta( $post_id, 'project_link', sanitize_text_field( $params['project_link'] ) ); // Save the project_link
 				update_post_meta( $post_id, 'video_link', sanitize_text_field( $params['video_link'] ) ); // Save the video_link
+
+				if ( ! empty( $_FILES['project_image']['name'] ) ) {
+					require_once( ABSPATH . 'wp-admin/includes/file.php' );
+					$uploadedfile = $_FILES['project_image'];
+					$upload_overrides = array( 'test_form' => false );
+					$movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
+
+					if ( $movefile && ! isset( $movefile['error'] ) ) {
+						update_post_meta( $post_id, 'project_image', $movefile['url'] ); // Save the image URL
+					} else {
+						return new WP_REST_Response( 'Image upload failed', 500 );
+					}
+				}
 
 				return new WP_REST_Response( 'Message sent', 200 );
 			}

@@ -83,6 +83,7 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
             $smart_goal = get_post_meta($post_id, 'smart_goal', true); // Get the smart_goal meta data
             $project_link = get_post_meta($post_id, 'project_link', true); // Get the project_link meta data
             $video_link = get_post_meta($post_id, 'video_link', true); // Get the video_link meta data
+            $project_image = get_post_meta($post_id, 'project_image', true); // Get the project_image meta data
 
             // Ensure value_chain is an array
             if (!is_array($value_chain)) {
@@ -130,6 +131,12 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                 <p><strong>SMART Goal :</strong> <?php echo esc_html($smart_goal); ?></p> <!-- Display the smart_goal -->
                 <p><strong>Project Link :</strong> <?php echo esc_html($project_link); ?></p> <!-- Display the project_link -->
                 <p><strong>Video Link :</strong> <?php echo esc_html($video_link); ?></p> <!-- Display the video_link -->
+                <p><strong>Project Image :</strong></p>
+                <?php if ($project_image): ?>
+                    <img src="<?php echo esc_url($project_image); ?>" alt="Project Image" style="max-width: 100%; height: auto;">
+                <?php else: ?>
+                    <p>No image uploaded.</p>
+                <?php endif; ?>
                 <?php
                 // Display the unpublish button
                 if ($status === 'published') {

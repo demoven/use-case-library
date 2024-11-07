@@ -53,6 +53,10 @@ function render_use_case_form() {
                 <div class="form-label">Technological Innovations</div>
                 <textarea name="techn_innovations" placeholder="Type your message"></textarea>
             </div>
+            <div id="project-image">
+                <div class="form-label">Project Image</div>
+                <input name="project_image" type="file" accept="image/*">
+            </div>
             <div id="tech-providers">
                 <div class="form-label">Tech Providers</div>
                 <textarea name="tech_providers" placeholder="Type your message"></textarea>

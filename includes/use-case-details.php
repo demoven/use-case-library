@@ -17,17 +17,17 @@ if (isset($_GET['post_id'])) {
         ?>
         <div class="use-case-details">
             <h1><?php echo esc_html($project_name); ?></h1>
-            <p><strong>Propriétaire du projet :</strong> <?php echo esc_html($creator_name); ?></p>
+            <p><strong>Project Owner :</strong> <?php echo esc_html($creator_name); ?></p>
             <div class="use-case-content">
                 <?php echo apply_filters('the_content', $post->post_content); ?>
             </div>
         </div>
         <?php
     } else {
-        echo '<p>Use case non trouvé.</p>';
+        echo '<p>No use case found</p>';
     }
 } else {
-    echo '<p>ID de use case non spécifié.</p>';
+    echo '<p>ID not found</p>';
 }
 
 get_footer();
