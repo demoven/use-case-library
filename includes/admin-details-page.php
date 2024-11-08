@@ -57,13 +57,19 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
             if (!isset($_GET['post_id'])) {
                 return;
             }
-            $post_id = intval($_GET['post_id']); // Get the post ID
-            $post = get_post($post_id); // Get the post object
+
+            // Get the post ID
+            $post_id = intval($_GET['post_id']); 
+
+            // Get the post object
+            $post = get_post($post_id); 
+
             // Check if post exists
             if (!$post) {
                 echo '<div class="wrap"><h1>No use case found</h1></div>';
                 return;
             }
+
             // Get post meta data
             $project_name = get_post_meta($post_id, 'project_name', true);
             $creator_name = get_post_meta($post_id, 'creator_name', true);
@@ -84,8 +90,9 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
             $project_link = get_post_meta($post_id, 'project_link', true); // Get the project_link meta data
             $video_link = get_post_meta($post_id, 'video_link', true); // Get the video_link meta data
             $project_image = get_post_meta($post_id, 'project_image', true); // Get the project_image meta data
+            $innovation_sectors = get_post_meta($post_id, 'innovation_sectors', true); // Get the innovation_sectors meta data
 
-            // Ensure value_chain is an array
+            // Ensure value_chain, themes, sdgs, and innovation_sectors are arrays
             if (!is_array($value_chain)) {
                 $value_chain = array($value_chain);
             }
@@ -95,11 +102,15 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
             if (!is_array($sdgs)) {
                 $sdgs = array($sdgs);
             }
+            if (!is_array($innovation_sectors)) {
+                $innovation_sectors = array($innovation_sectors);
+            }
 
-            // Convert the value_chain array to a comma-separated string
+            // Convert the arrays to comma-separated strings
             $value_chain_str = implode(', ', $value_chain);
             $themes_str = implode(', ', $themes);
             $sdgs_str = implode(', ', $sdgs);
+            $innovation_sectors_str = implode(', ', $innovation_sectors);
 
             // Display the use case details
             ?>
@@ -108,29 +119,22 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                 <p><strong>Status :</strong> <?php echo esc_html($status); ?></p>
                 <p><strong>Project Name :</strong> <?php echo esc_html($project_name); ?></p>
                 <p><strong>Project Owner :</strong> <?php echo esc_html($creator_name); ?></p>
-                <p><strong>Email :</strong> <?php echo esc_html($email); ?></p> <!-- Display the email -->
-                <p><strong>Windesheim Minor :</strong> <?php echo esc_html($w_minor); ?></p> <!-- Display the w_minor -->
-                <p><strong>Project Phase :</strong> <?php echo esc_html($project_phase); ?></p> <!-- Display the project_phase -->
+                <p><strong>Email :</strong> <?php echo esc_html($email); ?></p> 
+                <p><strong>Windesheim Minor :</strong> <?php echo esc_html($w_minor); ?></p> 
+                <p><strong>Project Phase :</strong> <?php echo esc_html($project_phase); ?></p> 
                 <p><strong>Value Chain :</strong> <?php echo esc_html($value_chain_str); ?></p>
-                <!-- Display the value_chain as a comma-separated string -->
                 <p><strong>Technological Innovations :</strong> <?php echo esc_html($tech_innovations); ?></p>
-                <!-- Display the tech_innovations -->
                 <p><strong>Technology Providers :</strong> <?php echo esc_html($tech_providers); ?></p>
-                <!-- Display the tech_providers -->
                 <p><strong>Themes :</strong> <?php echo esc_html($themes_str); ?></p>
-                <!-- Display the themes as a comma-separated string -->
                 <p><strong>Sustainable Development Goals :</strong> <?php echo esc_html($sdgs_str); ?></p>
-                <!-- Display the sdgs as a comma-separated string -->
                 <p><strong>Positive Impact on SDGs :</strong> <?php echo esc_html($positive_impact_sdgs); ?></p>
-                <!-- Display the positive_impact_sdgs -->
                 <p><strong>Negative Impact on SDGs :</strong> <?php echo esc_html($negative_impact_sdgs); ?></p>
-                <!-- Display the negative_impact_sdgs -->
                 <p><strong>Project Background :</strong> <?php echo esc_html($project_background); ?></p>
-                <!-- Display the project_background -->
-                <p><strong>Problem :</strong> <?php echo esc_html($problem); ?></p> <!-- Display the problem -->
-                <p><strong>SMART Goal :</strong> <?php echo esc_html($smart_goal); ?></p> <!-- Display the smart_goal -->
-                <p><strong>Project Link :</strong> <?php echo esc_html($project_link); ?></p> <!-- Display the project_link -->
-                <p><strong>Video Link :</strong> <?php echo esc_html($video_link); ?></p> <!-- Display the video_link -->
+                <p><strong>Problem :</strong> <?php echo esc_html($problem); ?></p> <
+                <p><strong>SMART Goal :</strong> <?php echo esc_html($smart_goal); ?></p> <
+                <p><strong>Project Link :</strong> <?php echo esc_html($project_link); ?></p> 
+                <p><strong>Video Link :</strong> <?php echo esc_html($video_link); ?></p> 
+                <p><strong>Innovation Sectors :</strong> <?php echo esc_html($innovation_sectors_str); ?></p> 
                 <p><strong>Project Image :</strong></p>
                 <?php if ($project_image): ?>
                     <img src="<?php echo esc_url($project_image); ?>" alt="Project Image" style="max-width: 100%; height: auto;">
@@ -138,6 +142,7 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                     <p>No image uploaded.</p>
                 <?php endif; ?>
                 <?php
+
                 // Display the unpublish button
                 if ($status === 'published') {
                     ?>
@@ -148,6 +153,8 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                     </form>
                     <?php
                 } else {
+
+                    // Display the publish button
                     ?>
                     <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
                         <input type="hidden" name="action" value="publish_use_case">
@@ -156,6 +163,7 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                     </form>
                     <?php
                 }
+                // Display the delete button
                 ?>
                 <form method="post" action="<?php echo admin_url('admin-post.php'); ?>" onsubmit="return confirmDeletion();">
                     <input type="hidden" name="action" value="delete_use_case">
@@ -178,14 +186,18 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         {
             // Check if post_id is set
             if (!isset($_POST['post_id'])) {
-                wp_redirect(admin_url('admin.php?page=use-case-details')); // Redirect to the details page
+
+                // Redirect to the details page
+                wp_redirect(admin_url('admin.php?page=use-case-details')); 
                 exit;
             }
 
             // Get the post ID
             $post_id = intval($_POST['post_id']);
+
             // Update the post status
             update_post_meta($post_id, 'status', 'published');
+
             // Redirect to the details page
             wp_redirect(admin_url('admin.php?page=use-case-details&post_id=' . $post_id));
             exit;
@@ -198,14 +210,17 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         {
             // Check if post_id is set
             if (!isset($_POST['post_id'])) {
+
                 // Redirect to the details page
                 wp_redirect(admin_url('admin.php?page=use-case-details'));
                 exit;
             }
             // Get the post ID
             $post_id = intval($_POST['post_id']);
+
             // Update the post status to 'on hold'
             update_post_meta($post_id, 'status', 'on hold');
+
             // Redirect to the details page
             wp_redirect(admin_url('admin.php?page=use-case-details&post_id=' . $post_id));
             exit;
@@ -218,6 +233,7 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         {
             // Check if post_id is set
             if (!isset($_POST['post_id'])) {
+
                 // Redirect to the details page
                 wp_redirect(admin_url('admin.php?page=use-case-details'));
                 exit;
@@ -225,8 +241,10 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
 
             // Get the post ID
             $post_id = intval($_POST['post_id']);
+
             // Delete the post
             wp_delete_post($post_id, true);
+            
             // Redirect to the use case library
             wp_redirect(admin_url('edit.php?post_type=use-case-library'));
             exit;

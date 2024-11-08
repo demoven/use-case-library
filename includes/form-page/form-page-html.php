@@ -61,6 +61,27 @@ function render_use_case_form() {
                 <div class="form-label">Tech Providers</div>
                 <textarea name="tech_providers" placeholder="Type your message"></textarea>
             </div>
+            <div id="innovation-sectors">
+                <div class="form-label">Innovation Sectors</div>
+                <label><input type="radio" name="innovation_sectors" value="Culture & Media"> Culture & Media</label>
+                <label><input type="radio" name="innovation_sectors" value="Data Sharing"> Data Sharing</label>
+                <label><input type="radio" name="innovation_sectors" value="Department of Defense"> Department of Defense</label>
+                <label><input type="radio" name="innovation_sectors" value="ELSA Labs"> ELSA Labs</label>
+                <label><input type="radio" name="innovation_sectors" value="Energy & Sustainability"> Energy & Sustainability</label>
+                <label><input type="radio" name="innovation_sectors" value="Financial Services"> Financial Services</label>
+                <label><input type="radio" name="innovation_sectors" value="Health & Care"> Health & Care</label>
+                <label><input type="radio" name="innovation_sectors" value="Port & Maritime"> Port & Maritime</label>
+                <label><input type="radio" name="innovation_sectors" value="Agriculture & Nutrition"> Agriculture & Nutrition</label>
+                <label><input type="radio" name="innovation_sectors" value="Logistics & Mobility"> Logistics & Mobility</label>
+                <label><input type="radio" name="innovation_sectors" value="Human-centered AI"> Human-centered AI</label>
+                <label><input type="radio" name="innovation_sectors" value="Mobility, Transport & Logistics"> Mobility, Transport & Logistics</label>
+                <label><input type="radio" name="innovation_sectors" value="Education"> Education</label>
+                <label><input type="radio" name="innovation_sectors" value="Public Services"> Public Services</label>
+                <label><input type="radio" name="innovation_sectors" value="Research & Innovation"> Research & Innovation</label>
+                <label><input type="radio" name="innovation_sectors" value="Startups & Scaleups"> Startups & Scaleups</label>
+                <label><input type="radio" name="innovation_sectors" value="Technical Industry"> Technical Industry</label>
+                <label><input type="radio" name="innovation_sectors" value="Security, Peace & Justice"> Security, Peace & Justice</label>
+            </div>
             <div id="themes">
                 <div class="form-label">Themes</div>
                 <label><input type="checkbox" name="themes[]" value="Transaction to interaction"> Transaction to interaction</label>
@@ -71,7 +92,6 @@ function render_use_case_form() {
                 <label><input type="checkbox" name="themes[]" value="Building Trust"> Building Trust</label>
                 <label><input type="checkbox" name="themes[]" value="Green Tech"> Green Tech</label>
                 <label><input type="checkbox" name="themes[]" value="Quantum computing"> Quantum computing</label>
-                <label><input type="checkbox" name="themes[]" value="Autonomy"> Autonomy</label>
             </div>
             <div id="sdgs">
                 <div class="form-label">SDGs</div>

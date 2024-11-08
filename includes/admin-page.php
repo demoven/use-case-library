@@ -76,17 +76,22 @@ if (!class_exists('UseCaseLibraryAdmin'))
         public function custom_column_data($column, $post_id) {
             switch ($column) {
                 case 'project_name':
-                    echo get_post_meta($post_id, 'project_name', true); // Display project name
+                    // Display project name
+                    echo get_post_meta($post_id, 'project_name', true); 
                     break;
                 case 'creator_name':
-                    echo get_post_meta($post_id, 'creator_name', true); // Display creator name
+                    // Display creator name
+                    echo get_post_meta($post_id, 'creator_name', true); 
                     break;
                 case 'status':
-                    echo get_post_meta($post_id, 'status', true); // Display status
+                    // Display status
+                    echo get_post_meta($post_id, 'status', true); 
                     break;
                 case 'details':
-                    $url = admin_url('admin.php?page=use-case-details&post_id=' . $post_id); // Create details URL
-                    echo '<a href="' . $url . '" target="_blank">Details</a>'; // Display details link
+                    // Create details URL
+                    $url = admin_url('admin.php?page=use-case-details&post_id=' . $post_id); 
+                     // Display details link
+                    echo '<a href="' . $url . '" target="_blank">Details</a>';
                     break;
             }
         }
@@ -157,14 +162,22 @@ if (!class_exists('UseCaseLibraryAdmin'))
          */
 
         public function search_by_project_name($search, $query) {
-            global $wpdb;
-        
+
+            // Get the WordPress database object
+            global $wpdb; 
+
+            // Check if the search query is for the main query
             if (!$query->is_main_query() || $query->get('post_type') !== 'use-case-library') {
                 return $search;
             }
-        
+            
+            // Get the search term
             $search_term = $query->get('s');
+
+            // Check if the search term is set
             if ($search_term) {
+
+                // Add search filter by project name
                 $search = $wpdb->prepare(" AND EXISTS (
                     SELECT 1 FROM {$wpdb->postmeta} 
                     WHERE {$wpdb->postmeta}.post_id = {$wpdb->posts}.ID 
