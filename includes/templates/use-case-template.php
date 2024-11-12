@@ -5,6 +5,22 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+// Enqueue the CSS for this template
+function enqueue_use_case_template_styles()
+{
+    if (is_page_template('use-case-template.php')) {
+        wp_enqueue_style(
+            'use-case-template-style',
+            plugin_dir_url(__FILE__) . '../../assets/css/template.css',
+            array(),
+            '1.0',
+            'all'
+        );
+    }
+}
+
+add_action('wp_enqueue_scripts', 'enqueue_use_case_template_styles');
+
 // Get the header of the other existing theme
 get_header();
 
@@ -13,12 +29,12 @@ get_header();
 if (isset($_GET['post_id'])) {
 
     // Get the post_id
-    $post_id = intval($_GET['post_id']); 
+    $post_id = intval($_GET['post_id']);
     $post = get_post($post_id);
 
     // Check if the post exists
     if ($post) {
-        
+
         // Get the post meta data
         $project_name = get_post_meta($post_id, 'project_name', true);
         $creator_name = get_post_meta($post_id, 'creator_name', true);
@@ -37,36 +53,112 @@ if (isset($_GET['post_id'])) {
         $smart_goal = get_post_meta($post_id, 'smart_goal', true);
         $project_link = get_post_meta($post_id, 'project_link', true);
         $video_link = get_post_meta($post_id, 'video_link', true);
-        $project_image = get_post_meta($post_id, 'project_image', true); 
+        $project_image = get_post_meta($post_id, 'project_image', true);
         $innovation_sectors = get_post_meta($post_id, 'innovation_sectors', true);
 
         // Display the post meta data with html
         ?>
-        <div class="use-case-details">
-            <h1><?php echo esc_html($project_name); ?></h1>
-            <p><strong>Project Owner :</strong> <?php echo esc_html($creator_name); ?></p>
-            <p><strong>Email :</strong> <?php echo esc_html($creator_email); ?></p>
-            <p><strong>Windesheim Minor :</strong> <?php echo esc_html($w_minor); ?></p>
-            <p><strong>Project Phase :</strong> <?php echo esc_html($project_phase); ?></p>
-            <p><strong>Value Chain :</strong> <?php echo esc_html(implode(', ', (array)$value_chain)); ?></p>
-            <p><strong>Technological Innovations :</strong> <?php echo esc_html($tech_innovations); ?></p>
-            <p><strong>Tech providers :</strong> <?php echo esc_html($tech_providers); ?></p>
-            <p><strong>Innovation Sectors :</strong> <?php echo esc_html($innovation_sectors); ?></p>
-            <p><strong>Themes :</strong> <?php echo esc_html(implode(', ', (array)$themes)); ?></p>
-            <p><strong>SDGs :</strong> <?php echo esc_html(implode(', ', (array)$sdgs)); ?></p>
-            <p><strong>Positive Impact SDGs :</strong> <?php echo esc_html($positive_impact_sdgs); ?></p>
-            <p><strong>Negative Impact SDGs:</strong> <?php echo esc_html($negative_impact_sdgs); ?></p>
-            <p><strong>Project Background :</strong> <?php echo esc_html($project_background); ?></p>
-            <p><strong>Problem to Solve :</strong> <?php echo esc_html($problem); ?></p>
-            <p><strong>Smart Goal :</strong> <?php echo esc_html($smart_goal); ?></p>
-            <p><strong>Project Link:</strong> <a href="<?php echo esc_url($project_link); ?>" target="_blank"><?php echo esc_html($project_link); ?></a></p>
-            <p><strong>Video Link :</strong> <a href="<?php echo esc_url($video_link); ?>" target="_blank"><?php echo esc_html($video_link); ?></a></p>
-            <?php if ($project_image): ?>
-                <!-- Style to change here -->
-                <img src="<?php echo esc_url($project_image); ?>" alt="Project Image" style="max-width: 100%; height: auto;"> 
-            <?php endif; ?>
-            <div class="use-case-content">
-                <?php echo apply_filters('the_content', $post->post_content); ?>
+        <div id="strip">
+            <div id="color-strip"><?php echo esc_html($project_name); ?></div>
+            <div id="image-strip"></div>
+        </div>
+        <div id="container">
+            <div class="informations">
+                <div class="tags">
+                    <div class="tags-title"><i class="fa-solid fa-arrow-trend-up icon-margin"></i>trends</div>
+                    <div class="tags-content">
+                        <?php
+                        $themes_array = (array)$themes;
+                        foreach ($themes_array as $theme) {
+                            echo '<div>' . esc_html($theme) . '</div>';
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="tags">
+                    <div class="tags-title"><i class="fa-solid fa-industry icon-margin"></i>value chain</div>
+                    <div class="tags-content">
+                        <?php
+                        $value_chain_array = (array)$value_chain;
+                        foreach ($value_chain_array as $value) {
+                            echo '<div>' . esc_html($value) . '</div>';
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="tags">
+                    <div class="tags-title">windesheim minor</div>
+                    <div class="tags-content"><?php echo esc_html($w_minor); ?></div>
+                </div>
+                <div class="tags">
+                    <div class="tags-title"><i class="fa-solid fa-lightbulb icon-margin"></i>innovation sector</div>
+                    <div class="tags-content"><?php echo esc_html($innovation_sectors); ?></div>
+                </div>
+                <div class="tags">
+                    <div class="tags-title">sdgs</div>
+                    <div class="tags-content">
+                        <?php
+                        $sdgs_array = (array)$sdgs;
+                        foreach ($sdgs_array as $sdg) {
+                            echo '<div>' . esc_html($sdg) . '</div>';
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="tags">
+                    <div class="tags-title"><i class="fa-solid fa-list-check icon-margin"></i>project phase</div>
+                    <div class="tags-content"><?php echo esc_html($project_phase); ?></div>
+                </div>
+            </div>
+            <div class="project-owner-informations">
+                <div class="po-info"><i
+                            class="fa-regular fa-user icon-margin"></i><?php echo esc_html($creator_name); ?></div>
+                <div class="po-info"><i
+                            class="fa-regular fa-envelope icon-margin"></i><?php echo esc_html($creator_email); ?></div>
+                <div class="po-info"><i class="fa-solid fa-link icon-margin"></i><a
+                            href="<?php echo esc_url($project_link); ?>"
+                            target="_blank"><?php echo esc_html($project_link); ?></a></div>
+                <div class="po-info"><i class="fa-regular fa-circle-play icon-margin"></i><a
+                            href="<?php echo esc_url($video_link); ?>"
+                            target="_blank"><?php echo esc_html($video_link); ?></a></div>
+            </div>
+            <div class="use-case-details">
+                <div class="project-informations">
+                    <h2 class="project-informtions-title">Project Background</h2>
+                    <p class="project-informations-content"><?php echo esc_html($project_background); ?></p>
+                </div>
+                <div class="project-informations">
+                    <h2 class="project-informtions-title">Problem to Solve</h2>
+                    <p class="project-informations-content"><?php echo esc_html($problem); ?></p>
+                </div>
+                <div class="project-informations">
+                    <h2 class="project-informtions-title">Technological Innovations</h2>
+                    <p class="project-informations-content"> <?php echo esc_html($tech_innovations); ?></p>
+                </div>
+                <div class="project-informations">
+                    <h2 class="project-informtions-title">Smart Goal</h2>
+                    <p class="project-informations-content"><?php echo esc_html($smart_goal); ?></p>
+                </div>
+                <div class="project-informations">
+                    <h2 class="project-informtions-title">Positive Impact SDGs</h2>
+                    <p class="project-informations-content"><?php echo esc_html($positive_impact_sdgs); ?></p>
+                </div>
+                <div class="project-informations">
+                    <h2 class="project-informtions-title">Negative Impact SDGs</h2>
+                    <p class="project-informations-content"><?php echo esc_html($negative_impact_sdgs); ?></p>
+                </div>
+                <div class="project-informations">
+                    <h2 class="project-informtions-title">Tech providers</h2>
+                    <p class="project-informations-content"><?php echo esc_html($tech_providers); ?></p>
+                </div>
+                <?php if ($project_image): ?>
+                    <!-- Style to change here -->
+                    <img src="<?php echo esc_url($project_image); ?>" alt="Project Image"
+                         style="max-width: 100%; height: auto;">
+                <?php endif; ?>
+                <div class="use-case-content">
+                    <?php echo apply_filters('the_content', $post->post_content); ?>
+                </div>
             </div>
         </div>
         <?php

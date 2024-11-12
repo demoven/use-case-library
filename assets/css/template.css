@@ -1,0 +1,51 @@
+#strip {
+    
+}
+
+#color-strip {
+    width : 100%;
+    height: 350px;
+    background-color: #f0f0f0;
+}
+#container{
+    margin-top : 20px;
+    margin-left: 50px;
+}
+
+.informations {
+    display: flex;
+    flex-wrap: wrap; /* Permettre le retour à la ligne si nécessaire */
+}
+
+.tags {
+    display: inline-block; /* Afficher les éléments en ligne */
+    margin-right: 1rem; /* Ajouter une marge à droite entre les éléments */
+    margin-bottom: 0.5rem; /* Ajouter un espace en bas pour séparer les lignes */
+}
+
+.tags-title {
+    font-weight: bold;
+    margin-bottom: 0.25rem; /* Réduire l'espace en bas du titre */
+    text-transform: capitalize; /* Mettre en majuscule la première lettre de chaque mot */
+}
+
+.tags-content {
+    color: var(--Grey1);
+    text-transform: capitalize; /* Mettre en majuscule la première lettre de chaque mot */
+}
+
+.icon-margin {
+    margin-right: 0.5rem; /* Ajustez la valeur selon vos besoins */
+}
+
+@media (max-width: 1200px) {
+    .tags {
+        flex: 1 1 45%; /* Ajuster la largeur des éléments pour les écrans moyens */
+    }
+}
+
+@media (max-width: 768px) {
+    .tags {
+        flex: 1 1 100%; /* Ajuster la largeur des éléments pour les petits écrans */
+    }
+}
