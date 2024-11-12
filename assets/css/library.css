@@ -1,0 +1,75 @@
+@import url('color-palette.css');
+
+@media (min-width: 768px) {
+    #primary {
+        margin-left:2vw !important;
+        margin-right: 2vw !important;
+    }
+}
+
+.use-case-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#filter-form{
+    background-color: orange;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: calc(20% - 18px);
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+
+.use-cases{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    max-width: calc(80% - 18px);
+    /* Calc to put 36px gap between the filter form and the use-cases */
+    justify-content: space-around;
+    gap: 18px;
+}
+
+.use-case{
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);
+    width: calc((100% * 1/3) - (2*18px)/3);
+    /* Calc is used to calculate the width of the use-case card 3 cards in a row and 18px gap between them */
+}
+
+.image-wrapper{
+    position: relative;
+}
+
+.image-wrapper:after{
+    content: "";
+    display: block;
+    padding-bottom: 67%;
+}
+
+.use-case img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
+}
+
+.use-case h3{
+    font-size: 1.5em;
+    margin-top: 0;
+}
+
+/* limit the text to 3 lines */
+.use-case p{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

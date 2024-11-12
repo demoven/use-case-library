@@ -116,8 +116,11 @@ if (!class_exists('UseCaseLibraryDisplay')) {
             // Get the published use cases
             $query = new WP_Query($args);
 
+            //add a container for the content
+            $output = '<div class="use-case-container">';
+
             // Display the filter form
-            $output = '<form id="filter-form" method="GET" action="" onchange="this.submit();">';
+            $output .= '<form id="filter-form" method="GET" action="" onchange="this.submit();">';
 
             // Filter by Windesheim Minor
             $output .= '<label>Filter by Windesheim Minor:</label><br>';
@@ -280,7 +283,9 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                     <div class="use-case">
                         <?php if ($project_image): ?>
                             <!-- Style to change here -->
-                            <img src="<?php echo esc_url($project_image); ?>" alt="Project Image" style="max-width: 100%; height: auto;">
+                            <div class="image-wrapper">
+                                <img src="<?php echo esc_url($project_image); ?>" alt="Project Image">
+                            </div>
                         <?php endif; ?>
                         <h2><a href="<?php echo esc_url(home_url('/use-case-details/?post_id=' . $post_id)); ?>" target="_blank"><?php echo esc_html($project_name); ?></a></h2>
                         <p><?php echo esc_html($smart_goal); ?></p>
@@ -289,11 +294,13 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                     $output .= ob_get_clean(); // Get the contents of the output buffer
                 }
                 $output .= '</div>';
+                $output .= '</div>';
                 
                 // Reset the post data
                 wp_reset_postdata();
             } else {
                 $output .= '<p>No use case found</p>';
+                $output .= '</div>';
             }
             return $output;
         }

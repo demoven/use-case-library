@@ -9,10 +9,6 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#simple-contact-form__form * {
-    font-family: 'Arial', sans-serif;
-}
-
 #simple-contact-form__form h2 {
     text-align: center;
     color: var(--Black);
