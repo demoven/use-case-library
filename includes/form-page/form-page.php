@@ -73,28 +73,85 @@ if(!class_exists('UseCaseLibraryForm'))
                 // Create a nonce for the REST API request
                 var nonce = '<?php echo wp_create_nonce( 'wp_rest' );?>';
 
-                // Dollar sign is a shortcut for jQuerys
+                // Dollar sign is un raccourci pour jQuery
                 (function ($) {
-					$('#simple-contact-form__form').submit(function (event) {
+                    $('#simple-contact-form__form').submit(function (event) {
+                        //Prevent the default reload of the page
+                        event.preventDefault();
 
-						// Prevent the reload of the page after the form submission
-						event.preventDefault();
+                        // Reset the error messages
+                        $('.error-message').hide();
+                        $('#success-message').hide(); 
 
-						// Create a new FormData object
-						var formData = new FormData(this);
+                        var isValid = true;
+                        var firstInvalidElement = null;
 
-						$.ajax({
-							method: 'post',
-							url: '<?php echo get_rest_url(null, 'use-case-library/v1/send-use-case'); ?>', // Set the URL to the REST API endpoint
-							headers: {'X-WP-Nonce': nonce},
-							processData: false, // Don't process the files
-							contentType: false,
-							data: formData, // Set the data to the FormData object
-						}).done(function(response) {
-							console.log(response);
-						});
-					});
-				})(jQuery);
+                        $('#simple-contact-form__form input, #simple-contact-form__form textarea').each(function () {
+                            var type = $(this).attr('type');
+
+                            if (type === 'file') {
+
+								// Ignore the file input
+                                return true; 
+                            }
+                            if ((type === 'checkbox' || type === 'radio') && !$('input[name="' + $(this).attr('name') + '"]:checked').length) {
+
+								// Show the error message if the checkbox or radio button is not checked
+                                $(this).closest('div').find('.error-message').show();
+                                isValid = false;
+                                if (!firstInvalidElement) {
+                                    firstInvalidElement = this;
+                                }
+                            } else if ($(this).is('textarea') && $(this).val().trim() === '') {
+
+								// Show the error message if the textarea is empty
+                                $(this).next('.error-message').show();
+                                isValid = false;
+                                if (!firstInvalidElement) {
+                                    firstInvalidElement = this;
+                                }
+                            } else if ($(this).val().trim() === '') {
+
+								// Show the error message if the input is empty
+                                $(this).next('.error-message').show();
+                                isValid = false;
+                                if (!firstInvalidElement) {
+                                    firstInvalidElement = this;
+                                }
+                            }
+                        });
+
+                        if (!isValid) {
+                            
+							// Place the first invalid element in the center of the view
+                            firstInvalidElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            return;
+                        }
+
+                        // Send the form data to the REST API endpoint
+                        var formData = new FormData(this);
+
+                        $.ajax({
+                            method: 'post',
+                            url: '<?php echo get_rest_url(null, 'use-case-library/v1/send-use-case'); ?>', 
+                            headers: {'X-WP-Nonce': nonce},
+                            processData: false, 
+                            contentType: false,
+                            data: formData, 
+                        }).done(function(response) {
+                            console.log(response);
+                            
+							// Show the success message for 5 seconds
+							$('#success-message').css('display', 'flex').delay(5000).fadeOut();
+
+							// Reset the form
+							$('#simple-contact-form__form').trigger('reset'); 
+                            
+							// Place the success message in the center of the view
+                            document.getElementById('success-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        });
+                    });
+                })(jQuery);
             </script>
 			<?php
 		}
@@ -124,6 +181,33 @@ if(!class_exists('UseCaseLibraryForm'))
 
 				// Return an error if the nonce is invalid
 				return new WP_REST_Response( 'Message not sent', 422 );
+			}
+			$required_fields = [
+				'project_name',
+				'name',
+				'creator_email',
+				'w_minor',
+				'project_phase',
+				'value_chain',
+				'techn_innovations',
+				'tech_providers',
+				'themes',
+				'sdgs',
+				'positive_impact_sdgs',
+				'negative_impact_sdgs',
+				'project_background',
+				'problem',
+				'smart_goal',
+				'project_link',
+				'video_link',
+				'innovation_sectors'
+			];
+			// Check if the required fields are set
+			foreach ($required_fields as $field) {
+				if (empty($params[$field])) {
+					// Return an error if the required fields are not set
+					return new WP_REST_Response('Missing information', 400);
+				}
 			}
 
 			// Insert the post

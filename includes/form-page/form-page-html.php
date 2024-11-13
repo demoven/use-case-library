@@ -5,23 +5,30 @@ if (!defined('ABSPATH')) {
 function render_use_case_form() {
  ob_start();
  ?>
+ <div id="success-message">
+    Use case sent successfully
+</div>
     <form id="simple-contact-form__form">
         <h2>Submit your use case</h2>
         <div class="form-group">
             <div id="project-name">
-                <div class="form-label">Project Name</div>
+                <div class="form-label">Project Name <span class="required">*</span></div>
                 <input name="project_name" type="text" placeholder="Project Name">
+                <span class="error-message" >* This field is required</span>
             </div>
             <div id="project-owner">
-                <div class="form-label">Project Owner</div>
+                <div class="form-label">Project Owner<span class="required">*</span></div>
                 <input name="name" type="text" placeholder="Name">
+                <span class="error-message" >* This field is required</span>
             </div>
             <div id="email">
-                <div class="form-label">Email</div>
+                <div class="form-label">Email<span class="required">*</span></div>
                 <input name="creator_email" type="email" placeholder="Email">
+                <span class="error-message" >* This field is required</span>
             </div>
             <div id="w-minor">
-                <div class="form-label">Windesheim Minor</div>
+                <div class="form-label">Windesheim Minor<span class="required">*</span></div>
+                <span class="error-message" >* This field is required</span>
                 <label><input type="radio" name="w_minor" value="Concept & Creation"> Concept & Creation</label>
                 <label><input type="radio" name="w_minor" value="Data driven Innovation"> Data driven Innovation</label>
                 <label><input type="radio" name="w_minor" value="Entrepreneurships"> Entrepreneurships</label>
@@ -32,7 +39,8 @@ function render_use_case_form() {
                 <label><input type="radio" name="w_minor" value="Web & Analytics"> Web & Analytics</label>
             </div>
             <div id="value-chain">
-                <div class="form-label">Value Chain</div>
+                <div class="form-label">Value Chain<span class="required">*</span></div>
+                <span class="error-message" >* This field is required</span>
                 <label><input type="checkbox" name="value_chain[]" value="Inbound logistics"> Inbound logistics</label>
                 <label><input type="checkbox" name="value_chain[]" value="Operations"> Operations</label>
                 <label><input type="checkbox" name="value_chain[]" value="Outbound logistics"> Outbound logistics</label>
@@ -44,25 +52,29 @@ function render_use_case_form() {
                 <label><input type="checkbox" name="value_chain[]" value="Procurement"> Procurement</label>
             </div>
             <div id="project-phase">
-                <div class="form-label">Project Phase</div>
+                <div class="form-label">Project Phase<span class="required">*</span></div>
+                <span class="error-message" >* This field is required</span>
                 <label><input type="radio" name="project_phase" value="Asses"> Asses</label>
                 <label><input type="radio" name="project_phase" value="Trial"> Trial</label>
                 <label><input type="radio" name="project_phase" value="Adopt"> Adopt</label>
             </div>
             <div id="technological-innovations">
-                <div class="form-label">Technological Innovations</div>
+                <div class="form-label">Technological Innovations<span class="required">*</span></div>
                 <textarea name="techn_innovations" placeholder="Type your message"></textarea>
+                <span class="error-message" >* This field is required</span>
             </div>
             <div id="project-image">
                 <div class="form-label">Project Image</div>
                 <input name="project_image" type="file" accept="image/*">
             </div>
             <div id="tech-providers">
-                <div class="form-label">Tech Providers</div>
+                <div class="form-label">Tech Providers<span class="required">*</span></div>
                 <textarea name="tech_providers" placeholder="Type your message"></textarea>
+                <span class="error-message" >* This field is required</span>
             </div>
             <div id="innovation-sectors">
-                <div class="form-label">Innovation Sectors</div>
+                <div class="form-label">Innovation Sectors<span class="required">*</span></div>
+                <span class="error-message" >* This field is required</span>
                 <label><input type="radio" name="innovation_sectors" value="Culture & Media"> Culture & Media</label>
                 <label><input type="radio" name="innovation_sectors" value="Data Sharing"> Data Sharing</label>
                 <label><input type="radio" name="innovation_sectors" value="Department of Defense"> Department of Defense</label>
@@ -83,7 +95,8 @@ function render_use_case_form() {
                 <label><input type="radio" name="innovation_sectors" value="Security, Peace & Justice"> Security, Peace & Justice</label>
             </div>
             <div id="themes">
-                <div class="form-label">Themes</div>
+                <div class="form-label">Themes<span class="required">*</span></div>
+                <span class="error-message" >* This field is required</span>
                 <label><input type="checkbox" name="themes[]" value="Transaction to interaction"> Transaction to interaction</label>
                 <label><input type="checkbox" name="themes[]" value="Future of Work"> Future of Work</label>
                 <label><input type="checkbox" name="themes[]" value="Cloud Everywhere"> Cloud Everywhere</label>
@@ -94,7 +107,8 @@ function render_use_case_form() {
                 <label><input type="checkbox" name="themes[]" value="Quantum computing"> Quantum computing</label>
             </div>
             <div id="sdgs">
-                <div class="form-label">SDGs</div>
+                <div class="form-label">SDGs<span class="required">*</span></div>
+                <span class="error-message" >* This field is required</span>
                 <label><input type="checkbox" name="sdgs[]" value="1. No poverty"> 1. No poverty</label>
                 <label><input type="checkbox" name="sdgs[]" value="2. No hunger"> 2. No hunger</label>
                 <label><input type="checkbox" name="sdgs[]" value="3. Good health and well-being"> 3. Good health and well-being</label>
@@ -114,32 +128,39 @@ function render_use_case_form() {
                 <label><input type="checkbox" name="sdgs[]" value="17. Partnership to achieve goals"> 17. Partnership to achieve goals</label>
             </div>
             <div id="positive-impact-sdgs">
-                <div class="form-label">Positive Impact SDGs</div>
+                <div class="form-label">Positive Impact SDGs<span class="required">*</span></div>
                 <textarea name="positive_impact_sdgs" placeholder="Type your message"></textarea>
+                <span class="error-message" >* This field is required</span>
             </div>
             <div id="negative-impact-sdgs">
-                <div class="form-label">Negative Impact SDGs</div>
+                <div class="form-label">Negative Impact SDGs<span class="required">*</span></div>
                 <textarea name="negative_impact_sdgs" placeholder="Type your message"></textarea>
+                <span class="error-message" >* This field is required</span>
             </div>
             <div id="project-background">
-                <div class="form-label">Project Background</div>
+                <div class="form-label">Project Background<span class="required">*</span></div>
                 <textarea name="project_background" placeholder="Type your message"></textarea>
+                <span class="error-message" >* This field is required</span>
             </div>
             <div id="problem">
-                <div class="form-label">Problem to Solve</div>
+                <div class="form-label">Problem to Solve<span class="required">*</span></div>
                 <textarea name="problem" placeholder="Type your message"></textarea>
+                <span class="error-message" >* This field is required</span>
             </div>
             <div id="smart-goal">
-                <div class="form-label">Smart Goal</div>
+                <div class="form-label">Smart Goal<span class="required">*</span></div>
                 <textarea name="smart_goal" placeholder="Type your message"></textarea>
+                <span class="error-message" >* This field is required</span>
             </div>
             <div id="project-link">
-                <div class="form-label">Project Link</div>
+                <div class="form-label">Project Link<span class="required">*</span></div>
                 <input name="project_link" type="text" placeholder="Project Link">
+                <span class="error-message" >* This field is required</span>
             </div>
             <div id="video-link">
-                <div class="form-label">Video Link</div>
+                <div class="form-label">Video Link<span class="required">*</span></div>
                 <input name="video_link" type="text" placeholder="Video Link">
+                <span class="error-message" >* This field is required</span>
             </div>
         </div>
         <button type="submit">Send</button>
