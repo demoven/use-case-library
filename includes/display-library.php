@@ -289,6 +289,10 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                         <?php endif; ?>
                         <h2><a href="<?php echo esc_url(home_url('/use-case-details/?post_id=' . $post_id)); ?>" target="_blank"><?php echo esc_html($project_name); ?></a></h2>
                         <p><?php echo esc_html($smart_goal); ?></p>
+                        <div class="use-case-footer">
+                            <a id="learn-more" href="<?php echo esc_url(home_url('/use-case-details/?post_id=' . $post_id)); ?>" target="_blank">Learn more</a>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
                     </div>
                     <?php
                     $output .= ob_get_clean(); // Get the contents of the output buffer
