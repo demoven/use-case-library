@@ -123,7 +123,8 @@ if (!class_exists('UseCaseLibraryDisplay')) {
             $output .= '<form id="filter-form" method="GET" action="" onchange="this.submit();">';
 
             // Filter by Windesheim Minor
-            $output .= '<label>Filter by Windesheim Minor:</label><br>';
+            $output .= '<div id="windesheim-minor">';
+            $output .= '<label>Filter by Windesheim Minor:</label>';
             $minors = array(
                 'Concept & Creation',
                 'Data driven Innovation',
@@ -142,12 +143,16 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                 $checked = in_array($minor, $selected_minors) ? 'checked' : '';
 
                 // Display the checkbox
-                $output .= '<input type="checkbox" name="w_minor[]" value="' . esc_attr($minor) . '" ' . $checked . '> ' . esc_html($minor) . '<br>';
+                $output .= '<div class="minor-checkbox">';
+                $output .= '<input type="checkbox" name="w_minor[]" value="' . esc_attr($minor) . '" ' . $checked . '> ' . esc_html($minor) ;
+                $output .= '</div>';
             }
+            $output .= '</div>';
 
 
             // Filter by Value Chain
-            $output .= '<label>Filter by Value Chain:</label><br>';
+            $output .= '<div id="value-chain">';
+            $output .= '<label>Filter by Value Chain:</label>';
             $value_chains = array(
                 'Inbound logistics',
                 'Operations',
@@ -167,11 +172,15 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                 $checked = in_array($value_chain, $selected_value_chains) ? 'checked' : '';
 
                 // Display the checkbox
-                $output .= '<input type="checkbox" name="value_chain[]" value="' . esc_attr($value_chain) . '" ' . $checked . '> ' . esc_html($value_chain) . '<br>';
+                $output .= '<div class="value-chain-checkbox">';
+                $output .= '<input type="checkbox" name="value_chain[]" value="' . esc_attr($value_chain) . '" ' . $checked . '> ' . esc_html($value_chain) ;
+                $output .= '</div>';
             }
+            $output .= '</div>';
 
             // Filter by Themes
-            $output .= '<label>Filter by Themes:</label><br>';
+            $output .= '<div id="themes">';
+            $output .= '<label>Filter by Themes:</label>';
             $themes = array(
                 'Transaction to interaction',
                 'Future of Work',
@@ -191,11 +200,15 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                 $checked = in_array($theme, $selected_themes) ? 'checked' : '';
 
                 // Display the checkbox
-                $output .= '<input type="checkbox" name="themes[]" value="' . esc_attr($theme) . '" ' . $checked . '> ' . esc_html($theme) . '<br>';
+                $output .= '<div class="theme-checkbox">';
+                $output .= '<input type="checkbox" name="themes[]" value="' . esc_attr($theme) . '" ' . $checked . '> ' . esc_html($theme) ;
+                $output .= '</div>';
             }
+            $output .= '</div>';
 
             // Filter by SDGs
-            $output .= '<label>Filter by SDGs:</label><br>';
+            $output .= '<div id="sdgs">';
+            $output .= '<label>Filter by SDGs:</label>';
             $sdgs = array(
                 '1. No poverty',
                 '2. No hunger',
@@ -223,11 +236,15 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                 $checked = in_array($sdg, $selected_sdgs) ? 'checked' : '';
 
                 // Display the checkbox
-                $output .= '<input type="checkbox" name="sdgs[]" value="' . esc_attr($sdg) . '" ' . $checked . '> ' . esc_html($sdg) . '<br>';
+                $output .= '<div class="sdg-checkbox">';
+                $output .= '<input type="checkbox" name="sdgs[]" value="' . esc_attr($sdg) . '" ' . $checked . '> ' . esc_html($sdg) ;
+                $output .= '</div>';
             }
+            $output .= '</div>';
 
             // Filter by Innovation Sectors
-            $output .= '<label>Filter by Innovation Sectors:</label><br>';
+            $output .= '<div id="innovation-sectors">';
+            $output .= '<label>Filter by Innovation Sectors:</label>';
             $innovation_sectors = array(
                 'Culture & Media',
                 'Data Sharing',
@@ -256,8 +273,11 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                 $checked = in_array($sector, $selected_innovation_sectors) ? 'checked' : '';
 
                 // Display the checkbox
-                $output .= '<input type="checkbox" name="innovation_sectors[]" value="' . esc_attr($sector) . '" ' . $checked . '> ' . esc_html($sector) . '<br>';
+                $output .= '<div class="innovation-sector-checkbox">';
+                $output .= '<input type="checkbox" name="innovation_sectors[]" value="' . esc_attr($sector) . '" ' . $checked . '> ' . esc_html($sector) ;
+                $output .= '</div>';
             }
+            $output .= '</div>';
 
             // End the form
             $output .= '</form>';
