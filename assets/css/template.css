@@ -1,15 +1,49 @@
 #strip {
-    
+    display: flex;
+    flex-direction: row; /* Aligner les éléments en ligne */
+    align-items: center; /* Aligner les éléments verticalement */
+    justify-content: space-between; /* Ajouter de l'espace entre les éléments */
 }
 
 #color-strip {
-    width : 100%;
-    height: 350px;
-    background-color: #f0f0f0;
+    flex: 1;
+    display: flex;
+    align-items: center; /* Aligner le contenu verticalement */
+    justify-content: center; /* Centrer le contenu horizontalement */
+    background: linear-gradient(
+        106deg, /* angle d'inclinaison */
+        var(--Orange) 0%,   /* première couleur commence à 0% */
+        var(--Orange) 33.33%, /* première couleur se termine à 33.33% */
+        var(--Gold) 33.33%, /* deuxième couleur commence à 33.33% */
+        var(--Gold) 66.66%, /* deuxième couleur se termine à 66.66% */
+        var(--Yellow) 66.66%, /* troisième couleur commence à 66.66% */
+        var(--Yellow) 100%    /* troisième couleur se termine à 100% */
+    );
+    height: 100%;
+    padding: 0 50px;
 }
-#container{
-    margin-top : 20px;
-    margin-left: 50px;
+
+.image-container {
+    width: 800px; /* Définir une largeur fixe pour l'image */
+    height: 350px; /* Définir une hauteur fixe pour l'image */
+    overflow: hidden;
+    flex: 0 0 auto;
+    background-color: var(--Yellow);
+}
+
+#image-strip {
+    width: 100%;
+    height: 100%; /* Faire en sorte que l'image prenne toute la hauteur disponible */
+    object-fit: cover; /* Couper l'image pour remplir le conteneur */
+    object-position: center; /* Centrer l'image dans le conteneur */
+    clip-path: polygon(12.8% 0%,
+                   100% 0%,
+                   100% 100%,
+                    0% 100%);
+}
+
+#container {
+    margin: 20px 50px;
 }
 
 .informations {
@@ -36,6 +70,11 @@
 
 .icon-margin {
     margin-right: 0.5rem; /* Ajustez la valeur selon vos besoins */
+}
+
+
+#use-case-details {
+    margin-top: 20px;
 }
 
 @media (max-width: 1200px) {

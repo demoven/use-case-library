@@ -59,8 +59,14 @@ if (isset($_GET['post_id'])) {
         // Display the post meta data with html
         ?>
         <div id="strip">
-            <div id="color-strip"><?php echo esc_html($project_name); ?></div>
-            <div id="image-strip"></div>
+            <div id="color-strip">
+                <h1><?php echo esc_html($project_name); ?></h1>
+            </div>
+            <?php if ($project_image): ?>
+                <div class="image-container">
+                    <img id="image-strip" src="<?php echo esc_url($project_image); ?>" alt="Project Image">
+                </div>
+            <?php endif; ?>
         </div>
         <div id="container">
             <div class="informations">
@@ -112,9 +118,13 @@ if (isset($_GET['post_id'])) {
             </div>
             <div class="project-owner-informations">
                 <div class="po-info"><i
-                            class="fa-regular fa-user icon-margin"></i><?php echo esc_html($creator_name); ?></div>
-                <div class="po-info"><i
-                            class="fa-regular fa-envelope icon-margin"></i><?php echo esc_html($creator_email); ?></div>
+                            class="fa-regular fa-user icon-margin"></i>
+                            <span><?php echo esc_html($creator_name); ?></span>
+                </div>
+                <div class="po-info">
+                    <i class="fa-regular fa-envelope icon-margin"></i>
+                    <span><?php echo esc_html($creator_email); ?></span>
+                </div>
                 <div class="po-info"><i class="fa-solid fa-link icon-margin"></i><a
                             href="<?php echo esc_url($project_link); ?>"
                             target="_blank"><?php echo esc_html($project_link); ?></a></div>
@@ -122,40 +132,36 @@ if (isset($_GET['post_id'])) {
                             href="<?php echo esc_url($video_link); ?>"
                             target="_blank"><?php echo esc_html($video_link); ?></a></div>
             </div>
-            <div class="use-case-details">
+            <div id="use-case-details">
                 <div class="project-informations">
-                    <h2 class="project-informtions-title">Project Background</h2>
+                    <h3 class="project-informtions-title">Project Background</h3>
                     <p class="project-informations-content"><?php echo esc_html($project_background); ?></p>
                 </div>
                 <div class="project-informations">
-                    <h2 class="project-informtions-title">Problem to Solve</h2>
+                    <h3 class="project-informtions-title">Problem to Solve</h3>
                     <p class="project-informations-content"><?php echo esc_html($problem); ?></p>
                 </div>
                 <div class="project-informations">
-                    <h2 class="project-informtions-title">Technological Innovations</h2>
+                    <h3 class="project-informtions-title">Technological Innovations</h3>
                     <p class="project-informations-content"> <?php echo esc_html($tech_innovations); ?></p>
                 </div>
                 <div class="project-informations">
-                    <h2 class="project-informtions-title">Smart Goal</h2>
+                    <h3 class="project-informtions-title">Smart Goal</h3>
                     <p class="project-informations-content"><?php echo esc_html($smart_goal); ?></p>
                 </div>
                 <div class="project-informations">
-                    <h2 class="project-informtions-title">Positive Impact SDGs</h2>
+                    <h3 class="project-informtions-title">Positive Impact SDGs</h3>
                     <p class="project-informations-content"><?php echo esc_html($positive_impact_sdgs); ?></p>
                 </div>
                 <div class="project-informations">
-                    <h2 class="project-informtions-title">Negative Impact SDGs</h2>
+                    <h3 class="project-informtions-title">Negative Impact SDGs</h3>
                     <p class="project-informations-content"><?php echo esc_html($negative_impact_sdgs); ?></p>
                 </div>
                 <div class="project-informations">
-                    <h2 class="project-informtions-title">Tech providers</h2>
+                    <h3 class="project-informtions-title">Tech providers</h3>
                     <p class="project-informations-content"><?php echo esc_html($tech_providers); ?></p>
                 </div>
-                <?php if ($project_image): ?>
-                    <!-- Style to change here -->
-                    <img src="<?php echo esc_url($project_image); ?>" alt="Project Image"
-                         style="max-width: 100%; height: auto;">
-                <?php endif; ?>
+                
                 <div class="use-case-content">
                     <?php echo apply_filters('the_content', $post->post_content); ?>
                 </div>
