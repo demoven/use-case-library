@@ -179,7 +179,7 @@ if (!class_exists('UseCaseLibraryDisplay')) {
             $output .= '</div>';
 
             // Filter by Themes
-            $output .= '<div id="themes">';
+            $output .= '<div id="lib-themes">';
             $output .= '<label>Filter by Themes:</label>';
             $themes = array(
                 'Transaction to interaction',
@@ -207,7 +207,7 @@ if (!class_exists('UseCaseLibraryDisplay')) {
             $output .= '</div>';
 
             // Filter by SDGs
-            $output .= '<div id="sdgs">';
+            $output .= '<div id="lib-sdgs">';
             $output .= '<label>Filter by SDGs:</label>';
             $sdgs = array(
                 '1. No poverty',

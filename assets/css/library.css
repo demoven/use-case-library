@@ -42,7 +42,7 @@ label{
     width: 100%;
 }
 
-#windesheim-minor, #value-chain, #themes, #sdgs, #innovation-sectors{
+#windesheim-minor, #value-chain, #lib-themes, #lib-sdgs, #innovation-sectors{
     display: flex;
     flex-direction: column;
     gap: 5px;
