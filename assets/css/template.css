@@ -1,31 +1,32 @@
 #strip {
     display: flex;
-    flex-direction: row; /* Aligner les éléments en ligne */
-    align-items: center; /* Aligner les éléments verticalement */
-    justify-content: space-between; /* Ajouter de l'espace entre les éléments */
+    flex-direction: row;
+    align-items: center; 
+    justify-content: space-between; 
+    font-size: 1.5rem;
 }
 
 #color-strip {
     flex: 1;
     display: flex;
-    align-items: center; /* Aligner le contenu verticalement */
-    justify-content: center; /* Centrer le contenu horizontalement */
+    align-items: center; 
+    justify-content: center; 
     background: linear-gradient(
-        106deg, /* angle d'inclinaison */
-        var(--Orange) 0%,   /* première couleur commence à 0% */
-        var(--Orange) 33.33%, /* première couleur se termine à 33.33% */
-        var(--Gold) 33.33%, /* deuxième couleur commence à 33.33% */
-        var(--Gold) 66.66%, /* deuxième couleur se termine à 66.66% */
-        var(--Yellow) 66.66%, /* troisième couleur commence à 66.66% */
-        var(--Yellow) 100%    /* troisième couleur se termine à 100% */
+        106deg, 
+        var(--Orange) 0%,   
+        var(--Orange) 33.33%, 
+        var(--Gold) 33.33%, 
+        var(--Gold) 66.66%, 
+        var(--Yellow) 66.66%, 
+        var(--Yellow) 100%    
     );
-    height: 100%;
+    min-height: 350px;
     padding: 0 50px;
 }
 
 .image-container {
-    width: 800px; /* Définir une largeur fixe pour l'image */
-    height: 350px; /* Définir une hauteur fixe pour l'image */
+    width: 800px; 
+    height: 350px; 
     overflow: hidden;
     flex: 0 0 auto;
     background-color: var(--Yellow);
@@ -33,9 +34,9 @@
 
 #image-strip {
     width: 100%;
-    height: 100%; /* Faire en sorte que l'image prenne toute la hauteur disponible */
-    object-fit: cover; /* Couper l'image pour remplir le conteneur */
-    object-position: center; /* Centrer l'image dans le conteneur */
+    height: 100%; 
+    object-fit: cover; 
+    object-position: center; 
     clip-path: polygon(12.8% 0%,
                    100% 0%,
                    100% 100%,
@@ -43,48 +44,88 @@
 }
 
 #container {
-    margin: 20px 50px;
+    margin-top: 20px;
 }
 
 .informations {
     display: flex;
-    flex-wrap: wrap; /* Permettre le retour à la ligne si nécessaire */
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    gap: 20px;
+    margin : 20px;
 }
 
+
 .tags {
-    display: inline-block; /* Afficher les éléments en ligne */
-    margin-right: 1rem; /* Ajouter une marge à droite entre les éléments */
-    margin-bottom: 0.5rem; /* Ajouter un espace en bas pour séparer les lignes */
+    display: inline-block; 
+    margin-right: 1rem; 
+    margin-bottom: 0.5rem; 
 }
 
 .tags-title {
     font-weight: bold;
-    margin-bottom: 0.25rem; /* Réduire l'espace en bas du titre */
-    text-transform: capitalize; /* Mettre en majuscule la première lettre de chaque mot */
+    margin-bottom: 0.25rem; 
+    text-transform: capitalize; 
 }
 
 .tags-content {
     color: var(--Grey1);
-    text-transform: capitalize; /* Mettre en majuscule la première lettre de chaque mot */
+    text-transform: capitalize; 
 }
 
 .icon-margin {
-    margin-right: 0.5rem; /* Ajustez la valeur selon vos besoins */
+    margin-right: 0.5rem; 
 }
 
 
 #use-case-details {
-    margin-top: 20px;
+    margin: 20px 20vw;
+
+}
+
+.project-owner-informations {
+    margin: 20px 20vw;
+
 }
 
 @media (max-width: 1200px) {
     .tags {
-        flex: 1 1 45%; /* Ajuster la largeur des éléments pour les écrans moyens */
+        flex: 1 1 45%; 
     }
+    .image-container {
+        display: none;
+    }
+    #color-strip {
+        min-height: 200px;
+    }
+    #use-case-details {
+        margin: 20px 10vw;
+    }
+    .project-owner-informations {
+        margin: 20px 10vw;
+    }
+    .informations {
+        margin: 20px 10vw;
+        
+    }
+
 }
 
 @media (max-width: 768px) {
     .tags {
-        flex: 1 1 100%; /* Ajuster la largeur des éléments pour les petits écrans */
+        flex: 1 1 100%; 
     }
+    #color-strip {
+        min-height: 150px;
+    }
+    #use-case-details {
+        margin: 20px 5vw;
+    }
+    .project-owner-informations {
+        margin: 20px 5vw;
+    }
+    .informations {
+        margin : 20px 5vw;
+    }
+
 }

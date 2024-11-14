@@ -70,6 +70,10 @@ if (isset($_GET['post_id'])) {
         </div>
         <div id="container">
             <div class="informations">
+            <div class="tags">
+                    <div class="tags-title"><i class="fa-solid fa-list-check icon-margin"></i>project phase</div>
+                    <div class="tags-content"><?php echo esc_html($project_phase); ?></div>
+                </div>
                 <div class="tags">
                     <div class="tags-title"><i class="fa-solid fa-arrow-trend-up icon-margin"></i>trends</div>
                     <div class="tags-content">
@@ -93,7 +97,7 @@ if (isset($_GET['post_id'])) {
                     </div>
                 </div>
                 <div class="tags">
-                    <div class="tags-title">windesheim minor</div>
+                    <div class="tags-title"><i class="fa-solid fa-graduation-cap icon-margin"></i>windesheim minor</div>
                     <div class="tags-content"><?php echo esc_html($w_minor); ?></div>
                 </div>
                 <div class="tags">
@@ -101,7 +105,7 @@ if (isset($_GET['post_id'])) {
                     <div class="tags-content"><?php echo esc_html($innovation_sectors); ?></div>
                 </div>
                 <div class="tags">
-                    <div class="tags-title">sdgs</div>
+                    <div class="tags-title"><i class="fa-solid fa-table-cells icon-margin"></i>SDGs</div>
                     <div class="tags-content">
                         <?php
                         $sdgs_array = (array)$sdgs;
@@ -110,10 +114,6 @@ if (isset($_GET['post_id'])) {
                         }
                         ?>
                     </div>
-                </div>
-                <div class="tags">
-                    <div class="tags-title"><i class="fa-solid fa-list-check icon-margin"></i>project phase</div>
-                    <div class="tags-content"><?php echo esc_html($project_phase); ?></div>
                 </div>
             </div>
             <div class="project-owner-informations">
