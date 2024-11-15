@@ -99,6 +99,8 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                 $query .= ' AND ' . implode(' AND ', $conditions);
             }
 
+            $query .= ' ORDER BY id DESC';
+
             // Prepare the query with the selected filter values
             $prepared_query = $wpdb->prepare($query, array_merge(
                 $selected_minors,

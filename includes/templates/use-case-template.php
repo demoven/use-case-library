@@ -30,31 +30,37 @@ if (isset($_GET['post_id'])) {
 
     // Get the post_id
     $post_id = intval($_GET['post_id']);
-    $post = get_post($post_id);
 
-    // Check if the post exists
-    if ($post) {
+    // Get the use case data from the custom table
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'use_case';
+    $use_case = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $post_id));
 
-        // Get the post meta data
-        $project_name = get_post_meta($post_id, 'project_name', true);
-        $creator_name = get_post_meta($post_id, 'creator_name', true);
-        $creator_email = get_post_meta($post_id, 'creator_email', true);
-        $w_minor = get_post_meta($post_id, 'w_minor', true);
-        $project_phase = get_post_meta($post_id, 'project_phase', true);
-        $value_chain = get_post_meta($post_id, 'value_chain', true);
-        $tech_innovations = get_post_meta($post_id, 'techn_innovations', true);
-        $tech_providers = get_post_meta($post_id, 'tech_providers', true);
-        $themes = get_post_meta($post_id, 'themes', true);
-        $sdgs = get_post_meta($post_id, 'sdgs', true);
-        $positive_impact_sdgs = get_post_meta($post_id, 'positive_impact_sdgs', true);
-        $negative_impact_sdgs = get_post_meta($post_id, 'negative_impact_sdgs', true);
-        $project_background = get_post_meta($post_id, 'project_background', true);
-        $problem = get_post_meta($post_id, 'problem', true);
-        $smart_goal = get_post_meta($post_id, 'smart_goal', true);
-        $project_link = get_post_meta($post_id, 'project_link', true);
-        $video_link = get_post_meta($post_id, 'video_link', true);
-        $project_image = get_post_meta($post_id, 'project_image', true);
-        $innovation_sectors = get_post_meta($post_id, 'innovation_sectors', true);
+    // Check if the use case exists
+    if ($use_case) {
+
+
+        // Get the use case data
+        $project_name = maybe_unserialize($use_case->project_name);
+        $project_image = maybe_unserialize($use_case->project_image);
+        $project_phase = maybe_unserialize($use_case->project_phase);
+        $themes = maybe_unserialize($use_case->themes);
+        $value_chain = maybe_unserialize($use_case->value_chain);
+        $w_minor = maybe_unserialize($use_case->w_minor);
+        $innovation_sectors = maybe_unserialize($use_case->innovation_sectors);
+        $sdgs = maybe_unserialize($use_case->sdgs);
+        $creator_name = maybe_unserialize($use_case->name);
+        $creator_email = maybe_unserialize($use_case->creator_email);
+        $project_background = maybe_unserialize($use_case->project_background);
+        $problem = maybe_unserialize($use_case->problem);
+        $tech_innovations = maybe_unserialize($use_case->techn_innovations);
+        $smart_goal = maybe_unserialize($use_case->smart_goal);
+        $positive_impact_sdgs = maybe_unserialize($use_case->positive_impact_sdgs);
+        $negative_impact_sdgs = maybe_unserialize($use_case->negative_impact_sdgs);
+        $tech_providers = maybe_unserialize($use_case->tech_providers);
+        $project_link = maybe_unserialize($use_case->project_link);
+        $video_link = maybe_unserialize($use_case->video_link);
+
 
         // Display the post meta data with html
         ?>
