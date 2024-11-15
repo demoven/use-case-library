@@ -26,6 +26,13 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                 '1.0',
                 'all'
             );
+            wp_enqueue_script(
+                'use-case-library-script',
+                plugin_dir_url(__FILE__) . '../assets/js/library.js',
+                array('jquery'),
+                '1.0',
+                true
+            );
         }
 
         /**
@@ -120,11 +127,15 @@ if (!class_exists('UseCaseLibraryDisplay')) {
             $output = '<div class="use-case-container">';
 
             // Display the filter form
+            $output .= '<div class="filter-container">';
+            $output .= '<h2>Filter Use Cases <i class="fa-solid fa-filter"></i></h2>';
             $output .= '<form id="filter-form" method="GET" action="" onchange="this.submit();">';
 
             // Filter by Windesheim Minor
+            $output .= '<div class="collapsible">';
+            $output .= '<button type="button" class="collapsible-button">Windesheim Minor<i class="fa-solid fa-chevron-down"></i></button>';
+            $output .= '<div class="collapsible-content">';
             $output .= '<div id="windesheim-minor">';
-            $output .= '<label>Filter by Windesheim Minor:</label>';
             $minors = array(
                 'Concept & Creation',
                 'Data driven Innovation',
@@ -144,15 +155,18 @@ if (!class_exists('UseCaseLibraryDisplay')) {
 
                 // Display the checkbox
                 $output .= '<div class="minor-checkbox">';
-                $output .= '<input type="checkbox" name="w_minor[]" value="' . esc_attr($minor) . '" ' . $checked . '> ' . esc_html($minor) ;
+                $output .= '<input type="checkbox" name="w_minor[]" value="' . esc_attr($minor) . '" ' . $checked . '> ' . '<div>' .esc_html($minor) .'</div>'; ;
                 $output .= '</div>';
             }
             $output .= '</div>';
-
+            $output .= '</div>';
+            $output .= '</div>';
 
             // Filter by Value Chain
+            $output .= '<div class="collapsible">';
+            $output .= '<button type="button" class="collapsible-button">Value Chain<i class="fa-solid fa-chevron-down"></i></button>';
+            $output .= '<div class="collapsible-content">';
             $output .= '<div id="value-chain">';
-            $output .= '<label>Filter by Value Chain:</label>';
             $value_chains = array(
                 'Inbound logistics',
                 'Operations',
@@ -173,14 +187,18 @@ if (!class_exists('UseCaseLibraryDisplay')) {
 
                 // Display the checkbox
                 $output .= '<div class="value-chain-checkbox">';
-                $output .= '<input type="checkbox" name="value_chain[]" value="' . esc_attr($value_chain) . '" ' . $checked . '> ' . esc_html($value_chain) ;
+                $output .= '<input type="checkbox" name="value_chain[]" value="' . esc_attr($value_chain) . '" ' . $checked . '> ' . '<div>' .esc_html($value_chain) .'</div>' ;
                 $output .= '</div>';
             }
             $output .= '</div>';
+            $output .= '</div>';
+            $output .= '</div>';
 
             // Filter by Themes
+            $output .= '<div class="collapsible">';
+            $output .= '<button type="button" class="collapsible-button">Themes<i class="fa-solid fa-chevron-down"></i></button>';
+            $output .= '<div class="collapsible-content">';
             $output .= '<div id="lib-themes">';
-            $output .= '<label>Filter by Themes:</label>';
             $themes = array(
                 'Transaction to interaction',
                 'Future of Work',
@@ -201,14 +219,18 @@ if (!class_exists('UseCaseLibraryDisplay')) {
 
                 // Display the checkbox
                 $output .= '<div class="theme-checkbox">';
-                $output .= '<input type="checkbox" name="themes[]" value="' . esc_attr($theme) . '" ' . $checked . '> ' . esc_html($theme) ;
+                $output .= '<input type="checkbox" name="themes[]" value="' . esc_attr($theme) . '" ' . $checked . '> ' . '<div>' .esc_html($theme) .'</div>' ;
                 $output .= '</div>';
             }
             $output .= '</div>';
+            $output .= '</div>';
+            $output .= '</div>';
 
             // Filter by SDGs
+            $output .= '<div class="collapsible">';
+            $output .= '<button type="button" class="collapsible-button">SDGs<i class="fa-solid fa-chevron-down"></i></button>';
+            $output .= '<div class="collapsible-content">';
             $output .= '<div id="lib-sdgs">';
-            $output .= '<label>Filter by SDGs:</label>';
             $sdgs = array(
                 '1. No poverty',
                 '2. No hunger',
@@ -237,14 +259,18 @@ if (!class_exists('UseCaseLibraryDisplay')) {
 
                 // Display the checkbox
                 $output .= '<div class="sdg-checkbox">';
-                $output .= '<input type="checkbox" name="sdgs[]" value="' . esc_attr($sdg) . '" ' . $checked . '> ' . esc_html($sdg) ;
+                $output .= '<input type="checkbox" name="sdgs[]" value="' . esc_attr($sdg) . '" ' . $checked . '> ' . '<div>' .esc_html($sdg) .'</div>' ;
                 $output .= '</div>';
             }
             $output .= '</div>';
+            $output .= '</div>';
+            $output .= '</div>';
 
             // Filter by Innovation Sectors
+            $output .= '<div class="collapsible">';
+            $output .= '<button type="button" class="collapsible-button">Innovation Sectors<i class="fa-solid fa-chevron-down"></i></button>';
+            $output .= '<div class="collapsible-content">';
             $output .= '<div id="innovation-sectors">';
-            $output .= '<label>Filter by Innovation Sectors:</label>';
             $innovation_sectors = array(
                 'Culture & Media',
                 'Data Sharing',
@@ -274,13 +300,16 @@ if (!class_exists('UseCaseLibraryDisplay')) {
 
                 // Display the checkbox
                 $output .= '<div class="innovation-sector-checkbox">';
-                $output .= '<input type="checkbox" name="innovation_sectors[]" value="' . esc_attr($sector) . '" ' . $checked . '> ' . esc_html($sector) ;
+                $output .= '<input type="checkbox" name="innovation_sectors[]" value="' . esc_attr($sector) . '" ' . $checked . '> ' . '<div>' .esc_html($sector) .'</div>' ;
                 $output .= '</div>';
             }
+            $output .= '</div>';
+            $output .= '</div>';
             $output .= '</div>';
 
             // End the form
             $output .= '</form>';
+            $output .= '</div>';
 
             if ($query->have_posts()) {
 
@@ -290,15 +319,15 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                 while ($query->have_posts()) {
                     // Get the post
                     $query->the_post();
-                    
+
                     // Get the custom fields
                     $project_name = get_post_meta(get_the_ID(), 'project_name', true);
                     $smart_goal = get_post_meta(get_the_ID(), 'smart_goal', true);
-                    $project_image = get_post_meta(get_the_ID(), 'project_image', true); 
+                    $project_image = get_post_meta(get_the_ID(), 'project_image', true);
                     $post_id = get_the_ID();
 
                     // Start the output buffer
-                    ob_start(); 
+                    ob_start();
                     ?>
                     <div class="use-case">
                         <?php if ($project_image): ?>
@@ -319,7 +348,7 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                 }
                 $output .= '</div>';
                 $output .= '</div>';
-                
+
                 // Reset the post data
                 wp_reset_postdata();
             } else {
@@ -330,3 +359,4 @@ if (!class_exists('UseCaseLibraryDisplay')) {
         }
     }
 }
+?>
