@@ -210,68 +210,83 @@ if(!class_exists('UseCaseLibraryForm'))
 				}
 			}
 
-			// Insert the post
-			$post_id = wp_insert_post( [
-				'post_type'   => 'use-case-library', // Set the post type to "use-case-library"
-				'post_title'  => 'New project', // Set the title to "New project"
-				'post_status' => 'publish' // Set the status to "publish"
-			] );
+			if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+				// Return an error if the request method is not POST
+				return new WP_REST_Response('Method not allowed', 405);
+			}
+			// Vérifiez si la table existe et créez-la si nécessaire
+			create_use_case_table();
 
-			if ( $post_id ) {
-				// Update the post meta
-				// Sanitize the data before saving it
-				update_post_meta( $post_id, 'project_name', sanitize_text_field( $params['project_name'] ) );
-				update_post_meta( $post_id, 'creator_name', sanitize_text_field( $params['name'] ) );
-				update_post_meta( $post_id, 'creator_email', sanitize_email( $params['creator_email'] ) ); 
-				update_post_meta( $post_id, 'w_minor', sanitize_text_field( $params['w_minor'] ) ); 
-				update_post_meta( $post_id, 'status', 'on hold' ); 
-				update_post_meta( $post_id, 'project_phase', sanitize_text_field( $params['project_phase'] ) ); 
-				update_post_meta( $post_id, 'value_chain', $params['value_chain'] ); 
-				update_post_meta( $post_id, 'techn_innovations', sanitize_textarea_field( $params['techn_innovations'] ) ); 
-				update_post_meta( $post_id, 'tech_providers', sanitize_textarea_field( $params['tech_providers'] ) ); 
-				update_post_meta( $post_id, 'themes', $params['themes'] ); 
-				update_post_meta( $post_id, 'sdgs', $params['sdgs'] ); 
-				update_post_meta( $post_id, 'positive_impact_sdgs', sanitize_textarea_field( $params['positive_impact_sdgs'] ) ); 
-				update_post_meta( $post_id, 'negative_impact_sdgs', sanitize_textarea_field( $params['negative_impact_sdgs'] ) ); 
-				update_post_meta( $post_id, 'project_background', sanitize_textarea_field( $params['project_background'] ) ); 
-				update_post_meta( $post_id, 'problem', sanitize_textarea_field( $params['problem'] ) ); 
-				update_post_meta( $post_id, 'smart_goal', sanitize_textarea_field( $params['smart_goal'] ) ); 
-				update_post_meta( $post_id, 'project_link', sanitize_text_field( $params['project_link'] ) ); 
-				update_post_meta( $post_id, 'video_link', sanitize_text_field( $params['video_link'] ) );
-				update_post_meta( $post_id, 'innovation_sectors', sanitize_text_field( $params['innovation_sectors'] ) ); 
+			// Insérez les données dans la table personnalisée
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'use_case';
 
+			$data = [
+				'project_name' => sanitize_text_field($params['project_name']),
+				'name' => sanitize_text_field($params['name']),
+				'creator_email' => sanitize_email($params['creator_email']),
+				'w_minor' => sanitize_text_field($params['w_minor']),
+				'project_phase' => sanitize_text_field($params['project_phase']),
+				'value_chain' => maybe_serialize($params['value_chain']),
+				'techn_innovations' => sanitize_textarea_field($params['techn_innovations']),
+				'tech_providers' => sanitize_textarea_field($params['tech_providers']),
+				'themes' => maybe_serialize($params['themes']),
+				'sdgs' => maybe_serialize($params['sdgs']),
+				'positive_impact_sdgs' => sanitize_textarea_field($params['positive_impact_sdgs']),
+				'negative_impact_sdgs' => sanitize_textarea_field($params['negative_impact_sdgs']),
+				'project_background' => sanitize_textarea_field($params['project_background']),
+				'problem' => sanitize_textarea_field($params['problem']),
+				'smart_goal' => sanitize_textarea_field($params['smart_goal']),
+				'project_link' => sanitize_text_field($params['project_link']),
+				'video_link' => sanitize_text_field($params['video_link']),
+				'innovation_sectors' => sanitize_text_field($params['innovation_sectors']),
+			];
+
+			// Insérer les données initiales dans la table
+			$wpdb->insert($table_name, $data);
+
+			if ($wpdb->insert_id) {
+				$insert_id = $wpdb->insert_id;
 
 				// Check if the image is uploaded
-				if ( ! empty( $_FILES['project_image']['name'] ) ) {
-
+				if (!empty($_FILES['project_image']['name'])) {
 					// Include the file.php WordPress library
-					require_once( ABSPATH . 'wp-admin/includes/file.php' );
+					require_once(ABSPATH . 'wp-admin/includes/file.php');
 
 					// Include the image.php WordPress library
 					$uploadedfile = $_FILES['project_image'];
 
 					// Set the upload overrides
-					$upload_overrides = array( 'test_form' => false );
+					$upload_overrides = array('test_form' => false);
 
 					// Upload the image
-					$movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
+					$movefile = wp_handle_upload($uploadedfile, $upload_overrides);
 
 					// Check if the image is uploaded
-					if ( $movefile && ! isset( $movefile['error'] ) ) {
+					if ($movefile && !isset($movefile['error'])) {
+						// Renommer l'image avec le format use_case_ID
+						$filetype = wp_check_filetype($movefile['file']);
+						$new_filename = 'use_case_' . $insert_id . '.' . $filetype['ext'];
+						$new_filepath = wp_upload_dir()['path'] . '/' . $new_filename;
+						rename($movefile['file'], $new_filepath);
+						$new_fileurl = wp_upload_dir()['url'] . '/' . $new_filename;
 
-						// Update the post meta and Save the image URL
-						update_post_meta( $post_id, 'project_image', $movefile['url'] ); 
+						// Update the table with the new image URL
+						$wpdb->update(
+							$table_name,
+							['project_image' => $new_fileurl],
+							['id' => $insert_id]
+						);
 					} else {
-
 						// Return an error if the image upload failed
-						return new WP_REST_Response( 'Image upload failed', 500 );
+						return new WP_REST_Response('Image upload failed', 500);
 					}
 				}
-				// Return a success message
-				return new WP_REST_Response( 'Message sent', 200 );
+
+				return new WP_REST_Response('Message sent', 200);
+			} else {
+				return new WP_REST_Response('Message not sent', 500);
 			}
-			// Return an error if the post creation failed
-			return new WP_REST_Response( 'Message not sent', 500 );
 		}
 	}
 }

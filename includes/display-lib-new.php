@@ -116,9 +116,7 @@ if (!class_exists('UseCaseLibraryDisplay')) {
 
             // Display the filter form and use cases
             ?>
-            <div class="use-case-container">
-                <div class="filter-container">
-                <h2>Filter Use Cases <i class="fa-solid fa-filter"></i></h2>
+            <div class="use-case-library">
                 <form id="filter-form" method="GET" action="" onchange="this.submit();">
                     <!-- Filter by Windesheim Minor -->
                     <div class="collapsible">
@@ -276,12 +274,11 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                         </div>
                     </div>
                 </form>
-                </div>
 
                 <!-- Display the use cases -->
                 <?php
                 if ($use_cases) {
-                    echo '<div class="use-cases">';
+                    echo '<div class="use-case-container">';
                     foreach ($use_cases as $use_case) {
                         $project_name = esc_html($use_case->project_name);
                         $smart_goal = esc_html($use_case->smart_goal);

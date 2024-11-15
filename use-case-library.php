@@ -95,5 +95,38 @@ function template_select($template)
 // Add filter to select the custom template 
 add_filter('template_include', 'template_select', 99 );
 
+register_activation_hook(__FILE__, 'create_use_case_table');
 
+function create_use_case_table() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'use_case';
+    $charset_collate = $wpdb->get_charset_collate();
 
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+        id smallint unsigned NOT NULL AUTO_INCREMENT,
+        project_name varchar(255) NOT NULL,
+        name varchar (255) NOT NULL,
+        creator_email varchar(255) NOT NULL,
+        w_minor varchar(255) NOT NULL,
+        project_phase varchar(255) NOT NULL,
+        value_chain text NOT NULL,
+        techn_innovations text NOT NULL,
+        tech_providers text NOT NULL,
+        themes text NOT NULL,
+        sdgs text NOT NULL,
+        positive_impact_sdgs text NOT NULL,
+        negative_impact_sdgs text NOT NULL,
+        project_background text NOT NULL,
+        problem text NOT NULL,
+        smart_goal text NOT NULL,
+        project_link varchar(2083) NOT NULL,
+        video_link varchar(2083) NOT NULL,
+        innovation_sectors varchar(255) NOT NULL,
+        project_image varchar(255), 
+        published boolean NOT NULL DEFAULT 0,
+        PRIMARY KEY (id)
+    ) $charset_collate;";
+
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);
+}
