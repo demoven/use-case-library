@@ -29,9 +29,10 @@
 }
 
 .filter-container h2{
-    padding: 10px 10px 0 10px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
+    margin : 0;
 }
 
 #filter-form{
@@ -170,6 +171,8 @@ label{
 
 
 .collapsible-button {
+    position : sticky;
+    top : 0;
     color: var(--Black);
     cursor: pointer;
     padding: 10px;

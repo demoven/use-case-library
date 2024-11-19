@@ -91,71 +91,78 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
             ?>
             <div class="wrap">
                 <h1>Use Case Details</h1>
-                <p><strong>Status :</strong> <?php echo esc_html($use_case->published ? 'published' : 'on hold'); ?></p>
-                <p><strong>Project Name :</strong> <?php echo esc_html($use_case->project_name); ?></p>
-                <p><strong>Project Owner :</strong> <?php echo esc_html($use_case->name); ?></p>
-                <p><strong>Email :</strong> <?php echo esc_html($use_case->creator_email); ?></p>
-                <p><strong>Windesheim Minor :</strong> <?php echo esc_html($use_case->w_minor); ?></p>
-                <p><strong>Project Phase :</strong> <?php echo esc_html($use_case->project_phase); ?></p>
-                <p><strong>Value Chain :</strong> <?php echo esc_html($value_chain_str); ?></p>
-                <p><strong>Technological Innovations :</strong> <?php echo esc_html($use_case->techn_innovations); ?>
-                </p>
-                <p><strong>Technology Providers :</strong> <?php echo esc_html($use_case->tech_providers); ?></p>
-                <p><strong>Themes :</strong> <?php echo esc_html($themes_str); ?></p>
-                <p><strong>Sustainable Development Goals :</strong> <?php echo esc_html($sdgs_str); ?></p>
-                <p><strong>Positive Impact on SDGs :</strong> <?php echo esc_html($use_case->positive_impact_sdgs); ?>
-                </p>
-                <p><strong>Negative Impact on SDGs :</strong> <?php echo esc_html($use_case->negative_impact_sdgs); ?>
-                </p>
-                <p><strong>Project Background :</strong> <?php echo esc_html($use_case->project_background); ?></p>
-                <p><strong>Problem :</strong> <?php echo esc_html($use_case->problem); ?></p>
-                <p><strong>SMART Goal :</strong> <?php echo esc_html($use_case->smart_goal); ?></p>
-                <p><strong>Project Link :</strong> <a href="<?php echo esc_url($use_case->project_link); ?>"
-                                                      target="_blank"><?php echo esc_html($use_case->project_link); ?></a>
-                </p>
-                <p><strong>Video Link :</strong> <a href="<?php echo esc_url($use_case->video_link); ?>"
-                                                    target="_blank"><?php echo esc_html($use_case->video_link); ?></a>
-                </p>
-                <p><strong>Innovation Sectors :</strong> <?php echo esc_html($innovation_sectors_str); ?></p>
-                <p><strong>Project Image :</strong></p>
-                <?php if ($use_case->project_image): ?>
-                    <img src="<?php echo esc_url($use_case->project_image); ?>" alt="Project Image"
-                         style="max-width: 100%; height: auto;">
-                <?php else: ?>
-                    <p>No image uploaded.</p>
-                <?php endif; ?>
-                <?php
+                <div class="use-case-image">
+                    <?php if ($use_case->project_image): ?>
+                        <img src="<?php echo esc_url($use_case->project_image); ?>" alt="Project Image"
+                             style="max-width: 100%; height: auto;">
+                    <?php else: ?>
+                        <p>No image uploaded.</p>
+                    <?php endif; ?>
+                </div>
+                <div class="use-case-content">
+                    <p><strong>Status :</strong> <?php echo esc_html($use_case->published ? 'published' : 'on hold'); ?>
+                    </p>
+                    <p><strong>Project Name :</strong> <?php echo esc_html($use_case->project_name); ?></p>
+                    <p><strong>Project Owner :</strong> <?php echo esc_html($use_case->name); ?></p>
+                    <p><strong>Email :</strong> <?php echo esc_html($use_case->creator_email); ?></p>
+                    <p><strong>Windesheim Minor :</strong> <?php echo esc_html($use_case->w_minor); ?></p>
+                    <p><strong>Project Phase :</strong> <?php echo esc_html($use_case->project_phase); ?></p>
+                    <p><strong>Value Chain :</strong> <?php echo esc_html($value_chain_str); ?></p>
+                    <p><strong>Technological Innovations
+                            :</strong> <?php echo esc_html($use_case->techn_innovations); ?></p>
+                    <p><strong>Technology Providers :</strong> <?php echo esc_html($use_case->tech_providers); ?></p>
+                    <p><strong>Themes :</strong> <?php echo esc_html($themes_str); ?></p>
+                    <p><strong>Innovation Sectors :</strong> <?php echo esc_html($innovation_sectors_str); ?></p>
+                    <p><strong>Sustainable Development Goals :</strong> <?php echo esc_html($sdgs_str); ?></p>
+                    <p><strong>Positive Impact on SDGs
+                            :</strong> <?php echo esc_html($use_case->positive_impact_sdgs); ?></p>
+                    <p><strong>Negative Impact on SDGs
+                            :</strong> <?php echo esc_html($use_case->negative_impact_sdgs); ?></p>
+                    <p><strong>Project Background :</strong> <?php echo esc_html($use_case->project_background); ?></p>
+                    <p><strong>Problem :</strong> <?php echo esc_html($use_case->problem); ?></p>
+                    <p><strong>SMART Goal :</strong> <?php echo esc_html($use_case->smart_goal); ?></p>
+                    <p><strong>Project Link :</strong> <a href="<?php echo esc_url($use_case->project_link); ?>"
+                                                          target="_blank"><?php echo esc_html($use_case->project_link); ?></a>
+                    </p>
+                    <p><strong>Video Link :</strong> <a href="<?php echo esc_url($use_case->video_link); ?>"
+                                                        target="_blank"><?php echo esc_html($use_case->video_link); ?></a>
+                    </p>
+                </div>
 
-                // Display the unpublish button
-                if ($use_case->published) {
-                    ?>
-                    <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
-                        <?php wp_nonce_field('unpublish_use_case', 'unpublish_use_case_nonce'); ?>
-                        <input type="hidden" name="action" value="unpublish_use_case">
-                        <input type="hidden" name="use_case_id" value="<?php echo esc_attr($use_case_id); ?>">
-                        <button type="submit" class="button button-secondary">Unpublish</button>
-                    </form>
+                <div class="actions">
                     <?php
-                } else {
-                    // Display the publish button
+
+                    // Display the unpublish button
+                    if ($use_case->published) {
+                        ?>
+                        <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
+                            <?php wp_nonce_field('unpublish_use_case', 'unpublish_use_case_nonce'); ?>
+                            <input type="hidden" name="action" value="unpublish_use_case">
+                            <input type="hidden" name="use_case_id" value="<?php echo esc_attr($use_case_id); ?>">
+                            <button type="submit" class="button button-secondary">Unpublish</button>
+                        </form>
+                        <?php
+                    } else {
+                        // Display the publish button
+                        ?>
+                        <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
+                            <?php wp_nonce_field('publish_use_case', 'publish_use_case_nonce'); ?>
+                            <input type="hidden" name="action" value="publish_use_case">
+                            <input type="hidden" name="use_case_id" value="<?php echo esc_attr($use_case_id); ?>">
+                            <button type="submit" class="button button-primary">Publish</button>
+                        </form>
+                        <?php
+                    }
+                    // Display the delete button
                     ?>
-                    <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
-                        <?php wp_nonce_field('publish_use_case', 'publish_use_case_nonce'); ?>
-                        <input type="hidden" name="action" value="publish_use_case">
+                    <form method="post" action="<?php echo admin_url('admin-post.php'); ?>"
+                          onsubmit="return confirmDeletion();">
+                        <?php wp_nonce_field('delete_use_case', 'delete_use_case_nonce'); ?>
+                        <input type="hidden" name="action" value="delete_use_case">
                         <input type="hidden" name="use_case_id" value="<?php echo esc_attr($use_case_id); ?>">
-                        <button type="submit" class="button button-primary">Publish</button>
+                        <button type="submit" class="button button-danger">Delete</button>
                     </form>
-                    <?php
-                }
-                // Display the delete button
-                ?>
-                <form method="post" action="<?php echo admin_url('admin-post.php'); ?>"
-                      onsubmit="return confirmDeletion();">
-                    <?php wp_nonce_field('delete_use_case', 'delete_use_case_nonce'); ?>
-                    <input type="hidden" name="action" value="delete_use_case">
-                    <input type="hidden" name="use_case_id" value="<?php echo esc_attr($use_case_id); ?>">
-                    <button type="submit" class="button button-danger">Delete</button>
-                </form>
+                </div>
             </div>
             <script type="text/javascript">
                 function confirmDeletion() {
