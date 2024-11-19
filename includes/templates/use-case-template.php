@@ -31,6 +31,7 @@ if (isset($_GET['post_id'])) {
     // Get the post_id
     $post_id = intval($_GET['post_id']);
 
+
     // Get the use case data from the custom table
     global $wpdb;
     $table_name = $wpdb->prefix . 'use_case';
@@ -76,7 +77,7 @@ if (isset($_GET['post_id'])) {
         </div>
         <div id="container">
             <div class="informations">
-            <div class="tags">
+                <div class="tags">
                     <div class="tags-title"><i class="fa-solid fa-list-check icon-margin"></i>project phase</div>
                     <div class="tags-content"><?php echo esc_html($project_phase); ?></div>
                 </div>
@@ -125,7 +126,7 @@ if (isset($_GET['post_id'])) {
             <div class="project-owner-informations">
                 <div class="po-info"><i
                             class="fa-regular fa-user icon-margin"></i>
-                            <span><?php echo esc_html($creator_name); ?></span>
+                    <span><?php echo esc_html($creator_name); ?></span>
                 </div>
                 <div class="po-info">
                     <i class="fa-regular fa-envelope icon-margin"></i>
@@ -167,7 +168,7 @@ if (isset($_GET['post_id'])) {
                     <h3 class="project-informtions-title">Tech providers</h3>
                     <p class="project-informations-content"><?php echo esc_html($tech_providers); ?></p>
                 </div>
-                
+
                 <div class="use-case-content">
                     <?php echo apply_filters('the_content', $post->post_content); ?>
                 </div>

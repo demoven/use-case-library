@@ -77,6 +77,7 @@ label{
 }
 
 .use-case{
+    text-decoration: none;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -127,6 +128,20 @@ label{
     overflow: hidden;
 }
 
+.use-case-click{
+    text-decoration: none;
+}
+
+.use-case-click:hover{
+    text-decoration: none;
+    color : var(--Black);
+}
+
+.use-case:hover {
+    border: 3px solid var(--Gold);
+    
+}
+
 .use-case-footer{
     display: flex;
     align-items: center;
@@ -146,6 +161,13 @@ label{
     width: 11px;
     color: var(--Gold);
 }
+
+#learn-more{
+    color : var(--Gold);
+    margin-left : 20px;
+    text-decoration: underline;
+}
+
 
 .collapsible-button {
     color: var(--Black);
@@ -200,6 +222,12 @@ label{
     width: 100%;
     display: flex;
     align-self: center;
+}
+.search-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    gap : 10px;
 }
 
 

@@ -11,11 +11,10 @@ if (!defined('ABSPATH')) {
 }
 
 // Include the main plugin class
-require_once plugin_dir_path(__FILE__) . 'includes/admin-page.php';
+require_once plugin_dir_path(__FILE__) . 'includes/admin/admin-page.php';
 require_once plugin_dir_path(__FILE__) . 'includes/form-page/form-page.php';
-require_once plugin_dir_path(__FILE__) . 'includes/admin-details-page.php';
+require_once plugin_dir_path(__FILE__) . 'includes/admin/admin-details-page.php';
 require_once plugin_dir_path(__FILE__) . 'includes/display-library.php';
-
 
 
 // Instantiate the main plugin class
@@ -53,8 +52,7 @@ function template_register($page_templates, $theme, $post)
     $templates = template_array();
 
     // Add the custom templates to the theme
-    foreach ($templates as $tk=>$tv) 
-    {
+    foreach ($templates as $tk => $tv) {
         // Add the template to the theme
         $page_templates[$tk] = $tv;
     }
@@ -82,8 +80,7 @@ function template_select($template)
     $templates = template_array();
 
     // Check if the custom template is set
-    if (isset($templates[$page_temp_slug]))
-    {
+    if (isset($templates[$page_temp_slug])) {
         // Get the custom template
         $template = plugin_dir_path(__FILE__) . 'includes/templates/' . $page_temp_slug;
     }
@@ -93,11 +90,12 @@ function template_select($template)
 }
 
 // Add filter to select the custom template 
-add_filter('template_include', 'template_select', 99 );
+add_filter('template_include', 'template_select', 99);
 
 register_activation_hook(__FILE__, 'create_use_case_table');
 
-function create_use_case_table() {
+function create_use_case_table()
+{
     global $wpdb;
     $table_name = $wpdb->prefix . 'use_case';
     $charset_collate = $wpdb->get_charset_collate();

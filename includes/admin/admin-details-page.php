@@ -4,8 +4,10 @@ if (!defined('ABSPATH')) {
 }
 
 if (!class_exists('UseCaseLibraryDetailsPage')) {
-    class UseCaseLibraryDetailsPage {
-        public function __construct() {
+    class UseCaseLibraryDetailsPage
+    {
+        public function __construct()
+        {
             // Add details page
             add_action('admin_menu', array($this, 'add_details_page'));
             // Handle form submissions
@@ -18,9 +20,10 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         /**
          * Add details page to the admin use case panel
          */
-        public function add_details_page() {
+        public function add_details_page()
+        {
             add_submenu_page(
-                null, // Pas de menu parent
+                null,
                 'Use Case Details',
                 'Use Case Details',
                 'manage_options',
@@ -32,11 +35,12 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         /**
          * Load assets for the library
          */
-        public function load_assets() {
+        public function load_assets()
+        {
             // Load CSS and JS files
             wp_enqueue_style(
                 'use-case-library-style',
-                plugin_dir_url(__FILE__) . '../assets/css/details.css',
+                plugin_dir_url(__FILE__) . '../../assets/css/details.css',
                 array(),
                 '1.0',
                 'all'
@@ -46,7 +50,11 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         /**
          * Render the details page
          */
-        public function render_details_page() {
+        public function render_details_page()
+        {
+            if (!current_user_can('manage_options')) {
+                wp_die(__('You do not have sufficient permissions to access this page.', 'textdomain'));
+            }
             // Check if use_case_id is set
             if (!isset($_GET['use_case_id'])) {
                 return;
@@ -65,6 +73,8 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                 echo '<div class="wrap"><h1>No use case found</h1></div>';
                 return;
             }
+
+            $nonce = wp_create_nonce('use_case_nonce' . $use_case_id);
 
             // Convert serialized fields back to arrays
             $value_chain = maybe_unserialize($use_case->value_chain);
@@ -88,21 +98,29 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                 <p><strong>Windesheim Minor :</strong> <?php echo esc_html($use_case->w_minor); ?></p>
                 <p><strong>Project Phase :</strong> <?php echo esc_html($use_case->project_phase); ?></p>
                 <p><strong>Value Chain :</strong> <?php echo esc_html($value_chain_str); ?></p>
-                <p><strong>Technological Innovations :</strong> <?php echo esc_html($use_case->techn_innovations); ?></p>
+                <p><strong>Technological Innovations :</strong> <?php echo esc_html($use_case->techn_innovations); ?>
+                </p>
                 <p><strong>Technology Providers :</strong> <?php echo esc_html($use_case->tech_providers); ?></p>
                 <p><strong>Themes :</strong> <?php echo esc_html($themes_str); ?></p>
                 <p><strong>Sustainable Development Goals :</strong> <?php echo esc_html($sdgs_str); ?></p>
-                <p><strong>Positive Impact on SDGs :</strong> <?php echo esc_html($use_case->positive_impact_sdgs); ?></p>
-                <p><strong>Negative Impact on SDGs :</strong> <?php echo esc_html($use_case->negative_impact_sdgs); ?></p>
+                <p><strong>Positive Impact on SDGs :</strong> <?php echo esc_html($use_case->positive_impact_sdgs); ?>
+                </p>
+                <p><strong>Negative Impact on SDGs :</strong> <?php echo esc_html($use_case->negative_impact_sdgs); ?>
+                </p>
                 <p><strong>Project Background :</strong> <?php echo esc_html($use_case->project_background); ?></p>
                 <p><strong>Problem :</strong> <?php echo esc_html($use_case->problem); ?></p>
                 <p><strong>SMART Goal :</strong> <?php echo esc_html($use_case->smart_goal); ?></p>
-                <p><strong>Project Link :</strong> <?php echo esc_html($use_case->project_link); ?></p>
-                <p><strong>Video Link :</strong> <?php echo esc_html($use_case->video_link); ?></p>
+                <p><strong>Project Link :</strong> <a href="<?php echo esc_url($use_case->project_link); ?>"
+                                                      target="_blank"><?php echo esc_html($use_case->project_link); ?></a>
+                </p>
+                <p><strong>Video Link :</strong> <a href="<?php echo esc_url($use_case->video_link); ?>"
+                                                    target="_blank"><?php echo esc_html($use_case->video_link); ?></a>
+                </p>
                 <p><strong>Innovation Sectors :</strong> <?php echo esc_html($innovation_sectors_str); ?></p>
                 <p><strong>Project Image :</strong></p>
                 <?php if ($use_case->project_image): ?>
-                    <img src="<?php echo esc_url($use_case->project_image); ?>" alt="Project Image" style="max-width: 100%; height: auto;">
+                    <img src="<?php echo esc_url($use_case->project_image); ?>" alt="Project Image"
+                         style="max-width: 100%; height: auto;">
                 <?php else: ?>
                     <p>No image uploaded.</p>
                 <?php endif; ?>
@@ -112,6 +130,7 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                 if ($use_case->published) {
                     ?>
                     <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
+                        <?php wp_nonce_field('unpublish_use_case', 'unpublish_use_case_nonce'); ?>
                         <input type="hidden" name="action" value="unpublish_use_case">
                         <input type="hidden" name="use_case_id" value="<?php echo esc_attr($use_case_id); ?>">
                         <button type="submit" class="button button-secondary">Unpublish</button>
@@ -121,6 +140,7 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                     // Display the publish button
                     ?>
                     <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
+                        <?php wp_nonce_field('publish_use_case', 'publish_use_case_nonce'); ?>
                         <input type="hidden" name="action" value="publish_use_case">
                         <input type="hidden" name="use_case_id" value="<?php echo esc_attr($use_case_id); ?>">
                         <button type="submit" class="button button-primary">Publish</button>
@@ -129,7 +149,9 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                 }
                 // Display the delete button
                 ?>
-                <form method="post" action="<?php echo admin_url('admin-post.php'); ?>" onsubmit="return confirmDeletion();">
+                <form method="post" action="<?php echo admin_url('admin-post.php'); ?>"
+                      onsubmit="return confirmDeletion();">
+                    <?php wp_nonce_field('delete_use_case', 'delete_use_case_nonce'); ?>
                     <input type="hidden" name="action" value="delete_use_case">
                     <input type="hidden" name="use_case_id" value="<?php echo esc_attr($use_case_id); ?>">
                     <button type="submit" class="button button-danger">Delete</button>
@@ -146,72 +168,57 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         /**
          * Publish a use case
          */
-        public function publish_use_case() {
-            // Check if use_case_id is set
-            if (!isset($_POST['use_case_id'])) {
-                // Redirect to the details page
-                wp_redirect(admin_url('admin.php?page=use-case-details'));
-                exit;
+        public function publish_use_case()
+        {
+            if (!isset($_POST['publish_use_case_nonce']) || !wp_verify_nonce($_POST['publish_use_case_nonce'], 'publish_use_case')) {
+                wp_die(__('Nonce verification failed', 'textdomain'));
             }
-
-            // Get the use case ID
-            $use_case_id = intval($_POST['use_case_id']);
-
-            // Update the use case status to published
-            global $wpdb;
-            $table_name = $wpdb->prefix . 'use_case';
-            $wpdb->update($table_name, ['published' => 1], ['id' => $use_case_id]);
-
-            // Redirect to the details page
-            wp_redirect(admin_url('admin.php?page=use-case-details&use_case_id=' . $use_case_id));
-            exit;
+            $this->handle_action('publish_use_case', 1);
         }
 
         /**
          * Unpublish a use case
          */
-        public function unpublish_use_case() {
-            // Check if use_case_id is set
-            if (!isset($_POST['use_case_id'])) {
-                // Redirect to the details page
-                wp_redirect(admin_url('admin.php?page=use-case-details'));
-                exit;
+        public function unpublish_use_case()
+        {
+            if (!isset($_POST['unpublish_use_case_nonce']) || !wp_verify_nonce($_POST['unpublish_use_case_nonce'], 'unpublish_use_case')) {
+                wp_die(__('Nonce verification failed', 'textdomain'));
             }
-
-            // Get the use case ID
-            $use_case_id = intval($_POST['use_case_id']);
-
-            // Update the use case status to on hold
-            global $wpdb;
-            $table_name = $wpdb->prefix . 'use_case';
-            $wpdb->update($table_name, ['published' => 0], ['id' => $use_case_id]);
-
-            // Redirect to the details page
-            wp_redirect(admin_url('admin.php?page=use-case-details&use_case_id=' . $use_case_id));
-            exit;
+            $this->handle_action('unpublish_use_case', 0);
         }
 
         /**
          * Delete a use case
          */
-        public function delete_use_case() {
-            // Check if use_case_id is set
+        public function delete_use_case()
+        {
+            if (!isset($_POST['delete_use_case_nonce']) || !wp_verify_nonce($_POST['delete_use_case_nonce'], 'delete_use_case')) {
+                wp_die(__('Nonce verification failed', 'textdomain'));
+            }
+            $this->handle_action('delete_use_case', null);
+        }
+
+        /**
+         * Handle the action (publish, unpublish, delete)
+         */
+        private function handle_action($action, $status)
+        {
             if (!isset($_POST['use_case_id'])) {
-                // Redirect to the details page
-                wp_redirect(admin_url('admin.php?page=use-case-details'));
-                exit;
+                wp_die(__('No use case ID provided', 'textdomain'));
             }
 
-            // Get the use case ID
             $use_case_id = intval($_POST['use_case_id']);
 
-            // Delete the use case from the custom table
             global $wpdb;
             $table_name = $wpdb->prefix . 'use_case';
-            $wpdb->delete($table_name, ['id' => $use_case_id]);
 
-            // Redirect to the use case library
-            wp_redirect(admin_url('admin.php?page=use-case-library'));
+            if ($action === 'delete_use_case') {
+                $wpdb->delete($table_name, ['id' => $use_case_id]);
+            } else {
+                $wpdb->update($table_name, ['published' => $status], ['id' => $use_case_id]);
+            }
+
+            wp_redirect(admin_url('admin.php?page=use-case-details&use_case_id=' . $use_case_id));
             exit;
         }
     }
