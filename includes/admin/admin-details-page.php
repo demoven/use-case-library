@@ -15,6 +15,8 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
             add_action('admin_post_unpublish_use_case', array($this, 'unpublish_use_case'));
             add_action('admin_post_delete_use_case', array($this, 'delete_use_case'));
             add_action('admin_enqueue_scripts', array($this, 'load_assets'));
+            add_action('admin_post_delete_use_case_image', array($this, 'delete_use_case_image'));
+            add_action('admin_post_upload_use_case_image', array($this, 'upload_use_case_image'));
         }
 
         /**
@@ -99,6 +101,26 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                         <p>No image uploaded.</p>
                     <?php endif; ?>
                 </div>
+                <?php if ($use_case->project_image): ?>
+                    <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
+                        <?php wp_nonce_field('delete_use_case_image', 'delete_use_case_image_nonce'); ?>
+                        <input type="hidden" name="action" value="delete_use_case_image">
+                        <input type="hidden" name="use_case_id" value="<?php echo esc_attr($use_case_id); ?>">
+                        <button type="submit" class="button button-danger">Delete image</button>
+                    </form>
+                    <!-- If there is no image, the button will be transform to an adding image button -->
+                <?php else: ?>
+                    <form method="post" action="<?php echo admin_url('admin-post.php'); ?>"
+                          enctype="multipart/form-data">
+                        <?php wp_nonce_field('upload_use_case_image', 'upload_use_case_image_nonce'); ?>
+                        <input type="hidden" name="action" value="upload_use_case_image">
+                        <input type="hidden" name="use_case_id" value="<?php echo esc_attr($use_case_id); ?>">
+                        <div class="upload-image">
+                            <input type="file" name="use_case_image" accept="image/PNG, image/JPEG" required>
+                            <button type="submit" class="button button-primary">Add image</button>
+                        </div>
+                    </form>
+                <?php endif; ?>
                 <div class="use-case-content">
                     <p><strong>Status :</strong> <?php echo esc_html($use_case->published ? 'published' : 'on hold'); ?>
                     </p>
@@ -203,6 +225,98 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                 wp_die(__('Nonce verification failed', 'textdomain'));
             }
             $this->handle_action('delete_use_case', null);
+        }
+
+        /**
+         * Delete the image of a use case in the site folder
+         */
+        public function delete_use_case_image()
+        {
+            if (!isset($_POST['delete_use_case_image_nonce']) || !wp_verify_nonce($_POST['delete_use_case_image_nonce'], 'delete_use_case_image')) {
+                wp_die(__('Nonce verification failed', 'textdomain'));
+            }
+
+            if (!isset($_POST['use_case_id'])) {
+                wp_die(__('No use case ID provided', 'textdomain'));
+            }
+
+            $use_case_id = intval($_POST['use_case_id']);
+
+            global $wpdb;
+            $table_name = $wpdb->prefix . 'use_case';
+            $use_case = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $use_case_id));
+            $image_path = $use_case->project_image;
+            if ($image_path) {
+                $upload_dir = wp_upload_dir();
+                $image_path = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $image_path);
+                unlink($image_path);
+                $wpdb->update($table_name, ['project_image' => null], ['id' => $use_case_id]);
+            }
+
+            wp_redirect(admin_url('admin.php?page=use-case-details&use_case_id=' . $use_case_id));
+            exit;
+        }
+
+        /**
+         * Add the image of a use case in the site folder
+         */
+        public function upload_use_case_image()
+        {
+            if (!isset($_POST['upload_use_case_image_nonce']) || !wp_verify_nonce($_POST['upload_use_case_image_nonce'], 'upload_use_case_image')) {
+                wp_die(__('Nonce verification failed', 'textdomain'));
+            }
+
+            if (!isset($_POST['use_case_id'])) {
+                wp_die(__('No use case ID provided', 'textdomain'));
+            }
+
+            $use_case_id = intval($_POST['use_case_id']);
+
+            // Check if the image is uploaded
+            if (!empty($_FILES['use_case_image']['name'])) {
+                // Include the file.php WordPress library
+                require_once(ABSPATH . 'wp-admin/includes/file.php');
+
+                // Include the image.php WordPress library
+                $uploadedfile = $_FILES['use_case_image'];
+
+                // Set the upload overrides
+                $upload_overrides = array('test_form' => false);
+
+                // Check the MIME type of the uploaded file
+                $filetype = wp_check_filetype($uploadedfile['name']);
+                $allowed_mime_types = ['image/jpeg', 'image/png'];
+
+                if (!in_array($filetype['type'], $allowed_mime_types)) {
+                    wp_die(__('Invalid image type', 'textdomain'));
+                }
+
+                // Upload the image
+                $movefile = wp_handle_upload($uploadedfile, $upload_overrides);
+
+                // Check if the image is uploaded
+                if ($movefile && !isset($movefile['error'])) {
+                    // Rename the image with the format use_case_ID
+                    $new_filename = sanitize_file_name('use_case_' . $use_case_id . '.' . pathinfo($movefile['file'], PATHINFO_EXTENSION));
+                    $new_filepath = wp_upload_dir()['path'] . '/' . $new_filename;
+                    rename($movefile['file'], $new_filepath);
+                    $new_fileurl = wp_upload_dir()['url'] . '/' . $new_filename;
+
+                    // Update the table with the new image URL
+                    global $wpdb;
+                    $table_name = $wpdb->prefix . 'use_case';
+                    $wpdb->update(
+                        $table_name,
+                        ['project_image' => $new_fileurl],
+                        ['id' => $use_case_id]
+                    );
+                } else {
+                    wp_die(__('Image upload failed', 'textdomain'));
+                }
+            }
+
+            wp_redirect(admin_url('admin.php?page=use-case-details&use_case_id=' . $use_case_id));
+            exit;
         }
 
         /**

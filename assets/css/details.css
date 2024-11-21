@@ -100,3 +100,14 @@ p {
 .button-danger:hover {
     background-color: var(--DarkPink) !important;
 }
+
+#btn-image {
+    width: 100%;
+}
+
+.upload-image {
+    width : 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
