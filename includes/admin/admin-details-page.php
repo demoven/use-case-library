@@ -220,6 +220,14 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
             $table_name = $wpdb->prefix . 'use_case';
 
             if ($action === 'delete_use_case') {
+                //Delete the image file 
+                $use_case = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $use_case_id));
+                $image_path = $use_case->project_image;
+                if ($image_path) {
+                    $upload_dir = wp_upload_dir();
+                    $image_path = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $image_path);
+                    unlink($image_path);
+                }
                 $wpdb->delete($table_name, ['id' => $use_case_id]);
             } else {
                 $wpdb->update($table_name, ['published' => $status], ['id' => $use_case_id]);

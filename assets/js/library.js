@@ -9,7 +9,11 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    window.applyFilters = function () {
+    var displayedUseCases = [];
+    var currentPage = 1;
+    var itemsPerPage = 21;
+
+    function applyFilters() {
         var searchQuery = $('#search').val().toLowerCase();
         var selectedMinors = $('#windesheim-minor input:checked').map(function () {
             return $(this).val();
@@ -26,6 +30,8 @@ jQuery(document).ready(function ($) {
         var selectedInnovationSectors = $('#innovation-sectors input:checked').map(function () {
             return $(this).val();
         }).get();
+
+        displayedUseCases = []; // Reset the array
 
         $('.use-case').each(function () {
             var useCase = $(this);
@@ -50,10 +56,63 @@ jQuery(document).ready(function ($) {
             var matchesInnovationSectors = selectedInnovationSectors.length === 0 || selectedInnovationSectors.includes(innovationSectors);
 
             if (matchesSearch && matchesMinor && matchesValueChain && matchesThemes && matchesSDGs && matchesInnovationSectors) {
-                useCase.show();
+                displayedUseCases.push(useCase); // Add to the array
             } else {
                 useCase.hide();
             }
         });
-    };
+
+        showPage(currentPage);
+        updatePagination();
+    }
+
+    function showPage(page) {
+        var startIndex = (page - 1) * itemsPerPage;
+        var endIndex = startIndex + itemsPerPage;
+
+        $('.use-case').hide(); // Hide all use cases
+        displayedUseCases.slice(startIndex, endIndex).forEach(function (useCase) {
+            useCase.show(); // Show only the use cases for the current page
+        });
+    }
+
+    function updatePagination() {
+        var totalPages = Math.ceil(displayedUseCases.length / itemsPerPage);
+        $('#page-info').text('Page ' + currentPage + ' of ' + totalPages);
+
+        if (currentPage === 1) {
+            $('#prev-page').addClass('disabled').prop('disabled', true);
+        } else {
+            $('#prev-page').removeClass('disabled').prop('disabled', false);
+        }
+
+        if (currentPage === totalPages) {
+            $('#next-page').addClass('disabled').prop('disabled', true);
+        } else {
+            $('#next-page').removeClass('disabled').prop('disabled', false);
+        }
+    }
+
+    $('#prev-page').click(function () {
+        if (currentPage > 1) {
+            currentPage--;
+            showPage(currentPage);
+            updatePagination();
+        }
+    });
+
+    $('#next-page').click(function () {
+        var totalPages = Math.ceil(displayedUseCases.length / itemsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            showPage(currentPage);
+            updatePagination();
+        }
+    });
+
+    // Initial call to apply filters and set up pagination
+    applyFilters();
+
+    // Attach applyFilters to filter change events
+    $('#search, #windesheim-minor input, #value-chain input, #lib-themes input, #lib-sdgs input, #innovation-sectors input').on('change', applyFilters);
 });

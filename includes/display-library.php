@@ -22,20 +22,22 @@ if (!class_exists('UseCaseLibraryDisplay')) {
         public function load_assets()
         {
             // Load CSS and JS files
-            wp_enqueue_style(
-                'use-case-library-style',
-                plugin_dir_url(__FILE__) . '../assets/css/library.css',
-                array(),
-                '1.0',
-                'all'
-            );
-            wp_enqueue_script(
-                'use-case-library-script',
-                plugin_dir_url(__FILE__) . '../assets/js/library.js',
-                array('jquery'),
-                '1.0',
-                true
-            );
+            if (has_shortcode(get_post()->post_content, 'display_use_cases')) {
+                wp_enqueue_style(
+                    'use-case-library-style',
+                    plugin_dir_url(__FILE__) . '../assets/css/library.css',
+                    array(),
+                    '1.0',
+                    'all'
+                );
+                wp_enqueue_script(
+                    'library-script',
+                    plugin_dir_url(__FILE__) . '../assets/js/library.js',
+                    array('jquery'),
+                    '1.0',
+                    true
+                );
+            }
         }
 
         /**
@@ -59,21 +61,23 @@ if (!class_exists('UseCaseLibraryDisplay')) {
 
             // Display the filter form and use cases
             ?>
+            <div class="search-bar">
+                <input type="text" id="search" placeholder="Search by Project Name">
+                <button type="button" class="button button-primary" onclick="applyFilters()">Search</button>
+            </div>
             <div class="use-case-container">
                 <div class="filter-container">
                     <h2>Filter Use Cases <i class="fa-solid fa-filter"></i></h2>
                     <form id="filter-form">
                         <!-- Search by Project Name -->
-                        <div class="search-bar">
-                            <input type="text" id="search" placeholder="Search by Project Name">
-                            <button type="button" class="button button-primary" onclick="applyFilters()">Search</button>
-                        </div>
+
 
                         <!-- Filter by Innovation -->
                         <div class="collapsible">
-                            <button type="button" class="collapsible-button">Innovation Sectors<i class="fa-solid fa-chevron-down"></i></button>
+                            <button type="button" class="collapsible-button">Innovation Sectors<i
+                                        class="fa-solid fa-chevron-down"></i></button>
                             <div class="collapsible-content">
-<div id="innovation-sectors">
+                                <div id="innovation-sectors">
                                     <?php
                                     $innovation_sectors = array(
                                         'Culture & Media',
@@ -97,7 +101,7 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                                     );
                                     foreach ($innovation_sectors as $sector) {
                                         echo '<div class="innovation-sector-checkbox">';
-                                        echo '<input type="checkbox" name="innovation_sectors[]" value="' . esc_attr($sector) . '" onchange="applyFilters()"> ' . esc_html($sector);
+                                        echo '<input type="checkbox" name="innovation_sectors[]" value="' . esc_attr($sector) . '"> ' . esc_html($sector);
                                         echo '</div>';
                                     }
                                     ?>
@@ -107,7 +111,8 @@ if (!class_exists('UseCaseLibraryDisplay')) {
 
                         <!-- Filter by Value Chain -->
                         <div class="collapsible">
-                            <button type="button" class="collapsible-button">Value Chain<i class="fa-solid fa-chevron-down"></i></button>
+                            <button type="button" class="collapsible-button">Value Chain<i
+                                        class="fa-solid fa-chevron-down"></i></button>
                             <div class="collapsible-content">
                                 <div id="value-chain">
                                     <?php
@@ -124,7 +129,7 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                                     );
                                     foreach ($value_chains as $value_chain) {
                                         echo '<div class="value-chain-checkbox">';
-                                        echo '<input type="checkbox" name="value_chain[]" value="' . esc_attr($value_chain) . '" onchange="applyFilters()"> ' . esc_html($value_chain);
+                                        echo '<input type="checkbox" name="value_chain[]" value="' . esc_attr($value_chain) . '"> ' . esc_html($value_chain);
                                         echo '</div>';
                                     }
                                     ?>
@@ -134,7 +139,8 @@ if (!class_exists('UseCaseLibraryDisplay')) {
 
                         <!-- Filter by Themes -->
                         <div class="collapsible">
-                            <button type="button" class="collapsible-button">Themes<i class="fa-solid fa-chevron-down"></i></button>
+                            <button type="button" class="collapsible-button">Themes<i
+                                        class="fa-solid fa-chevron-down"></i></button>
                             <div class="collapsible-content">
                                 <div id="lib-themes">
                                     <?php
@@ -151,7 +157,7 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                                     );
                                     foreach ($themes as $theme) {
                                         echo '<div class="theme-checkbox">';
-                                        echo '<input type="checkbox" name="themes[]" value="' . esc_attr($theme) . '" onchange="applyFilters()"> ' . esc_html($theme);
+                                        echo '<input type="checkbox" name="themes[]" value="' . esc_attr($theme) . '"> ' . esc_html($theme);
                                         echo '</div>';
                                     }
                                     ?>
@@ -161,7 +167,8 @@ if (!class_exists('UseCaseLibraryDisplay')) {
 
                         <!-- Filter by SDGs -->
                         <div class="collapsible">
-                            <button type="button" class="collapsible-button">SDGs<i class="fa-solid fa-chevron-down"></i></button>
+                            <button type="button" class="collapsible-button">SDGs<i
+                                        class="fa-solid fa-chevron-down"></i></button>
                             <div class="collapsible-content">
                                 <div id="lib-sdgs">
                                     <?php
@@ -186,7 +193,7 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                                     );
                                     foreach ($sdgs as $sdg) {
                                         echo '<div class="sdg-checkbox">';
-                                        echo '<input type="checkbox" name="sdgs[]" value="' . esc_attr($sdg) . '" onchange="applyFilters()"> ' . esc_html($sdg);
+                                        echo '<input type="checkbox" name="sdgs[]" value="' . esc_attr($sdg) . '"> ' . esc_html($sdg);
                                         echo '</div>';
                                     }
                                     ?>
@@ -196,9 +203,10 @@ if (!class_exists('UseCaseLibraryDisplay')) {
 
                         <!-- Filter by Innovation Sectors -->
                         <div class="collapsible">
-                            <button type="button" class="collapsible-button">Windesheim Minors<i class="fa-solid fa-chevron-down"></i></button>
+                            <button type="button" class="collapsible-button">Windesheim Minors<i
+                                        class="fa-solid fa-chevron-down"></i></button>
                             <div class="collapsible-content">
-                            <div id="windesheim-minor">
+                                <div id="windesheim-minor">
                                     <?php
                                     $minors = array(
                                         'Concept & Creation',
@@ -212,7 +220,7 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                                     );
                                     foreach ($minors as $minor) {
                                         echo '<div class="minor-checkbox">';
-                                        echo '<input type="checkbox" name="w_minor[]" value="' . esc_attr($minor) . '" onchange="applyFilters()"> ' . esc_html($minor);
+                                        echo '<input type="checkbox" name="w_minor[]" value="' . esc_attr($minor) . '"> ' . esc_html($minor);
                                         echo '</div>';
                                     }
                                     ?>
@@ -247,6 +255,11 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                     ?>
                 </div>
             </div>
+            <div class="pagination">
+                    <span id="prev-page"><i class="fa-solid fa-arrow-left"></i></span>
+                    <span id="page-info"></span>
+                    <span id="next-page"><i class="fa-solid fa-arrow-right"></i></span>
+                </div>
             <?php
 
             // Get the contents of the output buffer

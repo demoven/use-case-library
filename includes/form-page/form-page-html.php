@@ -71,7 +71,8 @@ function render_use_case_form()
             </div>
             <div id="project-image">
                 <div class="form-label">Project Image</div>
-                <input name="project_image" type="file" accept="image/*">
+                <input name="project_image" type="file" accept="image/png, image/jpeg">
+                <small>PNG, JPEG</small>
             </div>
             <div id="tech-providers">
                 <div class="form-label">Tech Providers<span class="required">*</span></div>

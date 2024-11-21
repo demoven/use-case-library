@@ -33,20 +33,23 @@ if (!class_exists('UseCaseLibraryForm')) {
         public function load_assets()
         {
             // Load CSS and JS files
-            wp_enqueue_style(
-                'form-style',
-                plugin_dir_url(__FILE__) . '../../assets/css/form.css',
-                array(),
-                '1.0',
-                'all'
-            );
-            wp_enqueue_script(
-                'form-script',
-                plugin_dir_url(__FILE__) . '../../assets/js/form.js',
-                array('jquery'),
-                '1.0',
-                true
-            );
+            if (has_shortcode(get_the_content(), 'form-use-case')) {
+                wp_enqueue_style(
+                    'form-style',
+                    plugin_dir_url(__FILE__) . '../../assets/css/form.css',
+                    array(),
+                    '1.0',
+                    'all'
+                );
+
+                wp_enqueue_script(
+                    'form-script',
+                    plugin_dir_url(__FILE__) . '../../assets/js/form.js',
+                    array('jquery'),
+                    '1.0',
+                    true
+                );
+            }
         }
 
         /**
@@ -114,13 +117,12 @@ if (!class_exists('UseCaseLibraryForm')) {
                                 block: 'center'
                             });
                         }).fail(function (response) {
-                            var errors = response.responseJSON;
+                            var errors = response.responseJSON.errors;
                             var firstInvalidElement = null;
 
 
                             // Display the error messages
                             $.each(errors, function (field, message) {
-                                console.log(field, message);
                                 var div = $('#' + field);
                                 var errorMessage = div.find('.error-message');
                                 errorMessage.text(message).show();
@@ -179,7 +181,7 @@ if (!class_exists('UseCaseLibraryForm')) {
             if (!empty($errors)) {
 
                 // Return the errors if there are any
-                return new WP_REST_Response($errors, 422);
+                return new WP_REST_Response(['errors' => $errors], 422);
             }
 
 
