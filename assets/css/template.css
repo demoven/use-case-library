@@ -1,3 +1,5 @@
+@import url('color-palette.css');
+
 #strip {
     display: flex;
     flex-direction: row;

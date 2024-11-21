@@ -29,7 +29,7 @@ function render_use_case_form()
                 <span class="error-message"></span>
             </div>
             <div id="w-minor">
-                <div class="form-label">Windesheim Minor<span class="required">*</span></div>
+                <div class="form-label">Windesheim Minor</div>
                 <span class="error-message"></span>
                 <label><input type="radio" name="w_minor" value="Concept & Creation"> Concept & Creation</label>
                 <label><input type="radio" name="w_minor" value="Data driven Innovation"> Data driven Innovation</label>
@@ -156,12 +156,12 @@ function render_use_case_form()
                     achieve goals</label>
             </div>
             <div id="positive-impact-sdgs">
-                <div class="form-label">Positive Impact SDGs<span class="required">*</span></div>
+                <div class="form-label">Positive Impact SDGs</div>
                 <textarea name="positive_impact_sdgs" placeholder="Type your message"></textarea>
                 <span class="error-message"></span>
             </div>
             <div id="negative-impact-sdgs">
-                <div class="form-label">Negative Impact SDGs<span class="required">*</span></div>
+                <div class="form-label">Negative Impact SDGs</div>
                 <textarea name="negative_impact_sdgs" placeholder="Type your message"></textarea>
                 <span class="error-message"></span>
             </div>
@@ -186,7 +186,7 @@ function render_use_case_form()
                 <span class="error-message"></span>
             </div>
             <div id="video-link">
-                <div class="form-label">Video Link<span class="required">*</span></div>
+                <div class="form-label">Video Link</div>
                 <input name="video_link" type="text" placeholder="Video Link">
                 <span class="error-message"></span>
             </div>

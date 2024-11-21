@@ -100,128 +100,96 @@ if (!class_exists('UseCaseFormChecking')) {
                 return $errors;
             }
 
-            if (isset($data['name'])){
+            if (isset($data['name'])) {
                 $this->checkName($data['name'], $errors);
-            }
-            else {
+            } else {
                 $errors['project-owner'] = 'Name is required';
             }
 
-            if (isset($data['creator_email'])){
+            if (isset($data['creator_email'])) {
                 $this->checkEmail($data['creator_email'], $errors);
-            }
-            else {
+            } else {
                 $errors['email'] = 'Email is required';
             }
 
-            if (isset($data['w_minor'])){
+            if (isset($data['w_minor'])) {
                 $this->checkMinor($data['w_minor'], $errors);
             }
-            else {
-                $errors['w-minor'] = 'Minor is required';
-            }
-            
-            if (isset($data['value_chain'])){
+
+            if (isset($data['value_chain'])) {
                 $this->checkValueChain($data['value_chain'], $errors);
-            }
-            else {
+            } else {
                 $errors['value-chain'] = 'Value chain is required';
             }
 
-            if (isset($data['project_phase'])){
+            if (isset($data['project_phase'])) {
                 $this->checkProjectPhase($data['project_phase'], $errors);
-            }
-            else {
+            } else {
                 $errors['project-phase'] = 'Project phase is required';
             }
 
-            if (isset($data['innovation_sectors'])){
+            if (isset($data['innovation_sectors'])) {
                 $this->checkInnovationSector($data['innovation_sectors'], $errors);
-            }
-            else {
+            } else {
                 $errors['innovation-sectors'] = 'Innovation sector is required';
             }
 
-            if (isset($data['themes'])){
+            if (isset($data['themes'])) {
                 $this->checkTheme($data['themes'], $errors);
-            }
-            else {
+            } else {
                 $errors['themes'] = 'Theme is required';
             }
-            if (isset($data['sdgs'])){
+            if (isset($data['sdgs'])) {
                 $this->checkSDGs($data['sdgs'], $errors);
-            }
-            else {
+            } else {
                 $errors['sdgs'] = 'SDGs is required';
             }
 
-            if (isset($data['project_name'])){
+            if (isset($data['project_name'])) {
                 $this->checkProjectName($data['project_name'], $errors);
-            }
-            else {
+            } else {
                 $errors['project-name'] = 'Project name is required';
             }
 
-            if (isset($data['techn_innovations'])){
+            if (isset($data['techn_innovations'])) {
                 $this->checkTechInnovations($data['techn_innovations'], $errors);
-            }
-            else {
+            } else {
                 $errors['technological-innovations'] = 'Tech innovations is required';
             }
 
-            if (isset($data['tech_providers'])){
+            if (isset($data['tech_providers'])) {
                 $this->checkTechProviders($data['tech_providers'], $errors);
-            }
-            else {
+            } else {
                 $errors['tech-providers'] = 'Tech providers is required';
             }
 
-            if (isset($data['positive_impact_sdgs'])){
-                $this->checkPositiveImpactSDGs($data['positive_impact_sdgs'], $errors);
-            }
-            else {
-                $errors['positive-impact-sdgs'] = 'Positive impact SDGs is required';
-            }
-
-            if (isset($data['negative_impact_sdgs'])){
-                $this->checkNegativeImpactSDGs($data['negative_impact_sdgs'], $errors);
-            }
-            else {
-                $errors['negative-impact-sdgs'] = 'Negative impact SDGs is required';
-            }
-
-            if (isset($data['project_background'])){
+            if (isset($data['project_background'])) {
                 $this->checkProjectBackground($data['project_background'], $errors);
-            }
-            else {
+            } else {
                 $errors['project-background'] = 'Project background is required';
             }
 
-            if (isset($data['problem'])){
+            if (isset($data['problem'])) {
                 $this->checkProblem($data['problem'], $errors);
-            }
-            else {
+            } else {
                 $errors['problem'] = 'Problem is required';
             }
 
-            if (isset($data['smart_goal'])){
+            if (isset($data['smart_goal'])) {
                 $this->checkSmartGoal($data['smart_goal'], $errors);
-            }
-            else {
+            } else {
                 $errors['smart-goal'] = 'Smart goal is required';
             }
 
-            if (isset($data['project_link'])){
+            if (isset($data['project_link'])) {
                 $this->checkProjectLink($data['project_link'], $errors);
-            }
-            else {
+            } else {
                 $errors['project-link'] = 'Project link is required';
             }
 
-            if (isset($data['video_link'])){
+            if (isset($data['video_link'])) {
                 $this->checkVideoLink($data['video_link'], $errors);
-            }
-            else {
+            } else {
                 $errors['video-link'] = 'Video link is required';
             }
             //return errors
@@ -247,20 +215,6 @@ if (!class_exists('UseCaseFormChecking')) {
         {
             if (empty($tech_providers)) {
                 $errors['tech-providers'] = 'Tech providers is required';
-            }
-        }
-
-        private function checkPositiveImpactSDGs($positive_impact_sdgs, &$errors)
-        {
-            if (empty($positive_impact_sdgs)) {
-                $errors['positive-impact-sdgs'] = 'Positive impact SDGs is required';
-            }
-        }
-
-        private function checkNegativeImpactSDGs($negative_impact_sdgs, &$errors)
-        {
-            if (empty($negative_impact_sdgs)) {
-                $errors['negative-impact-sdgs'] = 'Negative impact SDGs is required';
             }
         }
 
@@ -296,10 +250,11 @@ if (!class_exists('UseCaseFormChecking')) {
 
         private function checkVideoLink($video_link, &$errors)
         {
-            if (empty($video_link)) {
-                $errors['video-link'] = 'Video link is required';
-            } else if (!filter_var($video_link, FILTER_VALIDATE_URL)) {
-                $errors['video-link'] = 'Video link is not valid';
+            if (!empty($video_link)) {
+
+                if (!filter_var($video_link, FILTER_VALIDATE_URL)) {
+                    $errors['video-link'] = 'Video link is not valid';
+                }
             }
         }
 
@@ -324,13 +279,13 @@ if (!class_exists('UseCaseFormChecking')) {
 
         private function checkMinor($minor, &$errors)
         {
-            if (empty($minor)) {
-                $errors['w-minor'] = 'Minor is required';
-            } // Check if minor is a string
-            else if (!is_string($minor)) {
-                $errors['w-minor'] = 'Minor is not valid';
-            } else if (!in_array($minor, $this->valid_minors)) {
-                $errors['w-minor'] = 'Minor is not valid';
+            if (!empty($minor)) {
+
+                if (!is_string($minor)) {
+                    $errors['w-minor'] = 'Minor is not valid';
+                } else if (!in_array($minor, $this->valid_minors)) {
+                    $errors['w-minor'] = 'Minor is not valid';
+                }
             }
         }
 

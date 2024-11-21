@@ -103,10 +103,13 @@ if (isset($_GET['post_id'])) {
                         ?>
                     </div>
                 </div>
-                <div class="tags">
-                    <div class="tags-title"><i class="fa-solid fa-graduation-cap icon-margin"></i>windesheim minor</div>
-                    <div class="tags-content"><?php echo esc_html($w_minor); ?></div>
-                </div>
+                <?php if ($w_minor): ?>
+                    <div class="tags">
+                        <div class="tags-title"><i class="fa-solid fa-graduation-cap icon-margin"></i>windesheim minor
+                        </div>
+                        <div class="tags-content"><?php echo esc_html($w_minor); ?></div>
+                    </div>
+                <?php endif; ?>
                 <div class="tags">
                     <div class="tags-title"><i class="fa-solid fa-lightbulb icon-margin"></i>innovation sector</div>
                     <div class="tags-content"><?php echo esc_html($innovation_sectors); ?></div>
@@ -135,9 +138,11 @@ if (isset($_GET['post_id'])) {
                 <div class="po-info"><i class="fa-solid fa-link icon-margin"></i><a
                             href="<?php echo esc_url($project_link); ?>"
                             target="_blank"><?php echo esc_html($project_link); ?></a></div>
-                <div class="po-info"><i class="fa-regular fa-circle-play icon-margin"></i><a
-                            href="<?php echo esc_url($video_link); ?>"
-                            target="_blank"><?php echo esc_html($video_link); ?></a></div>
+                <?php if ($video_link): ?>
+                    <div class="po-info"><i class="fa-regular fa-circle-play icon-margin"></i><a
+                                href="<?php echo esc_url($video_link); ?>"
+                                target="_blank"><?php echo esc_html($video_link); ?></a></div>
+                <?php endif; ?>
             </div>
             <div id="use-case-details">
                 <div class="project-informations">
@@ -156,14 +161,18 @@ if (isset($_GET['post_id'])) {
                     <h3 class="project-informtions-title">Smart Goal</h3>
                     <p class="project-informations-content"><?php echo esc_html($smart_goal); ?></p>
                 </div>
-                <div class="project-informations">
-                    <h3 class="project-informtions-title">Positive Impact SDGs</h3>
-                    <p class="project-informations-content"><?php echo esc_html($positive_impact_sdgs); ?></p>
-                </div>
-                <div class="project-informations">
-                    <h3 class="project-informtions-title">Negative Impact SDGs</h3>
-                    <p class="project-informations-content"><?php echo esc_html($negative_impact_sdgs); ?></p>
-                </div>
+                <?php if ($positive_impact_sdgs): ?>
+                    <div class="project-informations">
+                        <h3 class="project-informtions-title">Positive Impact SDGs</h3>
+                        <p class="project-informations-content"><?php echo esc_html($positive_impact_sdgs); ?></p>
+                    </div>
+                <?php endif; ?>
+                <?php if ($negative_impact_sdgs): ?>
+                    <div class="project-informations">
+                        <h3 class="project-informtions-title">Negative Impact SDGs</h3>
+                        <p class="project-informations-content"><?php echo esc_html($negative_impact_sdgs); ?></p>
+                    </div>
+                <?php endif; ?>
                 <div class="project-informations">
                     <h3 class="project-informtions-title">Tech providers</h3>
                     <p class="project-informations-content"><?php echo esc_html($tech_providers); ?></p>

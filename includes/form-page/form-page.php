@@ -189,20 +189,16 @@ if (!class_exists('UseCaseLibraryForm')) {
                 'project_name',
                 'name',
                 'creator_email',
-                'w_minor',
                 'project_phase',
                 'value_chain',
                 'techn_innovations',
                 'tech_providers',
                 'themes',
                 'sdgs',
-                'positive_impact_sdgs',
-                'negative_impact_sdgs',
                 'project_background',
                 'problem',
                 'smart_goal',
                 'project_link',
-                'video_link',
                 'innovation_sectors'
             ];
             // Check if the required fields are set
@@ -228,20 +224,24 @@ if (!class_exists('UseCaseLibraryForm')) {
                 'project_name' => sanitize_text_field($params['project_name']),
                 'name' => sanitize_text_field($params['name']),
                 'creator_email' => sanitize_email($params['creator_email']),
-                'w_minor' => sanitize_text_field($params['w_minor']),
+                // if w_minor is not set, set it to null
+                'w_minor' => isset($params['w_minor']) ? sanitize_text_field($params['w_minor']) : null,
                 'project_phase' => sanitize_text_field($params['project_phase']),
                 'value_chain' => maybe_serialize($params['value_chain']),
                 'techn_innovations' => sanitize_textarea_field($params['techn_innovations']),
                 'tech_providers' => sanitize_textarea_field($params['tech_providers']),
                 'themes' => maybe_serialize($params['themes']),
                 'sdgs' => maybe_serialize($params['sdgs']),
-                'positive_impact_sdgs' => sanitize_textarea_field($params['positive_impact_sdgs']),
-                'negative_impact_sdgs' => sanitize_textarea_field($params['negative_impact_sdgs']),
+                // If positive_impact_sdgs is not set or empty, set it to null
+                'positive_impact_sdgs' => isset($params['positive_impact_sdgs']) || !empty($params['positive_impact_sdgs']) ? sanitize_textarea_field($params['positive_impact_sdgs']) : null,
+                //If negative_impact_sdgs is not set or empty, set it to null
+                'negative_impact_sdgs' => isset($params['negative_impact_sdgs']) || !empty($params['negative_impact_sdgs']) ? sanitize_textarea_field($params['negative_impact_sdgs']) : null,
                 'project_background' => sanitize_textarea_field($params['project_background']),
                 'problem' => sanitize_textarea_field($params['problem']),
                 'smart_goal' => sanitize_textarea_field($params['smart_goal']),
                 'project_link' => sanitize_text_field($params['project_link']),
-                'video_link' => sanitize_text_field($params['video_link']),
+                // If video_link is not set or empty, set it to null
+                'video_link' => isset($params['video_link']) || !empty($params['video_link']) ? sanitize_text_field($params['video_link']) : null,
                 'innovation_sectors' => sanitize_text_field($params['innovation_sectors']),
             ];
 
