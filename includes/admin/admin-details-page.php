@@ -41,12 +41,20 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         {
             // Load CSS and JS files
             wp_enqueue_style(
+                'use-case-library-color-palette',
+                plugin_dir_url(__FILE__) . '../../assets/css/color-palette.css',
+                array(),
+                '1.0',
+                'all'
+            );
+            wp_enqueue_style(
                 'use-case-library-style',
                 plugin_dir_url(__FILE__) . '../../assets/css/details.css',
                 array(),
                 '1.0',
                 'all'
             );
+           error_log('load_assets');
         }
 
         /**

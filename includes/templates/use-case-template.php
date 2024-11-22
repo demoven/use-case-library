@@ -10,12 +10,21 @@ function enqueue_use_case_template_styles()
 {
     if (is_page_template('use-case-template.php')) {
         wp_enqueue_style(
+            'use-case-color-palette',
+            plugin_dir_url(__FILE__) . '../../assets/css/color-palette.css',
+            array(),
+            '1.0',
+            'all'
+        );
+        wp_enqueue_style(
             'use-case-template-style',
             plugin_dir_url(__FILE__) . '../../assets/css/template.css',
             array(),
             '1.0',
             'all'
         );
+        error_log('Enqueued use case template styles');
+      
     }
 }
 

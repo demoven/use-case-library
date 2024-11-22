@@ -35,13 +35,19 @@ if (!class_exists('UseCaseLibraryForm')) {
             // Load CSS and JS files
             if (has_shortcode(get_the_content(), 'form-use-case')) {
                 wp_enqueue_style(
+                    'form-color-palette',
+                    plugin_dir_url(__FILE__) . '../../assets/css/color-palette.css',
+                    array(),
+                    '1.0',
+                    'all'
+                );
+                wp_enqueue_style(
                     'form-style',
                     plugin_dir_url(__FILE__) . '../../assets/css/form.css',
                     array(),
                     '1.0',
                     'all'
                 );
-
                 wp_enqueue_script(
                     'form-script',
                     plugin_dir_url(__FILE__) . '../../assets/js/form.js',
@@ -49,6 +55,7 @@ if (!class_exists('UseCaseLibraryForm')) {
                     '1.0',
                     true
                 );
+                error_log('Form assets loaded');
             }
         }
 

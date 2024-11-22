@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Use Case Library
- * Description: Description de mon plugin.
+ * Description: A plugin to manage use cases.
  * Version: 1.0
- * Author: Théo
+ * Author: Windesheim Technology Radar
  */
 
 if (!defined('ABSPATH')) {

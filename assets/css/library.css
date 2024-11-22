@@ -1,5 +1,3 @@
-@import url('color-palette.css');
-
 @media (min-width: 768px) {
     #primary {
         margin-left:2vw !important;
@@ -12,6 +10,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
+    user-select: none;
 }
 
 .filter-container{
@@ -216,9 +215,13 @@ label{
     align-items: center;
 }
 
-.minor-checkbox input, .value-chain-checkbox input, .theme-checkbox input, .sdg-checkbox input, .innovation-sector-checkbox input{
-    height: 18px;
-    width: 18px;
+input[type="checkbox"] {
+    transform: scale(1.5); /* Ajustez la valeur de scale selon vos besoins */
+    -webkit-transform: scale(1.5); /* Pour les anciens navigateurs WebKit */
+    -moz-transform: scale(1.5); /* Pour les anciens navigateurs Firefox */
+    -ms-transform: scale(1.5); /* Pour les anciens navigateurs Internet Explorer */
+    -o-transform: scale(1.5); /* Pour les anciens navigateurs Opera */
+    margin: 5px; /* Ajustez la marge pour compenser l'agrandissement */
 }
 
 .minor-checkbox div, .value-chain-checkbox div, .theme-checkbox div, .sdg-checkbox div, .innovation-sector-checkbox div{
@@ -231,14 +234,31 @@ label{
     display: flex;
     justify-content: flex-end;
     margin-bottom: 20px;
-    gap : 10px;
+    gap : 14px;
+    user-select: none;
 }
 
+.search-bar input {
+    padding: 10px;
+    border: 1px solid var(--Grey3);
+    border-radius: 5px;
+    font-size: 16px;
+    width: 300px;
+}
+
+.search-bar button {
+    border-radius: 5px;
+    background-color: var(--Orange);
+    border : none;
+    width : 100px;
+}
+
+.search-bar button:hover {
+    background-color: var(--Gold);
+}
 .pagination {
-    display: flex;
-    justify-content: flex-end; 
-    align-items: center;
     margin-top: 20px;
+    margin-left : auto;
 }
 
 .pagination span {

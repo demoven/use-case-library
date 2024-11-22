@@ -60,7 +60,7 @@ function render_use_case_form()
             <div id="project-phase">
                 <div class="form-label">Project Phase<span class="required">*</span></div>
                 <span class="error-message"></span>
-                <label><input type="radio" name="project_phase" value="Asses"> Asses</label>
+                <label><input type="radio" name="project_phase" value="Assess"> Assess</label>
                 <label><input type="radio" name="project_phase" value="Trial"> Trial</label>
                 <label><input type="radio" name="project_phase" value="Adopt"> Adopt</label>
             </div>

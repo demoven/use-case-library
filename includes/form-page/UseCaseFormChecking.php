@@ -5,6 +5,10 @@ if (!defined('ABSPATH')) {
 }
 
 if (!class_exists('UseCaseFormChecking')) {
+
+    /**
+     * Class UseCaseFormChecking for checking form data.
+     */
     class UseCaseFormChecking
     {
         private $valid_minors = [
@@ -31,7 +35,7 @@ if (!class_exists('UseCaseFormChecking')) {
         ];
 
         private $valid_project_phase = [
-            'Asses',
+            'Assess',
             'Trial',
             'Adopt'
         ];
@@ -92,6 +96,13 @@ if (!class_exists('UseCaseFormChecking')) {
         {
         }
 
+
+        /**
+         * Check all form data.
+         * 
+         * @param array $data
+         * @return array $errors
+         */
         public function checkForm($data)
         {
             $errors = [];
@@ -196,7 +207,12 @@ if (!class_exists('UseCaseFormChecking')) {
             return $errors;
         }
 
-
+        /**
+         * Check if project name is valid.
+         * 
+         * @param string $project_name
+         * @param array $errors
+         */
         private function checkProjectName($project_name, &$errors)
         {
             if (empty($project_name)) {

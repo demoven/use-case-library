@@ -24,6 +24,13 @@ if (!class_exists('UseCaseLibraryDisplay')) {
             // Load CSS and JS files
             if (has_shortcode(get_post()->post_content, 'display_use_cases')) {
                 wp_enqueue_style(
+                    'use-case-library-palette',
+                    plugin_dir_url(__FILE__) . '../assets/css/color-palette.css',
+                    array(),
+                    '1.0',
+                    'all'
+                );
+                wp_enqueue_style(
                     'use-case-library-style',
                     plugin_dir_url(__FILE__) . '../assets/css/library.css',
                     array(),
@@ -37,6 +44,7 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                     '1.0',
                     true
                 );
+                error_log('Enqueued use case library styles');
             }
         }
 
@@ -67,7 +75,7 @@ if (!class_exists('UseCaseLibraryDisplay')) {
             </div>
             <div class="use-case-container">
                 <div class="filter-container">
-                    <h2>Filter Use Cases <i class="fa-solid fa-filter"></i></h2>
+                    <h2>Filters<i class="fa-solid fa-filter"></i></h2>
                     <form id="filter-form">
                         <!-- Search by Project Name -->
 
@@ -254,12 +262,13 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                     }
                     ?>
                 </div>
-            </div>
-            <div class="pagination">
+                  <div class="pagination">
                     <span id="prev-page"><i class="fa-solid fa-arrow-left"></i></span>
                     <span id="page-info"></span>
                     <span id="next-page"><i class="fa-solid fa-arrow-right"></i></span>
                 </div>
+            </div>
+          
             <?php
 
             // Get the contents of the output buffer

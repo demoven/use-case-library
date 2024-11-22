@@ -1,11 +1,10 @@
-@import url('color-palette.css');
-
 #strip {
     display: flex;
     flex-direction: row;
     align-items: center; 
     justify-content: space-between; 
     font-size: 1.5rem;
+    user-select: none;
 }
 
 #color-strip {
@@ -16,19 +15,19 @@
     background: linear-gradient(
         106deg, 
         var(--Orange) 0%,   
-        var(--Orange) 33.33%, 
-        var(--Gold) 33.33%, 
-        var(--Gold) 66.66%, 
-        var(--Yellow) 66.66%, 
+        var(--Orange) 32%, 
+        var(--Gold) 32%, 
+        var(--Gold) 81.5%, 
+        var(--Yellow) 81.5%, 
         var(--Yellow) 100%    
     );
-    min-height: 350px;
+    height: 386px;
     padding: 0 50px;
 }
 
 .image-container {
     width: 800px; 
-    height: 350px; 
+    height: 386px; 
     overflow: hidden;
     flex: 0 0 auto;
     background-color: var(--Yellow);
@@ -47,6 +46,7 @@
 
 #container {
     margin-top: 20px;
+    user-select: none;
 }
 
 .informations {
@@ -98,7 +98,7 @@
         display: none;
     }
     #color-strip {
-        min-height: 200px;
+        height: 200px;
     }
     #use-case-details {
         margin: 20px 10vw;
@@ -118,7 +118,7 @@
         flex: 1 1 100%; 
     }
     #color-strip {
-        min-height: 150px;
+        height: 150px;
     }
     #use-case-details {
         margin: 20px 5vw;
