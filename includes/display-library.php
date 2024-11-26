@@ -88,24 +88,24 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                                 <div id="innovation-sectors">
                                     <?php
                                     $innovation_sectors = array(
-                                        'Culture & Media',
-                                        'Data Sharing',
-                                        'Department of Defense',
+                                        'Cultuur en Media',
+                                        'Data Delen',
+                                        'Defensie',
                                         'ELSA Labs',
-                                        'Energy & Sustainability',
-                                        'Financial Services',
-                                        'Health & Care',
-                                        'Port & Maritime',
-                                        'Agriculture & Nutrition',
-                                        'Logistics & Mobility',
-                                        'Human-centered AI',
-                                        'Mobility, Transport & Logistics',
-                                        'Education',
-                                        'Public Services',
-                                        'Research & Innovation',
-                                        'Startups & Scaleups',
-                                        'Technical Industry',
-                                        'Security, Peace & Justice'
+                                        'Energie en Duurzaamheid',
+                                        'Financiële Dienstverlening ',
+                                        'Gezondheid en Zorg',
+                                        'Haven en Maritiem',
+                                        'Landbouw en Voeding',
+                                        'Logistiek & Mobiliteit',
+                                        'Mensgerichte AI',
+                                        'Mobiliteit, Transport en Logistiek',
+                                        'Onderwijs',
+                                        'Publieke Diensten',
+                                        'Research en Innovatie',
+                                        'Startups en Scale-ups',
+                                        'Technische Industrie',
+                                        'Veiligheid, Vrede en Recht'
                                     );
                                     foreach ($innovation_sectors as $sector) {
                                         echo '<div class="innovation-sector-checkbox">';
@@ -181,23 +181,23 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                                 <div id="lib-sdgs">
                                     <?php
                                     $sdgs = array(
-                                        '1. No poverty',
-                                        '2. No hunger',
-                                        '3. Good health and well-being',
-                                        '4. Quality education',
-                                        '5. Gender equality',
-                                        '6. Clean water and sanitation',
-                                        '7. Affordable and sustainable energy',
-                                        '8. Decent work and economic growth',
-                                        '9. Industry, innovation and infrastructure',
-                                        '10. Reduce inequality',
-                                        '11. Sustainable cities and communities',
-                                        '12. Responsible consumption and production',
-                                        '13. Climate action',
-                                        '14. Life in the water',
-                                        '15. Life on land',
-                                        '16. Peace, justice and strong public services',
-                                        '17. Partnership to achieve goals'
+                                        '1. Geen armoede',
+                                        '2. Geen honger',
+                                        '3. Goede gezondheid en welzijn',
+                                        '4. Kwaliteitsonderwijs',
+                                        '5. Gendergelijkheid',
+                                        '6. Schoon water en sanitair',
+                                        '7. Betaalbare en duurzame energie',
+                                        '8. Eerlijk werk en economische groei',
+                                        '9. Industrie, innovatie en infrastructuur',
+                                        '10. Ongelijkheid verminderen',
+                                        '11. Duurzame steden en gemeenschappen',
+                                        '12. Verantwoorde consumptie en productie',
+                                        '13. Klimaatactie',
+                                        '14. Leven in het water',
+                                        '15. Leven op het land',
+                                        '16. Vrede, justitie en sterke publieke diensten',
+                                        '17. Partnerschap om doelstellingen te bereiken'
                                     );
                                     foreach ($sdgs as $sdg) {
                                         echo '<div class="sdg-checkbox">';

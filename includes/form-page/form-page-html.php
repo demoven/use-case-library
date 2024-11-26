@@ -14,18 +14,18 @@ function render_use_case_form()
         <h2>Submit your use case</h2>
         <div class="form-group">
             <div id="project-name">
-                <div class="form-label">Project Name <span class="required">*</span></div>
-                <input name="project_name" type="text" placeholder="Project Name">
+                <div class="form-label">Wat is de naam van uw project? <span class="required">*</span></div>
+                <input name="project_name" type="text" placeholder="Naam...">
                 <span class="error-message"></span>
             </div>
             <div id="project-owner">
                 <div class="form-label">Project Owner<span class="required">*</span></div>
-                <input name="name" type="text" placeholder="Name">
+                <input name="name" type="text" placeholder="Project Owner...">
                 <span class="error-message"></span>
             </div>
             <div id="email">
                 <div class="form-label">Email<span class="required">*</span></div>
-                <input name="creator_email" type="email" placeholder="Email">
+                <input name="creator_email" type="email" placeholder="Email...">
                 <span class="error-message"></span>
             </div>
             <div id="w-minor">
@@ -58,61 +58,51 @@ function render_use_case_form()
                 <label><input type="checkbox" name="value_chain[]" value="Procurement"> Procurement</label>
             </div>
             <div id="project-phase">
-                <div class="form-label">Project Phase<span class="required">*</span></div>
+                <div class="form-label">projectfase<span class="required">*</span></div>
                 <span class="error-message"></span>
                 <label><input type="radio" name="project_phase" value="Assess"> Assess</label>
                 <label><input type="radio" name="project_phase" value="Trial"> Trial</label>
                 <label><input type="radio" name="project_phase" value="Adopt"> Adopt</label>
             </div>
             <div id="technological-innovations">
-                <div class="form-label">What technological innovations are there within your project? (e.g. VR, AI, Robotics...)<span class="required">*</span></div>
-                <textarea name="techn_innovations" placeholder="Type your message"></textarea>
+                <div class="form-label">Welke technologische innovaties zijn er binnen je project? (bijv. VR, AI, Robotica...)<span class="required">*</span></div>
+                <textarea name="techn_innovations" placeholder="Type je bericht..."></textarea>
                 <span class="error-message"></span>
             </div>
             <div id="project-image">
-                <div class="form-label">Project Image</div>
+                <div class="form-label">Project afbeelding</div>
                 <input name="project_image" type="file" accept="image/png, image/jpeg">
                 <small>PNG, JPEG</small>
             </div>
             <div id="tech-providers">
-                <div class="form-label">Which Technology Providers are involved in your project?<span class="required">*</span></div>
-                <textarea name="tech_providers" placeholder="Type your message"></textarea>
+                <div class="form-label">Welke Technology Providers zijn betrokken bij je project?<span class="required">*</span></div>
+                <textarea name="tech_providers" placeholder="Type je bericht..."></textarea>
                 <span class="error-message"></span>
             </div>
             <div id="innovation-sectors">
-                <div class="form-label">What Innovation Sector defines your project?<span class="required">*</span></div>
+                <div class="form-label">Novatiesector definieert jouw project?<span class="required">*</span></div>
                 <span class="error-message"></span>
-                <label><input type="radio" name="innovation_sectors" value="Culture & Media"> Culture & Media</label>
-                <label><input type="radio" name="innovation_sectors" value="Data Sharing"> Data Sharing</label>
-                <label><input type="radio" name="innovation_sectors" value="Department of Defense"> Department of
-                    Defense</label>
+                <label><input type="radio" name="innovation_sectors" value="Cultuur en Media"> Cultuur en Media</label>
+                <label><input type="radio" name="innovation_sectors" value="Data Delen"> Data Delen</label>
+                <label><input type="radio" name="innovation_sectors" value="Defensie"> Defensie</label>
                 <label><input type="radio" name="innovation_sectors" value="ELSA Labs"> ELSA Labs</label>
-                <label><input type="radio" name="innovation_sectors" value="Energy & Sustainability"> Energy &
-                    Sustainability</label>
-                <label><input type="radio" name="innovation_sectors" value="Financial Services"> Financial
-                    Services</label>
-                <label><input type="radio" name="innovation_sectors" value="Health & Care"> Health & Care</label>
-                <label><input type="radio" name="innovation_sectors" value="Port & Maritime"> Port & Maritime</label>
-                <label><input type="radio" name="innovation_sectors" value="Agriculture & Nutrition"> Agriculture &
-                    Nutrition</label>
-                <label><input type="radio" name="innovation_sectors" value="Logistics & Mobility"> Logistics & Mobility</label>
-                <label><input type="radio" name="innovation_sectors" value="Human-centered AI"> Human-centered
-                    AI</label>
-                <label><input type="radio" name="innovation_sectors" value="Mobility, Transport & Logistics"> Mobility,
-                    Transport & Logistics</label>
-                <label><input type="radio" name="innovation_sectors" value="Education"> Education</label>
-                <label><input type="radio" name="innovation_sectors" value="Public Services"> Public Services</label>
-                <label><input type="radio" name="innovation_sectors" value="Research & Innovation"> Research &
-                    Innovation</label>
-                <label><input type="radio" name="innovation_sectors" value="Startups & Scaleups"> Startups &
-                    Scaleups</label>
-                <label><input type="radio" name="innovation_sectors" value="Technical Industry"> Technical
-                    Industry</label>
-                <label><input type="radio" name="innovation_sectors" value="Security, Peace & Justice"> Security, Peace
-                    & Justice</label>
+                <label><input type="radio" name="innovation_sectors" value="Energie en Duurzaamheid"> Energie en Duurzaamheid</label>
+                <label><input type="radio" name="innovation_sectors" value="Financiële Dienstverlening "> Financiële Dienstverlening </label>
+                <label><input type="radio" name="innovation_sectors" value="Gezondheid en Zorg"> Gezondheid en Zorg</label>
+                <label><input type="radio" name="innovation_sectors" value="Haven en Maritiem"> Haven en Maritiem</label>
+                <label><input type="radio" name="innovation_sectors" value="Landbouw en Voeding"> Landbouw en Voeding</label>
+                <label><input type="radio" name="innovation_sectors" value="Logistiek & Mobiliteit"> Logistiek & Mobiliteit</label>
+                <label><input type="radio" name="innovation_sectors" value="Mensgerichte AI"> Mensgerichte AI</label>
+                <label><input type="radio" name="innovation_sectors" value="Mobiliteit, Transport en Logistiek"> Mobiliteit, Transport en Logistiek</label>
+                <label><input type="radio" name="innovation_sectors" value="Onderwijs"> Onderwijs</label>
+                <label><input type="radio" name="innovation_sectors" value="Publieke Diensten"> Publieke Diensten</label>
+                <label><input type="radio" name="innovation_sectors" value="Research en Innovatie"> Research en Innovatie</label>
+                <label><input type="radio" name="innovation_sectors" value="Startups en Scale-ups"> Startups en Scale-ups</label>
+                <label><input type="radio" name="innovation_sectors" value="Technische Industrie"> Technische Industrie</label>
+                <label><input type="radio" name="innovation_sectors" value="Veiligheid, Vrede en Recht"> Veiligheid, Vrede en Recht</label>
             </div>
             <div id="themes">
-                <div class="form-label">Which of these themes apply to your project?<span class="required">*</span></div>
+                <div class="form-label">Welke van deze thema's zijn van toepassing op jouw project?<span class="required">*</span></div>
                 <span class="error-message"></span>
                 <label><input type="checkbox" name="themes[]" value="Transaction to interaction"> Transaction to
                     interaction</label>
@@ -126,68 +116,59 @@ function render_use_case_form()
                 <label><input type="checkbox" name="themes[]" value="Quantum computing"> Quantum computing</label>
             </div>
             <div id="sdgs">
-                <div class="form-label">Which SDGs are applicable to your project?<span class="required">*</span></div>
+                <div class="form-label">Welke SDG's zijn van toepassing op jouw project?<span class="required">*</span></div>
                 <span class="error-message"></span>
-                <label><input type="checkbox" name="sdgs[]" value="1. No poverty"> 1. No poverty</label>
-                <label><input type="checkbox" name="sdgs[]" value="2. No hunger"> 2. No hunger</label>
-                <label><input type="checkbox" name="sdgs[]" value="3. Good health and well-being"> 3. Good health and
-                    well-being</label>
-                <label><input type="checkbox" name="sdgs[]" value="4. Quality education"> 4. Quality education</label>
-                <label><input type="checkbox" name="sdgs[]" value="5. Gender equality"> 5. Gender equality</label>
-                <label><input type="checkbox" name="sdgs[]" value="6. Clean water and sanitation"> 6. Clean water and
-                    sanitation</label>
-                <label><input type="checkbox" name="sdgs[]" value="7. Affordable and sustainable energy"> 7. Affordable
-                    and sustainable energy</label>
-                <label><input type="checkbox" name="sdgs[]" value="8. Decent work and economic growth"> 8. Decent work
-                    and economic growth</label>
-                <label><input type="checkbox" name="sdgs[]" value="9. Industry, innovation and infrastructure"> 9.
-                    Industry, innovation and infrastructure</label>
-                <label><input type="checkbox" name="sdgs[]" value="10. Reduce inequality"> 10. Reduce inequality</label>
-                <label><input type="checkbox" name="sdgs[]" value="11. Sustainable cities and communities"> 11.
-                    Sustainable cities and communities</label>
-                <label><input type="checkbox" name="sdgs[]" value="12. Responsible consumption and production"> 12.
-                    Responsible consumption and production</label>
-                <label><input type="checkbox" name="sdgs[]" value="13. Climate action"> 13. Climate action</label>
-                <label><input type="checkbox" name="sdgs[]" value="14. Life in the water"> 14. Life in the water</label>
-                <label><input type="checkbox" name="sdgs[]" value="15. Life on land"> 15. Life on land</label>
-                <label><input type="checkbox" name="sdgs[]" value="16. Peace, justice and strong public services"> 16.
-                    Peace, justice and strong public services</label>
-                <label><input type="checkbox" name="sdgs[]" value="17. Partnership to achieve goals"> 17. Partnership to
-                    achieve goals</label>
+                <label><input type="checkbox" name="sdgs[]" value="1. Geen armoede"> 1. Geen armoede</label>
+                <label><input type="checkbox" name="sdgs[]" value="2. Geen honger"> 2. Geen honger</label>
+                <label><input type="checkbox" name="sdgs[]" value="3. Goede gezondheid en welzijn"> 3. Goede gezondheid en welzijn</label>
+                <label><input type="checkbox" name="sdgs[]" value="4. Kwaliteitsonderwijs"> 4. Kwaliteitsonderwijs</label>
+                <label><input type="checkbox" name="sdgs[]" value="5. Gendergelijkheid"> 5. Gendergelijkheid</label>
+                <label><input type="checkbox" name="sdgs[]" value="6. Schoon water en sanitair"> 6. Schoon water en sanitair</label>
+                <label><input type="checkbox" name="sdgs[]" value="7. Betaalbare en duurzame energie"> 7. Betaalbare en duurzame energie</label>
+                <label><input type="checkbox" name="sdgs[]" value="8. Eerlijk werk en economische groei"> 8. Eerlijk werk en economische groei</label>
+                <label><input type="checkbox" name="sdgs[]" value="9. Industrie, innovatie en infrastructuur"> 9. Industrie, innovatie en infrastructuur</label>
+                <label><input type="checkbox" name="sdgs[]" value="10. Ongelijkheid verminderen"> 10. Ongelijkheid verminderen</label>
+                <label><input type="checkbox" name="sdgs[]" value="11. Duurzame steden en gemeenschappen"> 11. Duurzame steden en gemeenschappen</label>
+                <label><input type="checkbox" name="sdgs[]" value="12. Verantwoorde consumptie en productie"> 12. Verantwoorde consumptie en productie</label>
+                <label><input type="checkbox" name="sdgs[]" value="13. Klimaatactie"> 13. Klimaatactie</label>
+                <label><input type="checkbox" name="sdgs[]" value="14. Leven in het water"> 14. Leven in het water</label>
+                <label><input type="checkbox" name="sdgs[]" value="15. Leven op het land"> 15. Leven op het land</label>
+                <label><input type="checkbox" name="sdgs[]" value="16. Vrede, justitie en sterke publieke diensten"> 16. Vrede, justitie en sterke publieke diensten</label>
+                <label><input type="checkbox" name="sdgs[]" value="17. Partnerschap om doelstellingen te bereiken"> 17. Partnerschap om doelstellingen te bereiken</label>
             </div>
             <div id="positive-impact-sdgs">
-                <div class="form-label">Describe the positive impact of the chosen SDGs</div>
-                <textarea name="positive_impact_sdgs" placeholder="Type your message"></textarea>
+                <div class="form-label">Beschrijf de positieve impact van de gekozen SDG's</div>
+                <textarea name="positive_impact_sdgs" placeholder="Type je bericht..."></textarea>
                 <span class="error-message"></span>
             </div>
             <div id="negative-impact-sdgs">
-                <div class="form-label">Describe the negative impact of the chosen SDGs</div>
-                <textarea name="negative_impact_sdgs" placeholder="Type your message"></textarea>
+                <div class="form-label">Beschrijf de negatieve impact van de gekozen SDG's</div>
+                <textarea name="negative_impact_sdgs" placeholder="Type je bericht..."></textarea>
                 <span class="error-message"></span>
             </div>
             <div id="project-background">
-                <div class="form-label">Can you tell something about the project background?<span class="required">*</span></div>
-                <textarea name="project_background" placeholder="Type your message"></textarea>
+                <div class="form-label">Kun je iets vertellen over de achtergrond van het project?<span class="required">*</span></div>
+                <textarea name="project_background" placeholder="Type je bericht..."></textarea>
                 <span class="error-message"></span>
             </div>
             <div id="problem">
-                <div class="form-label">What problem does this project solve?<span class="required">*</span></div>
-                <textarea name="problem" placeholder="Type your message"></textarea>
+                <div class="form-label">Welk probleem lost dit project op?<span class="required">*</span></div>
+                <textarea name="problem" placeholder="Type je bericht..."></textarea>
                 <span class="error-message"></span>
             </div>
             <div id="smart-goal">
-                <div class="form-label">What is the (SMART) goal of the project?<span class="required">*</span></div>
-                <textarea name="smart_goal" placeholder="Type your message"></textarea>
+                <div class="form-label">Wat is het (SMART) doel van het project?<span class="required">*</span></div>
+                <textarea name="smart_goal" placeholder="Type je bericht..."></textarea>
                 <span class="error-message"></span>
             </div>
             <div id="project-link">
-                <div class="form-label">Link to your case study<span class="required">*</span></div>
-                <input name="project_link" type="text" placeholder="Project Link">
+                <div class="form-label">Link naar je casestudy<span class="required">*</span></div>
+                <input name="project_link" type="text" placeholder="Projectlink...">
                 <span class="error-message"></span>
             </div>
             <div id="video-link">
-                <div class="form-label">Add a video link of the project</div>
-                <input name="video_link" type="text" placeholder="Video Link">
+                <div class="form-label">Een videolink van het project toevoegen</div>
+                <input name="video_link" type="text" placeholder="Videolink...">
                 <span class="error-message"></span>
             </div>
         </div>
