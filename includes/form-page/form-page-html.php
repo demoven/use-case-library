@@ -65,7 +65,7 @@ function render_use_case_form()
                 <label><input type="radio" name="project_phase" value="Adopt"> Adopt</label>
             </div>
             <div id="technological-innovations">
-                <div class="form-label">Technological Innovations<span class="required">*</span></div>
+                <div class="form-label">What technological innovations are there within your project? (e.g. VR, AI, Robotics...)<span class="required">*</span></div>
                 <textarea name="techn_innovations" placeholder="Type your message"></textarea>
                 <span class="error-message"></span>
             </div>
@@ -75,12 +75,12 @@ function render_use_case_form()
                 <small>PNG, JPEG</small>
             </div>
             <div id="tech-providers">
-                <div class="form-label">Tech Providers<span class="required">*</span></div>
+                <div class="form-label">Which Technology Providers are involved in your project?<span class="required">*</span></div>
                 <textarea name="tech_providers" placeholder="Type your message"></textarea>
                 <span class="error-message"></span>
             </div>
             <div id="innovation-sectors">
-                <div class="form-label">Innovation Sectors<span class="required">*</span></div>
+                <div class="form-label">What Innovation Sector defines your project?<span class="required">*</span></div>
                 <span class="error-message"></span>
                 <label><input type="radio" name="innovation_sectors" value="Culture & Media"> Culture & Media</label>
                 <label><input type="radio" name="innovation_sectors" value="Data Sharing"> Data Sharing</label>
@@ -112,7 +112,7 @@ function render_use_case_form()
                     & Justice</label>
             </div>
             <div id="themes">
-                <div class="form-label">Themes<span class="required">*</span></div>
+                <div class="form-label">Which of these themes apply to your project?<span class="required">*</span></div>
                 <span class="error-message"></span>
                 <label><input type="checkbox" name="themes[]" value="Transaction to interaction"> Transaction to
                     interaction</label>
@@ -126,7 +126,7 @@ function render_use_case_form()
                 <label><input type="checkbox" name="themes[]" value="Quantum computing"> Quantum computing</label>
             </div>
             <div id="sdgs">
-                <div class="form-label">SDGs<span class="required">*</span></div>
+                <div class="form-label">Which SDGs are applicable to your project?<span class="required">*</span></div>
                 <span class="error-message"></span>
                 <label><input type="checkbox" name="sdgs[]" value="1. No poverty"> 1. No poverty</label>
                 <label><input type="checkbox" name="sdgs[]" value="2. No hunger"> 2. No hunger</label>
@@ -156,37 +156,37 @@ function render_use_case_form()
                     achieve goals</label>
             </div>
             <div id="positive-impact-sdgs">
-                <div class="form-label">Positive Impact SDGs</div>
+                <div class="form-label">Describe the positive impact of the chosen SDGs</div>
                 <textarea name="positive_impact_sdgs" placeholder="Type your message"></textarea>
                 <span class="error-message"></span>
             </div>
             <div id="negative-impact-sdgs">
-                <div class="form-label">Negative Impact SDGs</div>
+                <div class="form-label">Describe the negative impact of the chosen SDGs</div>
                 <textarea name="negative_impact_sdgs" placeholder="Type your message"></textarea>
                 <span class="error-message"></span>
             </div>
             <div id="project-background">
-                <div class="form-label">Project Background<span class="required">*</span></div>
+                <div class="form-label">Can you tell something about the project background?<span class="required">*</span></div>
                 <textarea name="project_background" placeholder="Type your message"></textarea>
                 <span class="error-message"></span>
             </div>
             <div id="problem">
-                <div class="form-label">Problem to Solve<span class="required">*</span></div>
+                <div class="form-label">What problem does this project solve?<span class="required">*</span></div>
                 <textarea name="problem" placeholder="Type your message"></textarea>
                 <span class="error-message"></span>
             </div>
             <div id="smart-goal">
-                <div class="form-label">Smart Goal<span class="required">*</span></div>
+                <div class="form-label">What is the (SMART) goal of the project?<span class="required">*</span></div>
                 <textarea name="smart_goal" placeholder="Type your message"></textarea>
                 <span class="error-message"></span>
             </div>
             <div id="project-link">
-                <div class="form-label">Project Link<span class="required">*</span></div>
+                <div class="form-label">Link to your case study<span class="required">*</span></div>
                 <input name="project_link" type="text" placeholder="Project Link">
                 <span class="error-message"></span>
             </div>
             <div id="video-link">
-                <div class="form-label">Video Link</div>
+                <div class="form-label">Add a video link of the project</div>
                 <input name="video_link" type="text" placeholder="Video Link">
                 <span class="error-message"></span>
             </div>
