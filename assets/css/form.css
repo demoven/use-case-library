@@ -38,6 +38,13 @@
     display: flex;
     flex-wrap: wrap;
 }
+.project-phase-paragraph{
+    font-weight: normal;
+    font-style: italic;
+}
+.project-phase-underlined{
+    font-weight: bold;
+}
 
 #themes > label {
     padding: 0rem 0.5rem;

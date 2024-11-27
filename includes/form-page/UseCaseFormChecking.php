@@ -148,7 +148,7 @@ if (!class_exists('UseCaseFormChecking')) {
             if (isset($data['themes'])) {
                 $this->checkTheme($data['themes'], $errors);
             } else {
-                $errors['themes'] = 'Theme is vereist';
+                $errors['themes'] = 'Thema is vereist';
             }
             if (isset($data['sdgs'])) {
                 $this->checkSDGs($data['sdgs'], $errors);
@@ -230,14 +230,14 @@ if (!class_exists('UseCaseFormChecking')) {
         private function checkTechProviders($tech_providers, &$errors)
         {
             if (empty($tech_providers)) {
-                $errors['tech-providers'] = 'Techaanbieders zijn vereist';
+                $errors['tech-providers'] = 'Tech Providers zijn vereist';
             }
         }
 
         private function checkProjectBackground($project_background, &$errors)
         {
             if (empty($project_background)) {
-                $errors['project-background'] = 'Projectachtergrond is vereist';
+                $errors['project-background'] = 'Project achtergrond is vereist';
             }
         }
 
@@ -329,7 +329,7 @@ if (!class_exists('UseCaseFormChecking')) {
         private function checkProjectPhase($project_phase, &$errors)
         {
             if (empty($project_phase)) {
-                $errors['project-phase'] = 'Project phase is vereist';
+                $errors['project-phase'] = 'Projectfase is vereist';
             } else if (!is_string($project_phase)) {
                 $errors['project-phase'] = 'Projectfase is ongeldig';
             } else if (!in_array($project_phase, $this->valid_project_phase)) {
@@ -340,31 +340,31 @@ if (!class_exists('UseCaseFormChecking')) {
         private function checkInnovationSector($innovation_sector, &$errors)
         {
             if (empty($innovation_sector)) {
-                $errors['innovation-sectors'] = 'Innovatiesector is vereist';
+                $errors['innovation-sectors'] = 'Innovatie sector is vereist';
                 return;
             } else if (!is_string($innovation_sector)) {
-                $errors['innovation-sectors'] = 'Innovatiesector is ongeldig';
+                $errors['innovation-sectors'] = 'Innovatie sector is ongeldig';
             } else if (!in_array($innovation_sector, $this->valid_innovation_sectors)) {
-                $errors['innovation-sectors'] = 'Innovatiesector is ongeldig';
+                $errors['innovation-sectors'] = 'Innovatie sector is ongeldig';
             }
         }
 
         private function checkTheme($theme, &$errors)
         {
             if (empty($theme)) {
-                $errors['themes'] = 'Theme is vereist';
+                $errors['themes'] = 'Thema is vereist';
                 return;
             }
             // No duplicate values allowed
             if (count($theme) !== count(array_unique($theme))) {
-                $errors['themes'] = 'Theme kan geen dubbele waarden bevatten';
+                $errors['themes'] = 'Thema kan geen dubbele waarden bevatten';
                 return;
             }
 
             // Check if all values are valid
             foreach ($theme as $value) {
                 if (!in_array($value, $this->valid_themes)) {
-                    $errors['themes'] = 'Theme is ongeldig';
+                    $errors['themes'] = 'Thema is ongeldig';
                     break;
                 }
             }
