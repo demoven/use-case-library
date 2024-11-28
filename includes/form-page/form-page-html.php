@@ -7,11 +7,11 @@ function render_use_case_form()
     ob_start();
     ?>
     <div id="success-message">
-        Use case sent successfully
+        Use case succesvol verzonden
     </div>
     <div id="general-error"></div>
     <form id="simple-contact-form__form">
-        <h2>Submit your use case</h2>
+        <h2>Dien uw use case in</h2>
         <div class="form-group">
             <div id="project-name">
                 <div class="form-label">Wat is de naam van uw project? <span class="required">*</span></div>
