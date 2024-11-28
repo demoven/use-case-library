@@ -87,6 +87,7 @@ label{
     border-radius: 5px;
     box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);
     width: calc((100% * 1/3) - (2*18px)/3);
+    min-height: 380px;;
     /* Calc is used to calculate the width of the use-case card 3 cards in a row and 18px gap between them */
 }
 
@@ -131,6 +132,10 @@ label{
 
 .use-case-click{
     text-decoration: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .use-case-click:hover{
@@ -142,12 +147,20 @@ label{
     border: 3px solid var(--Gold);
     
 }
+.use-case-info-preview {
+    flex-grow : 1;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: column;
+    
+}
 
 .use-case-footer{
     display: flex;
     align-items: center;
     gap: 10px;
     padding-bottom: 20px;
+    margin-top: auto;
 }
 
 .use-case-footer a{
@@ -168,6 +181,7 @@ label{
     margin-left : 20px;
     text-decoration: underline;
 }
+
 
 
 .collapsible-button {

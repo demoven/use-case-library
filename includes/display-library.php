@@ -251,11 +251,13 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                             echo '<img src="' . esc_url($use_case->project_image) . '" alt="Project Image">';
                             echo '</div>';
                         }
+                        echo '<div class="use-case-info-preview">';
                         echo '<h2>' . esc_html($use_case->project_name) . '</h2>';
                         echo '<p>' . esc_html($use_case->problem) . '</p>';
                         echo '<div class="use-case-footer">';
                         echo '<span id="learn-more">Leer meer</span>';
                         echo '<i class="fa-solid fa-arrow-right"></i>';
+                        echo '</div>';
                         echo '</div>';
                         echo '</a>';
                         echo '</div>';
