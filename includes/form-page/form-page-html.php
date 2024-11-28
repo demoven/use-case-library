@@ -11,7 +11,7 @@ function render_use_case_form()
     </div>
     <div id="general-error"></div>
     <form id="simple-contact-form__form">
-        <h2>Dien uw use case in</h2>
+        <h2>Dien hier uw use case in</h2>
         <div class="form-group">
             <div id="project-name">
                 <div class="form-label">Wat is de naam van uw project? <span class="required">*</span></div>
