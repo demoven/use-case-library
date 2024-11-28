@@ -91,7 +91,7 @@ if (isset($_GET['post_id'])) {
                     <div class="tags-content"><?php echo esc_html($project_phase); ?></div>
                 </div>
                 <div class="tags">
-                    <div class="tags-title"><i class="fa-solid fa-arrow-trend-up icon-margin"></i>trends</div>
+                    <div class="tags-title"><i class="fa-solid fa-arrow-trend-up icon-margin"></i>thema's</div>
                     <div class="tags-content">
                         <?php
                         $themes_array = (array)$themes;
@@ -120,7 +120,7 @@ if (isset($_GET['post_id'])) {
                     </div>
                 <?php endif; ?>
                 <div class="tags">
-                    <div class="tags-title"><i class="fa-solid fa-lightbulb icon-margin"></i>innovation sector</div>
+                    <div class="tags-title"><i class="fa-solid fa-lightbulb icon-margin"></i>innovatie sector</div>
                     <div class="tags-content"><?php echo esc_html($innovation_sectors); ?></div>
                 </div>
                 <div class="tags">
@@ -155,11 +155,11 @@ if (isset($_GET['post_id'])) {
             </div>
             <div id="use-case-details">
                 <div class="project-informations">
-                    <h3 class="project-informtions-title">Achtergrond</h3>
+                    <h3 class="project-informtions-title">Project Achtergrond</h3>
                     <p class="project-informations-content"><?php echo esc_html($project_background); ?></p>
                 </div>
                 <div class="project-informations">
-                    <h3 class="project-informtions-title">Probleemstelling</h3>
+                    <h3 class="project-informtions-title">Probleemstelling van het project</h3>
                     <p class="project-informations-content"><?php echo esc_html($problem); ?></p>
                 </div>
                 <div class="project-informations">
@@ -167,7 +167,7 @@ if (isset($_GET['post_id'])) {
                     <p class="project-informations-content"> <?php echo esc_html($tech_innovations); ?></p>
                 </div>
                 <div class="project-informations">
-                    <h3 class="project-informtions-title">Doelstelling</h3>
+                    <h3 class="project-informtions-title">Doelstelling van het project</h3>
                     <p class="project-informations-content"><?php echo esc_html($smart_goal); ?></p>
                 </div>
                 <?php if ($positive_impact_sdgs): ?>
@@ -183,7 +183,7 @@ if (isset($_GET['post_id'])) {
                     </div>
                 <?php endif; ?>
                 <div class="project-informations">
-                    <h3 class="project-informtions-title">Technologieleveranciers</h3>
+                    <h3 class="project-informtions-title">Technology Providers</h3>
                     <p class="project-informations-content"><?php echo esc_html($tech_providers); ?></p>
                 </div>
             </div>

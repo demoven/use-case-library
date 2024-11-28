@@ -78,7 +78,7 @@ jQuery(document).ready(function ($) {
 
     function updatePagination() {
         var totalPages = Math.ceil(displayedUseCases.length / itemsPerPage);
-        $('#page-info').text('Page ' + currentPage + ' of ' + totalPages);
+        $('#page-info').text('Pagina ' + currentPage + ' van ' + totalPages);
 
         if (currentPage === 1) {
             $('#prev-page').addClass('disabled').prop('disabled', true);

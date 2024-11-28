@@ -70,19 +70,19 @@ if (!class_exists('UseCaseLibraryDisplay')) {
             // Display the filter form and use cases
             ?>
             <div class="search-bar">
-                <input type="text" id="search" placeholder="Search by Project Name">
-                <button type="button" class="button button-primary" onclick="applyFilters()">Search</button>
+                <input type="text" id="search" placeholder="Zoeken op Projectnaam">
+                <button type="button" class="button button-primary" onclick="applyFilters()">Zoeken</button>
             </div>
             <div class="use-case-container">
                 <div class="filter-container">
-                    <h2>Filters<i class="fa-solid fa-filter"></i></h2>
+                    <h2>Filter<i class="fa-solid fa-filter"></i></h2>
                     <form id="filter-form">
                         <!-- Search by Project Name -->
 
 
                         <!-- Filter by Innovation -->
                         <div class="collapsible">
-                            <button type="button" class="collapsible-button">Innovation Sectors<i
+                            <button type="button" class="collapsible-button">Innovatie Sectoren<i
                                         class="fa-solid fa-chevron-down"></i></button>
                             <div class="collapsible-content">
                                 <div id="innovation-sectors">
@@ -147,7 +147,7 @@ if (!class_exists('UseCaseLibraryDisplay')) {
 
                         <!-- Filter by Themes -->
                         <div class="collapsible">
-                            <button type="button" class="collapsible-button">Themes<i
+                            <button type="button" class="collapsible-button">Thema's<i
                                         class="fa-solid fa-chevron-down"></i></button>
                             <div class="collapsible-content">
                                 <div id="lib-themes">
@@ -254,7 +254,7 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                         echo '<h2>' . esc_html($use_case->project_name) . '</h2>';
                         echo '<p>' . esc_html($use_case->problem) . '</p>';
                         echo '<div class="use-case-footer">';
-                        echo '<span id="learn-more">Learn more</span>';
+                        echo '<span id="learn-more">Leer meer</span>';
                         echo '<i class="fa-solid fa-arrow-right"></i>';
                         echo '</div>';
                         echo '</a>';
