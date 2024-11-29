@@ -57,9 +57,10 @@ if (!class_exists('UseCaseLibraryAdmin')) {
             $total_use_cases = $wpdb->get_var("SELECT COUNT(*) FROM `$table_name`");
 
             // Prepare the query to fetch data securely
+            $order_by_clause = $orderby === 'id' ? "published ASC, `$orderby` $order" : "`$orderby` $order";
             $use_cases = $wpdb->get_results(
                 $wpdb->prepare(
-                    "SELECT * FROM `$table_name` ORDER BY `$orderby` $order LIMIT %d OFFSET %d",
+                    "SELECT * FROM `$table_name` ORDER BY $order_by_clause LIMIT %d OFFSET %d",
                     $limit,
                     $offset
                 )

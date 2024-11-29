@@ -93,7 +93,7 @@ if (!class_exists('UseCaseLibraryDisplay')) {
                                         'Defensie',
                                         'ELSA Labs',
                                         'Energie en Duurzaamheid',
-                                        'Financiële Dienstverlening ',
+                                        'Financiële Dienstverlening',
                                         'Gezondheid en Zorg',
                                         'Haven en Maritiem',
                                         'Landbouw en Voeding',
