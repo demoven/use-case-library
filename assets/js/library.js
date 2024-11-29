@@ -93,11 +93,27 @@ jQuery(document).ready(function ($) {
         }
     }
 
+    function scrollToTop() {
+        // Scroll to the top of the use cases div with an offset
+        var useCasesDiv = document.getElementById('use-cases');
+        var offset = -100; // Adjust this value as needed
+        var bodyRect = document.body.getBoundingClientRect().top;
+        var elementRect = useCasesDiv.getBoundingClientRect().top;
+        var elementPosition = elementRect - bodyRect;
+        var offsetPosition = elementPosition + offset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    }
+
     $('#prev-page').click(function () {
         if (currentPage > 1) {
             currentPage--;
             showPage(currentPage);
             updatePagination();
+            scrollToTop();
         }
     });
 
@@ -107,6 +123,7 @@ jQuery(document).ready(function ($) {
             currentPage++;
             showPage(currentPage);
             updatePagination();
+            scrollToTop();
         }
     });
 
