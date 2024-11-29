@@ -152,7 +152,6 @@ label{
     flex-shrink: 1;
     display: flex;
     flex-direction: column;
-    
 }
 
 .use-case-footer{
@@ -321,6 +320,10 @@ input[type="checkbox"] {
         left: 0;
         margin-bottom: 20px;
     }
+    
+    .use-case:hover {
+        border: 1px solid #ddd;
+    }
 
 }
 
@@ -343,5 +346,9 @@ input[type="checkbox"] {
 
     .use-case{
         width: 100%;
+    }
+    
+    .use-case:hover {
+        border: 1px solid #ddd;
     }
 }
