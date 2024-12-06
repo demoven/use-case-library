@@ -84,6 +84,10 @@ if (isset($_GET['post_id'])) {
                 </div>
             <?php endif; ?>
         </div>
+           <div class="back-button-container">
+                <span><a href="<?php echo esc_url(home_url('/use-case-library')); ?>">Use Case bibliotheek</a></span>
+                <span>/ Details</span>
+            </div>
         <div id="container">
             <div class="informations">
                 <div class="tags">

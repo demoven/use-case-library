@@ -97,6 +97,10 @@
 
 }
 
+.back-button-container {
+    margin : 5px 0 0 20px;
+}
+
 @media (max-width: 1200px) {
     .tags {
         flex: 1 1 45%; 

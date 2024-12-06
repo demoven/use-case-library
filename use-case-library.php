@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Use Case Library
  * Description: A plugin to manage use cases.
- * Version: 1.1
+ * Version: 1.1.1
  * Author: Windesheim Technology Radar
  */
 

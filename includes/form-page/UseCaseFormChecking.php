@@ -207,12 +207,6 @@ if (!class_exists('UseCaseFormChecking')) {
             return $errors;
         }
 
-        /**
-         * Check if project name is valid.
-         * 
-         * @param string $project_name
-         * @param array $errors
-         */
         private function checkProjectName($project_name, &$errors)
         {
             if (empty($project_name)) {

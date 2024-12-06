@@ -6,6 +6,10 @@ if (!defined('ABSPATH')) {
 if (!class_exists('UseCaseLibraryAdmin')) {
     class UseCaseLibraryAdmin
     {
+        /**
+         * The PHP constructor function sets up admin menu, sortable columns, and custom column sorting
+         * for a use-case library.
+         */
         public function __construct()
         {
             // Add admin menu
@@ -15,6 +19,10 @@ if (!class_exists('UseCaseLibraryAdmin')) {
             add_action('pre_get_posts', array($this, 'custom_column_sorting'));
         }
 
+        /**
+         * The function `add_admin_menu` adds a menu page titled "Use Cases" with a corresponding icon
+         * and position in the WordPress admin dashboard.
+         */
         public function add_admin_menu()
         {
             // Verify the user has the appropriate capabilities
@@ -29,8 +37,10 @@ if (!class_exists('UseCaseLibraryAdmin')) {
             );
         }
 
+       
         /**
-         * Display use cases page.
+         * The function `display_use_cases_page` in PHP displays a paginated list of use cases with
+         * sorting options and pagination on an admin page, ensuring user permissions are checked.
          */
         public function display_use_cases_page()
         {
@@ -93,7 +103,21 @@ if (!class_exists('UseCaseLibraryAdmin')) {
         }
 
         /**
-         * Render the column headers with sorting links.
+         * The function `render_column_headers` generates HTML table headers for columns with sorting
+         * functionality based on the provided orderby and order parameters.
+         * 
+         * @param orderby The `orderby` parameter in the `render_column_headers` function is used to
+         * determine which column the table should be sorted by. It specifies the key of the column in
+         * the `` array that should be used for sorting.
+         * @param order The `order` parameter in the `render_column_headers` function is used to
+         * determine the sorting order of the column headers. It can have two possible values: 'asc'
+         * for ascending order and 'desc' for descending order.
+         * 
+         * @return The `render_column_headers` function returns a string containing HTML table headers
+         * for columns based on the provided `` and `` parameters. The headers include
+         * columns for ID, Project Name, Project Owner, Status, and a Details column. Each column
+         * header is generated with sorting functionality based on the current order and can be clicked
+         * to change the sorting order.
          */
         private function render_column_headers($orderby, $order)
         {
@@ -116,7 +140,12 @@ if (!class_exists('UseCaseLibraryAdmin')) {
         }
 
         /**
-         * Render a table row for a use case.
+         * The function `render_table_row` outputs a table row with information about a use case,
+         * including its ID, project name, name, status, and a link to view details.
+         * 
+         * @param use_case The `render_table_row` function takes a `` object as a parameter
+         * and renders a table row with information from the `` object. It displays the ID,
+         * project name, name, status (published or on hold), and a link to view more details.
          */
         private function render_table_row($use_case)
         {
@@ -130,8 +159,18 @@ if (!class_exists('UseCaseLibraryAdmin')) {
             echo '</tr>';
         }
 
+       
         /**
-         * Render pagination links.
+         * The render_pagination function generates pagination links based on the current page, total
+         * items, and items per page in PHP.
+         * 
+         * @param paged The `` parameter in the `render_pagination` function represents the
+         * current page number of the paginated content being displayed. It is used to determine which
+         * page is currently being viewed by the user.
+         * @param total_items Total number of items in the dataset or list that you are paginating.
+         * @param per_page The `` parameter in the `render_pagination` function represents the
+         * number of items to display per page in a paginated list or table. It is used to calculate
+         * the total number of pages based on the total number of items and the desired items per page.
          */
         private function render_pagination($paged, $total_items, $per_page)
         {
@@ -151,7 +190,15 @@ if (!class_exists('UseCaseLibraryAdmin')) {
         }
 
         /**
-         * Set sortable columns.
+         * The function `set_sortable_columns` sets the sortable columns for a given data set in PHP.
+         * 
+         * @param columns The `set_sortable_columns` function is used to define which columns in a
+         * table should be sortable. The function takes an array of columns as a parameter and then
+         * adds the columns that should be sortable to that array.
+         * 
+         * @return The `set_sortable_columns` function is returning an array with keys 'id',
+         * 'project_name', 'name', and 'published', each mapped to their respective values 'id',
+         * 'project_name', 'name', and 'published'.
          */
         public function set_sortable_columns($columns)
         {
@@ -163,7 +210,18 @@ if (!class_exists('UseCaseLibraryAdmin')) {
         }
 
         /**
-         * Handle custom column sorting.
+         * The function custom_column_sorting in PHP checks and sets the orderby parameter in the query
+         * based on valid columns.
+         * 
+         * @param query The `query` parameter in the `custom_column_sorting` function is an instance of
+         * the WP_Query class. It represents the main query that is being processed. This function is
+         * intended to modify the sorting behavior of the main query in the WordPress admin area based
+         * on the specified valid columns.
+         * 
+         * @return If the conditions are met (is_admin() and  is the main query), the function
+         * will return the modified  object with the 'orderby' parameter set to the value of the
+         * requested column if it is one of the valid columns ('id', 'project_name', 'name',
+         * 'published'). Otherwise, nothing will be returned.
          */
         public function custom_column_sorting($query)
         {

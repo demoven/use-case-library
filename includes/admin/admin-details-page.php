@@ -6,6 +6,10 @@ if (!defined('ABSPATH')) {
 if (!class_exists('UseCaseLibraryDetailsPage')) {
     class UseCaseLibraryDetailsPage
     {
+        /**
+         * The constructor function sets up various actions for handling use case details in a
+         * WordPress admin panel.
+         */
         public function __construct()
         {
             // Add details page
@@ -19,8 +23,10 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
             add_action('admin_post_upload_use_case_image', array($this, 'upload_use_case_image'));
         }
 
+       
         /**
-         * Add details page to the admin use case panel
+         * The function `add_details_page` adds a submenu page for displaying use case details in a
+         * WordPress admin menu.
          */
         public function add_details_page()
         {
@@ -35,7 +41,7 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         }
 
         /**
-         * Load assets for the library
+         * The function `load_assets` in PHP loads CSS and JS files for a WordPress plugin
          */
         public function load_assets()
         {
@@ -54,11 +60,16 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                 '1.0',
                 'all'
             );
-           error_log('load_assets');
         }
-
         /**
-         * Render the details page
+         * The `render_details_page` function in PHP renders the details of a use case, including
+         * displaying use case data, managing images, and providing options to publish, unpublish, or
+         * delete the use case.
+         * 
+         * @return The `render_details_page` function is responsible for rendering the details of a
+         * specific use case. It first checks if the current user has the necessary permissions to
+         * access the page. Then, it checks if the `use_case_id` is set in the URL parameters. If not
+         * set, the function returns early.
          */
         public function render_details_page()
         {
@@ -164,6 +175,7 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
 
                     // Display the unpublish button
                     if ($use_case->published) {
+                        // use the nonce for the action
                         ?>
                         <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
                             <?php wp_nonce_field('unpublish_use_case', 'unpublish_use_case_nonce'); ?>
@@ -174,6 +186,7 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                         <?php
                     } else {
                         // Display the publish button
+                        // use the nonce for the action
                         ?>
                         <form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
                             <?php wp_nonce_field('publish_use_case', 'publish_use_case_nonce'); ?>
@@ -184,6 +197,7 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                         <?php
                     }
                     // Display the delete button
+                    // use the nonce for the action
                     ?>
                     <form method="post" action="<?php echo admin_url('admin-post.php'); ?>"
                           onsubmit="return confirmDeletion();">
@@ -203,10 +217,12 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         }
 
         /**
-         * Publish a use case
+         * The function `publish_use_case` in PHP handles the publishing of a use case after verifying
+         * a nonce.
          */
         public function publish_use_case()
         {
+            // Nonce verification
             if (!isset($_POST['publish_use_case_nonce']) || !wp_verify_nonce($_POST['publish_use_case_nonce'], 'publish_use_case')) {
                 wp_die(__('Nonce verification failed', 'textdomain'));
             }
@@ -214,10 +230,12 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         }
 
         /**
-         * Unpublish a use case
+         * The PHP function `unpublish_use_case` handles the action of unpublishing a use case after
+         * verifying a nonce.
          */
         public function unpublish_use_case()
         {
+            // Nonce verification
             if (!isset($_POST['unpublish_use_case_nonce']) || !wp_verify_nonce($_POST['unpublish_use_case_nonce'], 'unpublish_use_case')) {
                 wp_die(__('Nonce verification failed', 'textdomain'));
             }
@@ -225,10 +243,12 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         }
 
         /**
-         * Delete a use case
+         * The function `delete_use_case` checks for nonce verification and then handles the action of
+         * deleting a use case.
          */
         public function delete_use_case()
         {
+            // Nonce verification
             if (!isset($_POST['delete_use_case_nonce']) || !wp_verify_nonce($_POST['delete_use_case_nonce'], 'delete_use_case')) {
                 wp_die(__('Nonce verification failed', 'textdomain'));
             }
@@ -236,44 +256,51 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         }
 
         /**
-         * Delete the image of a use case in the site folder
+         * The function `delete_use_case_image` deletes an image associated with a specific use case in
+         * WordPress after verifying nonces and use case ID.
          */
         public function delete_use_case_image()
         {
+            // Nonce verification
             if (!isset($_POST['delete_use_case_image_nonce']) || !wp_verify_nonce($_POST['delete_use_case_image_nonce'], 'delete_use_case_image')) {
                 wp_die(__('Nonce verification failed', 'textdomain'));
             }
 
+            // Check if use_case_id is set
             if (!isset($_POST['use_case_id'])) {
                 wp_die(__('No use case ID provided', 'textdomain'));
             }
 
+            // Get the use case ID
             $use_case_id = intval($_POST['use_case_id']);
 
+            // Get the image path
             global $wpdb;
             $table_name = $wpdb->prefix . 'use_case';
             $use_case = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $use_case_id));
             $image_path = $use_case->project_image;
+            // Delete the image file
             if ($image_path) {
                 $upload_dir = wp_upload_dir();
-                $image_path = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $image_path);
+                $image_path = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $image_path); 
                 unlink($image_path);
                 $wpdb->update($table_name, ['project_image' => null], ['id' => $use_case_id]);
             }
-
             wp_redirect(admin_url('admin.php?page=use-case-details&use_case_id=' . $use_case_id));
             exit;
         }
 
         /**
-         * Add the image of a use case in the site folder
+         * The function `upload_use_case_image` handles the uploading and processing of an image for a
+         * specific use case in WordPress.
          */
         public function upload_use_case_image()
         {
+            // Nonce verification
             if (!isset($_POST['upload_use_case_image_nonce']) || !wp_verify_nonce($_POST['upload_use_case_image_nonce'], 'upload_use_case_image')) {
                 wp_die(__('Nonce verification failed', 'textdomain'));
             }
-
+            // Check if use_case_id is set
             if (!isset($_POST['use_case_id'])) {
                 wp_die(__('No use case ID provided', 'textdomain'));
             }
@@ -328,7 +355,16 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
         }
 
         /**
-         * Handle the action (publish, unpublish, delete)
+         * The function `handle_action` processes actions related to a use case, such as deleting the
+         * use case and updating its publish status, and then redirects to the use case details page.
+         * 
+         * @param action The `action` parameter in the `handle_action` function is used to determine
+         * the specific action to be taken. In the provided code snippet, there are two possible
+         * actions: `delete_use_case` and updating the `published` status of a use case.
+         * @param status The `status` parameter in the `handle_action` function represents the status
+         * that will be assigned to a specific use case. This status will be updated in the database
+         * for the use case identified by the `use_case_id`. The function checks if the action is to
+         * delete a use case or update its
          */
         private function handle_action($action, $status)
         {

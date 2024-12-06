@@ -4,6 +4,7 @@ if (!defined('ABSPATH')) {
 }
 
 require_once plugin_dir_path(__FILE__) . 'UseCaseFormChecking.php';
+require_once plugin_dir_path(__FILE__) . 'UseCaseMailer.php';
 
 if (!class_exists('UseCaseLibraryForm')) {
     class UseCaseLibraryForm
@@ -12,6 +13,10 @@ if (!class_exists('UseCaseLibraryForm')) {
         // Private variable to check if the form is already loaded
         private $form_loaded = false;
 
+        /**
+         * The PHP constructor function initializes various actions and callbacks for loading assets,
+         * adding a shortcode, loading scripts, and registering a REST API in WordPress.
+         */
         public function __construct()
         {
             // Load assets
@@ -27,8 +32,10 @@ if (!class_exists('UseCaseLibraryForm')) {
             add_action('rest_api_init', array($this, 'register_rest_api'));
         }
 
+       
         /**
-         * Load assets for the form
+         * The function `load_assets` checks for a specific shortcode in the content and enqueues CSS
+         * and JS files if the shortcode is present.
          */
         public function load_assets()
         {
@@ -60,7 +67,11 @@ if (!class_exists('UseCaseLibraryForm')) {
         }
 
         /**
-         * Use case Form
+         * The function `load_shortcode` checks if a form is already loaded, sets it as loaded,
+         * includes a form HTML file, and returns the rendered form.
+         * 
+         * @return The function `load_shortcode()` is returning the output of the function
+         * `render_use_case_form()`.
          */
         public function load_shortcode()
         {
@@ -80,7 +91,9 @@ if (!class_exists('UseCaseLibraryForm')) {
         }
 
         /**
-         * Load scripts for the form
+         * The function `load_scripts` in PHP creates a nonce for a REST API request and handles form
+         * submission using jQuery AJAX to send data to an endpoint, displaying success or error
+         * messages accordingly.
          */
         public function load_scripts()
         {
@@ -150,7 +163,8 @@ if (!class_exists('UseCaseLibraryForm')) {
         }
 
         /**
-         * Register REST API route
+         * The function `register_rest_api` registers a REST API route for sending a use case with a
+         * POST method callback.
          */
         public function register_rest_api()
         {
@@ -163,7 +177,15 @@ if (!class_exists('UseCaseLibraryForm')) {
         }
 
         /**
-         * Handle the form submission
+         * The function `handle_contact_form` processes and validates form data, inserts it into a
+         * custom table in WordPress, handles file uploads, and sends email notifications.
+         * 
+         * @param data The code you provided is a PHP function that handles a contact form submission.
+         * It performs various checks and validations before inserting the form data into a custom
+         * table in the WordPress database. Here is a breakdown of the function:
+         * 
+         * @return The function `handle_contact_form` returns different responses based on the
+         * conditions met during its execution. Here are the possible return values:
          */
         public function handle_contact_form($data)
         {
@@ -220,10 +242,10 @@ if (!class_exists('UseCaseLibraryForm')) {
                 // Return an error if the request method is not POST
                 return new WP_REST_Response(['error' => 'Method not allowed'], 405);
             }
-            // Vérifiez si la table existe et créez-la si nécessaire
+            // Verify if the table exists, if not, create it
             create_use_case_table();
 
-            // Insérez les données dans la table personnalisée
+            // Insert the form data into the custom table
             global $wpdb;
             $table_name = $wpdb->prefix . 'use_case';
 
@@ -300,6 +322,11 @@ if (!class_exists('UseCaseLibraryForm')) {
                         return new WP_REST_Response(['error' => 'Image upload failed'], 500);
                     }
                 }
+
+                // Instantiate the UseCaseMailer class
+                // $mailer = new UseCaseMailer();
+                // $mailer->send_email_reception($data['creator_email']);
+                // $mailer->send_admin_email(get_option('admin_email'), get_site_url() . '/wp-admin/admin.php?page=use-case-details&use_case_id=' . $insert_id);
 
                 return new WP_REST_Response('Message sent', 200);
             } else {

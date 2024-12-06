@@ -17,7 +17,8 @@ if (!class_exists('UseCaseLibraryDisplay')) {
         }
 
         /**
-         * Load assets for the library
+         * The function `load_assets` checks for a specific shortcode in the post content and enqueues
+         * CSS and JS files if the shortcode is present.
          */
         public function load_assets()
         {
@@ -49,9 +50,14 @@ if (!class_exists('UseCaseLibraryDisplay')) {
         }
 
         /**
-         * Shortcode to display published use cases.
-         *
-         * @return string HTML output of the published use cases.
+         * The `display_use_cases_shortcode` function in PHP retrieves and displays published use cases
+         * with filtering options in a WordPress environment.
+         * 
+         * @return The `display_use_cases_shortcode` function is returning the HTML content that
+         * includes a search bar, filter options for innovation sectors, value chain, themes, SDGs,
+         * Windesheim Minors, and a list of use cases with project details like project name, image,
+         * problem statement, and a "Learn more" link. Additionally, there is a pagination section at
+         * the bottom for navigating through the list
          */
         public function display_use_cases_shortcode()
         {
