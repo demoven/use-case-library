@@ -274,7 +274,6 @@ if (!class_exists('UseCaseLibraryForm')) {
                 'innovation_sectors' => sanitize_text_field($params['innovation_sectors']),
             ];
 
-            // Insérer les données initiales dans la table
             $wpdb->insert($table_name, $data);
 
             if ($wpdb->insert_id) {
@@ -324,9 +323,9 @@ if (!class_exists('UseCaseLibraryForm')) {
                 }
 
                 // Instantiate the UseCaseMailer class
-                // $mailer = new UseCaseMailer();
-                // $mailer->send_email_reception($data['creator_email']);
-                // $mailer->send_admin_email(get_option('admin_email'), get_site_url() . '/wp-admin/admin.php?page=use-case-details&use_case_id=' . $insert_id);
+                $mailer = new UseCaseMailer();
+                $mailer->send_email_confirmation($data['creator_email']);
+                $mailer->send_admin_email(get_option('admin_email'), get_site_url() . '/wp-admin/admin.php?page=use-case-details&use_case_id=' . $insert_id);
 
                 return new WP_REST_Response('Message sent', 200);
             } else {

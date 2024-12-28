@@ -31,7 +31,7 @@ if (!class_exists('UseCaseMailer'))
             $body = '';
     
             $body .= '<p>Dear submitter,</p>';
-            $body .= '<p>Your case study has been accepted !</p>';
+            $body .= '<p>Your case study has been sent!</p>';
             $body .= '<p>Many thanks.</p>';
             $body .= '<p>Kind regards,</p>';
             $body .= '<p>Windesheim Technology Radar</p>';
@@ -59,7 +59,7 @@ if (!class_exists('UseCaseMailer'))
             $body = '';
     
             $body .= '<p>Dear admin,</p>';
-            $body .= '<p>A new case study has been submitted !</p>';
+            $body .= '<p>A new case study has been submitted!</p>';
             $body .= '<p>You can view it <a href="' . $use_case_link . '">here</a>.</p>';
             $body .= '<p>Kind regards,</p>';
             $body .= '<p>Windesheim Technology Radar</p>';
