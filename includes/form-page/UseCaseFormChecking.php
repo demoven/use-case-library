@@ -203,6 +203,15 @@ if (!class_exists('UseCaseFormChecking')) {
             } else {
                 $errors['video-link'] = 'Videolink is vereist';
             }
+
+            if (isset($data['country'])) {
+                $this->checkCountry($data['country'], $errors);
+            } else {
+                $errors['country'] = 'Land is vereist';
+            }
+            if (isset($data['zipcode'])) {
+                $this->zipcode($data['zipcode'], $errors);
+            }
             //return errors
             return $errors;
         }
@@ -382,6 +391,31 @@ if (!class_exists('UseCaseFormChecking')) {
                 if (!in_array($value, $this->valid_sdgs)) {
                     $errors['sdgs'] = 'SDGs is ongeldig';
                     break;
+                }
+            }
+        }
+
+        private function checkCountry($country, &$errors)
+        {
+            if (empty($country)) {
+                $errors['country'] = 'Land is vereist';
+            }
+
+            if (!is_string($country)) {
+                $errors['country'] = 'Land is ongeldig';
+            }
+
+            if (strlen($country) > 40) {
+                $errors['country'] = 'Land is te lang';
+            }
+        }
+
+        private function zipcode($zipcode, &$errors)
+        {
+            if (!empty($zipcode)) {
+
+                if (strlen($zipcode) > 6) {
+                    $errors['zipcode'] = 'Postcode is te lang';
                 }
             }
         }

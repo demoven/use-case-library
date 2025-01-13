@@ -253,6 +253,9 @@ if (!class_exists('UseCaseLibraryForm')) {
                 'project_name' => sanitize_text_field($params['project_name']),
                 'name' => sanitize_text_field($params['name']),
                 'creator_email' => sanitize_email($params['creator_email']),
+                'country' => sanitize_text_field($params['country']),
+                //if zipcode is not set, set it to null
+                'zipcode' => isset($params['zipcode']) ? sanitize_text_field($params['zipcode']) : null,
                 // if w_minor is not set, set it to null
                 'w_minor' => isset($params['w_minor']) ? sanitize_text_field($params['w_minor']) : null,
                 'project_phase' => sanitize_text_field($params['project_phase']),

@@ -146,6 +146,8 @@ if (!class_exists('UseCaseLibraryDetailsPage')) {
                     <p><strong>Project Name :</strong> <?php echo esc_html($use_case->project_name); ?></p>
                     <p><strong>Project Owner :</strong> <?php echo esc_html($use_case->name); ?></p>
                     <p><strong>Email :</strong> <?php echo esc_html($use_case->creator_email); ?></p>
+                    <p><strong>Country :</strong> <?php echo esc_html($use_case->country); ?></p>
+                    <p><strong>Zipcode :</strong> <?php echo esc_html($use_case->zipcode); ?></p>
                     <p><strong>Windesheim Minor :</strong> <?php echo esc_html($use_case->w_minor); ?></p>
                     <p><strong>Project Phase :</strong> <?php echo esc_html($use_case->project_phase); ?></p>
                     <p><strong>Value Chain :</strong> <?php echo esc_html($value_chain_str); ?></p>

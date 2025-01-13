@@ -122,6 +122,8 @@ function create_use_case_table()
         innovation_sectors varchar(255) NOT NULL,
         project_image varchar(255), 
         published boolean NOT NULL DEFAULT 0,
+        country varchar(40) NOT NULL,
+        zipcode varchar(6),
         PRIMARY KEY (id)
     ) $charset_collate;";
 

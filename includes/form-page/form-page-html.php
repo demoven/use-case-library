@@ -28,6 +28,16 @@ function render_use_case_form()
                 <input name="creator_email" type="email" placeholder="Email...">
                 <span class="error-message"></span>
             </div>
+            <div id="country">
+                <div class="form-label">Land<span class="required">*</span></div>
+                <input name="country" type="text" placeholder="Land...">
+                <span class="error-message"></span>
+            </div>
+            <div id="zipcode">
+                <div class="form-label">Postcode</div>
+                <input name="zipcode" type="text" placeholder="Postcode..." maxlength="6">
+                <span class="error-message"></span>
+            </div>
             <div id="w-minor">
                 <div class="form-label">Windesheim Minor</div>
                 <span class="error-message"></span>
