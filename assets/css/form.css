@@ -1,0 +1,151 @@
+#simple-contact-form__form {
+    width: 100%;
+    margin: 0 auto;
+    padding: 2em;
+    border: var(--Grey3) 2px solid;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#simple-contact-form__form h2 {
+    text-align: center;
+    color: var(--Black);
+    margin-bottom: 1em;
+}
+
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-group > * {
+    padding: 1rem;
+}
+
+.form-label {
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    color: var(--Black);
+    width: 100%;
+}
+
+#project-name, #technological-innovations, #tech-providers, #project-background, #project-link, #video-link{
+    width: 100%;
+}
+
+#themes, #sdgs {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.project-phase-paragraph{
+    font-weight: normal;
+    font-style: italic;
+}
+.project-phase-underlined{
+    font-weight: bold;
+}
+
+#themes > label {
+    padding: 0rem 0.5rem;
+    width: 33%;
+}
+
+#sdgs > label {
+    padding: 0rem 0.5rem;
+    width: 50%;
+}
+
+#project-owner, #email, #w-minor, #value-chain, #positive-impact-sdgs, #negative-impact-sdgs, #problem, #smart-goal {
+    width: 50%;
+}
+
+
+#simple-contact-form__form input[type="text"],
+#simple-contact-form__form input[type="email"],
+#simple-contact-form__form textarea {
+    width: 100%;
+    padding: 0.75em;
+    border: 2px solid var(--Grey3);
+    border-radius: 4px;
+    font-size: 1em;
+    color: var(--Black);
+}
+
+#simple-contact-form__form input[type="text"]:focus,
+#simple-contact-form__form input[type="email"]:focus,
+#simple-contact-form__form textarea:focus {
+    border-color: var(--Blue);
+    outline: none;
+}
+
+#simple-contact-form__form label {
+    display: block;
+    margin-bottom: 0.5em;
+    color: var(--Black);
+}
+
+#simple-contact-form__form input[type="radio"],
+#simple-contact-form__form input[type="checkbox"] {
+    margin-right: 0.5em;
+}
+
+#simple-contact-form__form button[type="submit"] {
+    width: 100%;
+    padding: 0.75em;
+    background-color: var(--Orange);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 150ms;
+}
+
+#simple-contact-form__form button[type="submit"]:hover {
+    background-color: var(--Gold);
+}
+
+.error-message {
+    display: none; 
+    color: var(--Red);
+    width : 100%;
+}
+
+.required {
+    color: var(--Red);
+    margin-left: 5px;
+}
+
+#success-message {
+    display: none;
+    background-color: var(--GreenApple);
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+}
+
+#general-error {
+    display: none;
+    background-color: var(--Red);
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Media query for small screens */
+@media (max-width: 767px) {
+    .form-group > div {
+        width: 100% !important;
+    }
+
+    #themes > label, #sdgs > label {
+        width: 100%;
+    }
+}

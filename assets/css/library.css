@@ -1,0 +1,354 @@
+@media (min-width: 768px) {
+    #primary {
+        margin-left:2vw !important;
+        margin-right: 2vw !important;
+    }
+}
+
+.use-case-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    user-select: none;
+}
+
+.filter-container{
+    display: flex;
+    width: calc(20% - 18px);
+    position: sticky;
+    /* top: 5vh; */
+    left: 0;
+    /* max-height: 90vh; */
+    height: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    /* box-shadow: 0 0 5px 0 rgba(0,0,0,0.1); */
+    flex-direction: column;
+}
+
+.filter-container h2{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin : 0;
+}
+
+#filter-form{
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#filter-form::-webkit-scrollbar {
+    display: none;
+}
+
+label{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#windesheim-minor, #value-chain, #lib-themes, #lib-sdgs, #innovation-sectors{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.minor-checkbox, .value-chain-checkbox, .theme-checkbox, .sdg-checkbox, .innovation-sector-checkbox{
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+
+.use-cases{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: calc(80% - 18px);
+    /* Calc to put 36px gap between the filter form and the use-cases */
+    justify-content: space-around;
+    gap: 18px;
+}
+
+.use-case{
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);
+    width: calc((100% * 1/3) - (2*18px)/3);
+    min-height: 380px;;
+    /* Calc is used to calculate the width of the use-case card 3 cards in a row and 18px gap between them */
+}
+
+.image-wrapper{
+    position: relative;
+}
+
+.image-wrapper:after{
+    content: "";
+    display: block;
+    padding-bottom: 56%;
+}
+
+.use-case img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px 4px 0 0;
+}
+
+.use-case h2{
+    padding: 20px 20px 0 20px;
+    font-size: 20px;
+    margin-top: 0;
+    /* limit the text to 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* limit the text to 3 lines */
+.use-case p{
+    padding: 0 20px 0 20px;
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.use-case-click{
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.use-case-click:hover{
+    text-decoration: none;
+    color : var(--Black);
+}
+
+.use-case:hover {
+    border: 3px solid var(--Gold);
+    
+}
+.use-case-info-preview {
+    flex-grow : 1;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.use-case-footer{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 20px;
+    margin-top: auto;
+}
+
+.use-case-footer a{
+    padding: 0 0 0 20px;
+    font-size: 14px;
+    color: var(--Gold);
+    text-decoration: underline;
+}
+
+.use-case-footer i{
+    height: 11px;
+    width: 11px;
+    color: var(--Gold);
+}
+
+#learn-more{
+    color : var(--Gold);
+    margin-left : 20px;
+    text-decoration: underline;
+}
+
+
+
+.collapsible-button {
+    position : sticky;
+    top : 0;
+    color: var(--Black);
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 20px;
+    border-bottom: var(--Black) 2px solid;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFFFFF;
+}
+
+.collapsible-button i{
+    height: 24px;
+    width: 24px;
+    color: var(--Black);
+    transition: transform 0.2s ease;
+}
+
+.collapsible-button.active i{
+    transform: rotate(180deg);
+    transition: transform 0.2s ease;
+}
+
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    padding: 0 1em;
+    margin-top: 10px;
+}
+
+.minor-checkbox, .value-chain-checkbox, .theme-checkbox, .sdg-checkbox, .innovation-sector-checkbox{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.5); /* Ajustez la valeur de scale selon vos besoins */
+    -webkit-transform: scale(1.5); /* Pour les anciens navigateurs WebKit */
+    -moz-transform: scale(1.5); /* Pour les anciens navigateurs Firefox */
+    -ms-transform: scale(1.5); /* Pour les anciens navigateurs Internet Explorer */
+    -o-transform: scale(1.5); /* Pour les anciens navigateurs Opera */
+    margin: 5px; /* Ajustez la marge pour compenser l'agrandissement */
+}
+
+.minor-checkbox div, .value-chain-checkbox div, .theme-checkbox div, .sdg-checkbox div, .innovation-sector-checkbox div{
+    font-size: 16px;
+    width: 100%;
+    display: flex;
+    align-self: center;
+}
+.search-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    gap : 14px;
+    user-select: none;
+}
+
+.search-bar input {
+    padding: 10px;
+    border: 1px solid var(--Grey3);
+    border-radius: 5px;
+    font-size: 16px;
+    width: 300px;
+}
+
+.search-bar button {
+    border-radius: 5px;
+    background-color: var(--Orange);
+    border : none;
+    width : 100px;
+}
+
+.search-bar button:hover {
+    background-color: var(--Gold);
+}
+.pagination {
+    margin-top: 20px;
+    margin-left : auto;
+}
+
+.pagination span {
+    user-select: none;
+}
+
+.pagination span.disabled {
+    color: var(--Grey2);
+}
+
+.pagination span.disabled:hover {
+    color : var(--Grey2) !important;
+    cursor : not-allowed !important;
+}
+
+.pagination #page-info {
+    margin: 0 10px;
+}
+
+#prev-page:hover {
+    cursor: pointer;
+    color : var(--Gold);
+}
+
+#next-page:hover {
+    cursor: pointer;
+    color : var(--Gold);
+}
+
+
+
+
+@media (max-width: 992px) {
+    .use-case{
+        width: calc((100% * 1/2) - (2*18px)/2);
+    }
+
+    .use-cases{
+        width: 100%;
+    }
+
+    .filter-container{
+        width: 100%;
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-bottom: 20px;
+    }
+    
+    .use-case:hover {
+        border: 1px solid #ddd;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .use-case-container{
+        flex-direction: column;
+    }
+
+    .filter-container{
+        width: 100%;
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-bottom: 20px;
+    }
+
+    .use-cases{
+        width: 100%;
+    }
+
+    .use-case{
+        width: 100%;
+    }
+    
+    .use-case:hover {
+        border: 1px solid #ddd;
+    }
+}
