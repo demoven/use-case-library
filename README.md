@@ -34,3 +34,11 @@ The Use Case Library is a WordPress plugin designed to manage and display a libr
 - **Title**: use case details
 - **Slug**: use-case-details
 - **Template**: Use Case Template
+
+## Future improvements 
+
+The following features are planned for future releases to enhance the plugin:
+
+- Zipcode and country inputs (see branch zipcode)
+
+- Zipcode and countries filters
