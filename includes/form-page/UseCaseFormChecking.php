@@ -209,9 +209,6 @@ if (!class_exists('UseCaseFormChecking')) {
             } else {
                 $errors['country'] = 'Land is vereist';
             }
-            if (isset($data['zipcode'])) {
-                $this->zipcode($data['zipcode'], $errors);
-            }
             //return errors
             return $errors;
         }
@@ -407,16 +404,6 @@ if (!class_exists('UseCaseFormChecking')) {
 
             if (strlen($country) > 40) {
                 $errors['country'] = 'Land is te lang';
-            }
-        }
-
-        private function zipcode($zipcode, &$errors)
-        {
-            if (!empty($zipcode)) {
-
-                if (strlen($zipcode) > 6) {
-                    $errors['zipcode'] = 'Postcode is te lang';
-                }
             }
         }
     }
